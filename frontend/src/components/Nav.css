@@ -1,0 +1,24 @@
+#header-bottom { position: relative; z-index: 100; }
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0;
+  height: 45px;
+  background-color: #a98274;
+}
+
+.sub-nav-bg {
+  width: 100%;
+  height: 35px;
+  position: absolute;
+  top: 45px;
+  left: 0;
+  box-shadow: 0 2px 4px #725b53;
+  background-color: #be9c91;
+  visibility: hidden;
+}
+
+.sub-nav-bg.is-active { visibility: visible; }

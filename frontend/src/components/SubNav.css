@@ -1,0 +1,22 @@
+.sub-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 410px;
+  height: 35px;
+  position: absolute;
+  top: 45px;
+  left: 50%;
+  transform: translateX(-50%);
+  visibility: hidden;
+  background-color: transparent;
+}
+
+.sub-nav-item {
+  margin: 0 15px;
+  float: left;
+  color: white;
+  cursor: pointer;
+}
+.sub-nav-item:hover { color: #3e2723; }
+.sub-nav.is-active { visibility: visible; }

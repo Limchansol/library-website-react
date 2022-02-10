@@ -1,0 +1,10 @@
+.nav-item {
+  margin: 0;
+  padding: 10px 30px;
+  height: 45px;
+  float: left;
+  position: relative;
+  color: white;
+  cursor: default;
+}
+.nav-item:hover { border-bottom: 5px solid #795548; }
