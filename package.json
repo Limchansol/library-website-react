@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client": "cd frontend && npm run start"
+    "client": "cd frontend && npm run start",
+    "server": "nodemon --watch backend --exec node backend/server.js"
   },
   "keywords": [],
   "author": "",
