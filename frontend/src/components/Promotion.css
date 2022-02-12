@@ -1,0 +1,42 @@
+#promotion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  width: 300px;
+  height: 300px;
+  position: relative;
+  border: 5px solid #dfdfdf;
+  border-radius: 5px;
+  overflow: hidden;
+  text-align: center;
+}
+
+button.previous, button.next {
+  position: absolute;
+  bottom: 50%;
+  width: 25px;
+  height: 40px;
+  border: none;
+  opacity: 0.5;
+  background-color: #cfcfcf;
+}
+button.previous:hover, button.next:hover { opacity: 0.8; }
+button.previous { left: 0; }
+button.next { right: 0; }
+
+.promotion-img { display: none; }
+.promotion-img.is-active { display: inline-block;}
+
+.index-mark-container { position: absolute; bottom: 0; }
+
+.index-mark {
+  display: inline-block;
+  margin: 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #40241a;
+  opacity: 0.5;
+}
+.index-mark.is-active { opacity: 1; }
