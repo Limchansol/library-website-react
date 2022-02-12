@@ -10,8 +10,8 @@ function SubNavList({ currPage, path, hover }) {
     <ul className={subNavClass}>
     {navItemsData[currPage].map((subNavItem) =>  {
       return (
-        <Link to={`${path}${subNavItem.address}`}>
-          <li className="sub-nav-item" key={subNavItem.title}>{subNavItem.title}</li>
+        <Link to={`${path}${subNavItem.address}`} key={subNavItem.title}>
+          <li className="sub-nav-item">{subNavItem.title}</li>
         </Link>
       );
     })}

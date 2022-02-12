@@ -13,12 +13,13 @@ import Rule3Page from "./pages/Rule3Page";
 import Notice1Page from "./pages/Notice1Page";
 import Notice2Page from "./pages/Notice2Page";
 import Notice3Page from "./pages/Notice3Page";
-import Sth1Page from "./pages/Sth1Page";
-import Sth2Page from "./pages/Sth2Page";
-import Sth3Page from "./pages/Sth3Page";
+import Material1Page from "./pages/Material1Page";
+import Material2Page from "./pages/Material2Page";
+import Material3Page from "./pages/Material3Page";
 import Cafe1Page from "./pages/Cafe1Page";
 import Cafe2Page from "./pages/Cafe2Page";
 import Cafe3Page from "./pages/Cafe3Page";
+import SearchedPage from "./pages/SearchedPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 import './Main.css';
@@ -47,22 +48,24 @@ function Main() {
             <Route path="notice2" element={<Notice2Page />} />
             <Route path="notice3" element={<Notice3Page />} />
           </Route>
-          <Route path="/sth">
-            <Route path="sth1" element={<Sth1Page />} />
-            <Route path="sth2" element={<Sth2Page />} />
-            <Route path="sth3" element={<Sth3Page />} />
+          <Route path="/materials">
+            <Route path="material1" element={<Material1Page />} />
+            <Route path="material2" element={<Material2Page />} />
+            <Route path="material3" element={<Material3Page />} />
           </Route>
           <Route path="/cafe">
             <Route path="cafe1" element={<Cafe1Page />} />
             <Route path="cafe2" element={<Cafe2Page />} />
             <Route path="cafe3" element={<Cafe3Page />} />
           </Route>
+          <Route path="/searched" element={<SearchedPage />}></Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </App>
     </BrowserRouter>
   );
 }
+
 
 export default Main;
 

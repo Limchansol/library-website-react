@@ -1,23 +1,22 @@
+import { useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import books from '../books';
 import logoImg from '../images/main_logo.png';
 import './Search.css';
 
 function Search() {
 
-  function filterByKeyword(items, keyword) {
-    const lowered = keyword.toLowerCase();
-    return (
-      items.filter((item) => (
-        item.title.toLowerCase().includes(lowered)
-        || item.keyword.toLowerCase().includes(lowered)
-      ))
-    );
-  }
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initKeyword = searchParams.get('keyword');
+  const [keyword, setKeyword] = useState(initKeyword || '');
 
-  function getBooks(keyword) {
-    if (!keyword) return books;
-    return filterByKeyword(keyword, books);
+  const handleSubmit = () => {
+    setSearchParams(keyword ? { keyword } : {});
+    console.log('dlfdjska');
+    }
+
+  const handleInputChange = (e) => {
+    setKeyword(e.target.value);
+    console.log(keyword, '입력즉시 나오는 키워드');
   }
 
   return (
@@ -33,8 +32,10 @@ function Search() {
           <option value="publisher">출판사</option>
           <option value="ISBN">ISBN</option>
         </select>
-        <input type="search" className="search-input" placeholder="원하는 도서를 검색하세요." required autoComplete='off' />
-        <button className="search-btn">검색</button>
+        <input type="search" value={keyword} onChange={handleInputChange}  className="search-input" placeholder="원하는 도서를 검색하세요." required autoComplete='off' />
+        <Link to={`/searched?keyword=${keyword}`} state={{keyword: keyword}}>
+          <button className="search-btn" onClick={handleSubmit}>검색</button>
+        </Link>
       </form>
     </div>
   );

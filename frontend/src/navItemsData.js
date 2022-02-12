@@ -14,10 +14,10 @@ const navItemsData = {
     { title: '영화로 세상 읽기', address: '/notice2' },
     { title: '도서관 소식3', address: '/notice3' },
   ],
-  '도서관 무언가': [
-    { title: '세부내용1', address: '/sth1' },
-    { title: '세부내용2', address: '/sth2' },
-    { title: '세부내용3', address: '/sth3' },
+  '도서관 자료': [
+    { title: '세부내용1', address: '/material1' },
+    { title: '세부내용2', address: '/material2' },
+    { title: '세부내용3', address: '/material3' },
   ],
   '북악하늘 카페': [
     { title: '메뉴', address: '/cafe1' },
