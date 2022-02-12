@@ -1,0 +1,25 @@
+GET http://localhost:5000/api/books
+
+###
+POST http://localhost:5000/api/users/logIn
+Content-Type: application/json
+
+{
+  "id": "jww0418",
+  "password": "123"
+}
+
+###
+POST http://localhost:5000/api/users/signUp
+Content-Type: application/json
+
+{
+  "name": "chansol",
+  "id": "sol1234",
+  "password": "1234",
+  "isAdmin": false,
+  "phone": "010-3879-7817",
+  "gender": "female",
+  "birthdate": "00-10-24",
+  "email": "chansol1024@naver.com"
+}
