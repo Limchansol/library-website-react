@@ -1,17 +1,36 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
-import books from '../mock.json';
+import axios from "axios";
 
 function SearchedPage() {
-
-  console.log(useLocation(), '로케이션');
+  console.log(useLocation(), "로케이션");
   const _keyword = useLocation().state?.keyword;
   const [searchParams, setSearchParams] = useSearchParams();
-  const initKeyword = searchParams.get('keyword');
-  const [keyword, setKeyword] = useState(initKeyword || '');
+  const initKeyword = searchParams.get("keyword");
+  const [keyword, setKeyword] = useState(initKeyword || "");
+  const [selectedBooks, setSelectedBooks] = useState([]);
+
+  function filterByKeyword(keyword, items) {
+    const lowered = keyword.toLowerCase();
+    return items.filter(
+      (item) =>
+        item.title.toLowerCase().includes(lowered) ||
+        item.keyword.toLowerCase().includes(lowered)
+    );
+  }
+
   useEffect(() => {
-    setKeyword(_keyword || '');
+    setKeyword(_keyword || "");
     setSearchParams(keyword ? { keyword } : {});
+    const fetchData = async () => {
+      const {
+        data: { books },
+      } = await axios.get("api/books");
+      console.log(books);
+      const wantedBooks = filterByKeyword(keyword, books);
+      setSelectedBooks(wantedBooks);
+    };
+    fetchData();
   }, []);
 
   if (!keyword) {
@@ -23,41 +42,22 @@ function SearchedPage() {
     );
   }
 
-  console.log('키워드 잇음');
+  console.log("키워드 잇음");
 
-  function filterByKeyword(keyword, items) {
-    const lowered = keyword.toLowerCase();
-    return (
-      items.filter((item) => (
-        item.title.toLowerCase().includes(lowered)
-        || item.keyword.toLowerCase().includes(lowered)
-      ))
-    );
-  }
-
-  function getBooks(keyword) {
-    if (!keyword) return books;
-    return filterByKeyword(keyword, books);
-  }
-
-  const selectedBooks = getBooks(keyword);
   console.log(selectedBooks);
 
   return (
     <>
       {selectedBooks.map((book) => {
         return (
-          <div className='book' key={book.ISBN}>
+          <div className="book" key={book.ISBN}>
             <h3>책 제목: {book.title}</h3>
-            <p>글쓴이: {book.writer}</p> 
-            <p>출판사: {book.publisher}</p> 
+            <p>글쓴이: {book.writer}</p>
+            <p>출판사: {book.publisher}</p>
           </div>
         );
       })}
-
     </>
-    
-
   );
 }
 
