@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 function SearchedPage() {
-  console.log(useLocation(), "로케이션");
-  const _keyword = useLocation().state?.keyword;
-  const [searchParams, setSearchParams] = useSearchParams();
-  const initKeyword = searchParams.get("keyword");
-  const [keyword, setKeyword] = useState(initKeyword || "");
+  const keyword = useLocation().state.keyword;
   const [selectedBooks, setSelectedBooks] = useState([]);
 
   function filterByKeyword(keyword, items) {
@@ -20,8 +16,6 @@ function SearchedPage() {
   }
 
   useEffect(() => {
-    setKeyword(_keyword || "");
-    setSearchParams(keyword ? { keyword } : {});
     const fetchData = async () => {
       const {
         data: { books },
@@ -31,7 +25,7 @@ function SearchedPage() {
       setSelectedBooks(wantedBooks);
     };
     fetchData();
-  }, []);
+  }, [keyword]);
 
   if (!keyword) {
     return (
@@ -41,10 +35,6 @@ function SearchedPage() {
       </>
     );
   }
-
-  console.log("키워드 잇음");
-
-  console.log(selectedBooks);
 
   return (
     <>
