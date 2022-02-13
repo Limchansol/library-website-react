@@ -16,14 +16,25 @@ function LoginPage() {
     }));
   }
 
-  const handleLogin = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!userInfo.id || !userInfo.pw) return alert('아이디와 비밀번호를 입력해 주세요.');
-    console.log(userInfo);
+    const fetchData = async () => {
+      try {
+        const fetchedData = await axios.post("api/users/logIn", userInfo);
+        console.log(fetchedData);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        console.log('로그인 요청 axios finally문');
+      }
+    }
+    fetchData();
+    return console.log(userInfo);
   }
 
   return (
-    <form id="login-form" onSubmit={handleLogin}>
+    <form id="login-form" onSubmit={handleSubmit}>
       <input type="text" name="id" value={userInfo.id} onChange={handleUserInfo} className="user-id" placeholder="아이디" autoFocus />
       <input type="password" name="pw" value={userInfo.pw} onChange={handleUserInfo} className="user-pw" placeholder="비밀번호" />
       <button type="submit" className="login-btn">로그인</button>
