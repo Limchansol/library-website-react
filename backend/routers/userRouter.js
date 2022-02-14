@@ -32,6 +32,19 @@ userRouter.post(
 );
 
 userRouter.post(
+  "/signUpChecker",
+  expressAsyncHandler(async (req, res) => {
+    const tryId = req.body.id;
+    const beforeUser = await User.findOne({ id: tryId });
+    if (beforeUser) {
+      res.send({ message: "there is already user had this id!", valid: false });
+      return; //아이디 중복가입 방지
+    }
+    res.send({ message: "you can use it", valid: true });
+  })
+);
+
+userRouter.post(
   "/signUp",
   expressAsyncHandler(async (req, res) => {
     const newUser = new User({
