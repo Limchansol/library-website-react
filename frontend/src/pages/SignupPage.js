@@ -38,7 +38,6 @@ function SignupPage() {
   });
 
   const checkId = (value) => {
-    console.log("체크 아이디");
     let validity;
     let message;
     let color;
@@ -52,8 +51,8 @@ function SignupPage() {
         "5~20자의 영문 소문자, 숫자, 특수기호(_),(-)만 사용 가능합니다.";
       color = "tomato";
     } else if (value.length >= 5 && value.length <= 20) {
-      validity = true;
-      message = "사용 가능한 아이디입니다.";
+      validity = false;
+      message = '아이디 확인 버튼을 눌러주세요.';
       color = "#795548";
     }
     setInfoValidity((prev) => ({
@@ -61,6 +60,35 @@ function SignupPage() {
       id: [validity, message, color],
     }));
   };
+
+  const confirmId = (e) => {
+    e.preventDefault();
+    let validity;
+    let message;
+    let color;
+    if (!signupInfo.id) return;
+    const idCheckRequest = async () => {
+      try {
+        const fetchedData = await axios.post("/api/user/signUpChecker", { "id": signupInfo.id });
+        validity = fetchedData.valid;
+        message = '사용 가능한 아이디입니다.';
+        color = '#795548';
+        console.log(fetchedData, '아이디 확인용');
+      } catch (error) {
+        validity = false;
+        message = '사용할 수 없는 아이디입니다.';
+        color = 'tomato';
+        console.log(error);
+      } finally {
+        setInfoValidity((prev) => ({
+          ...prev,
+          id: [validity, message, color],
+        }));
+      }
+    }
+    idCheckRequest();
+    return console.log(signupInfo.id, '컨펌 아이디 함수 끝');
+  }
 
   // 비밀번호 확인 함수도 같이 넣어야 함
   const checkPassword = (value) => {
@@ -351,6 +379,7 @@ function SignupPage() {
             minLength="5"
             maxLength="20"
           />
+          <button type='button' id="id-check" onClick={confirmId}>아이디 확인</button>
           <CheckMessage
             message={infoValidity.id[1]}
             color={infoValidity.id[2]}
