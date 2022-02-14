@@ -10,6 +10,14 @@ Content-Type: application/json
 }
 
 ###
+POST  http://localhost:5000/api/users/signUpChecker
+Content-Type: application/json
+
+{
+  "id": "newID"
+}
+
+###
 POST http://localhost:5000/api/users/signUp
 Content-Type: application/json
 
