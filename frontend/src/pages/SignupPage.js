@@ -52,7 +52,7 @@ function SignupPage() {
       color = "tomato";
     } else if (value.length >= 5 && value.length <= 20) {
       validity = false;
-      message = '아이디 확인 버튼을 눌러주세요.';
+      message = "아이디 확인 버튼을 눌러주세요.";
       color = "#795548";
     }
     setInfoValidity((prev) => ({
@@ -69,15 +69,17 @@ function SignupPage() {
     if (!signupInfo.id) return;
     const idCheckRequest = async () => {
       try {
-        const fetchedData = await axios.post("/api/user/signUpChecker", { "id": signupInfo.id });
-        validity = fetchedData.valid;
-        message = '사용 가능한 아이디입니다.';
-        color = '#795548';
-        console.log(fetchedData, '아이디 확인용');
+        const fetchedData = await axios.post("/api/users/signUpChecker", {
+          id: signupInfo.id,
+        });
+        validity = fetchedData.data.valid;
+        message = fetchedData.data.message;
+        color = "#795548";
+        console.log(fetchedData, "아이디 확인용");
       } catch (error) {
         validity = false;
-        message = '사용할 수 없는 아이디입니다.';
-        color = 'tomato';
+        message = "사용할 수 없는 아이디입니다.";
+        color = "tomato";
         console.log(error);
       } finally {
         setInfoValidity((prev) => ({
@@ -85,10 +87,10 @@ function SignupPage() {
           id: [validity, message, color],
         }));
       }
-    }
+    };
     idCheckRequest();
-    return console.log(signupInfo.id, '컨펌 아이디 함수 끝');
-  }
+    return console.log(signupInfo.id, "컨펌 아이디 함수 끝");
+  };
 
   // 비밀번호 확인 함수도 같이 넣어야 함
   const checkPassword = (value) => {
@@ -342,6 +344,7 @@ function SignupPage() {
   // false인 애들만 골라서 메시지 띄워놓기
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(infoValidity);
     const valid = Object.values(infoValidity).every(
       (value) => value[0] === true
     );
@@ -379,7 +382,9 @@ function SignupPage() {
             minLength="5"
             maxLength="20"
           />
-          <button type='button' id="id-check" onClick={confirmId}>아이디 확인</button>
+          <button type="button" id="id-check" onClick={confirmId}>
+            아이디 확인
+          </button>
           <CheckMessage
             message={infoValidity.id[1]}
             color={infoValidity.id[2]}

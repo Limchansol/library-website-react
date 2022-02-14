@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema(
     yyyy: { type: String, required: true },
     mm: { type: String, required: true },
     dd: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
+    email: { type: String, required: true },
   },
   {
     timestamps: true,
