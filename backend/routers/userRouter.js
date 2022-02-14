@@ -41,7 +41,9 @@ userRouter.post(
       isAdmin: false,
       phone: req.body.phone,
       gender: req.body.gender,
-      birthdate: req.body.birthdate,
+      yyyy: req.body.yyyy,
+      mm: req.body.mm,
+      dd: req.body.dd,
       email: req.body.email,
     });
     const beforeUser = await User.findOne({ id: newUser.id });

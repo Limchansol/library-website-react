@@ -20,6 +20,8 @@ Content-Type: application/json
   "isAdmin": false,
   "phone": "010-3879-7817",
   "gender": "female",
-  "birthdate": "00-10-24",
+  "yyyy": "2000",
+  "mm": "10",
+  "dd": "24",
   "email": "chansol1024@naver.com"
 }

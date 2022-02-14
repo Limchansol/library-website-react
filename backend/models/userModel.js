@@ -8,7 +8,9 @@ const userSchema = new mongoose.Schema(
     isAdmin: { type: Boolean, default: false, required: false },
     phone: { type: String, required: true },
     gender: { type: String, required: true },
-    birthdate: { type: String, required: true },
+    yyyy: { type: String, required: true },
+    mm: { type: String, required: true },
+    dd: { type: String, required: true },
     email: { type: String, required: true, unique: true },
   },
   {
