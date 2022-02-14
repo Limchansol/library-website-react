@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import axios from 'axios';
 import './LoginPage.css';
 
 function LoginPage() {
   
   const [userInfo, setUserInfo] = useState({
     id: '',
-    pw: '',
+    password: '',
   });
 
   const handleUserInfo = (e) => {
@@ -36,7 +37,7 @@ function LoginPage() {
   return (
     <form id="login-form" onSubmit={handleSubmit}>
       <input type="text" name="id" value={userInfo.id} onChange={handleUserInfo} className="user-id" placeholder="아이디" autoFocus />
-      <input type="password" name="pw" value={userInfo.pw} onChange={handleUserInfo} className="user-pw" placeholder="비밀번호" />
+      <input type="password" name="password" value={userInfo.password} onChange={handleUserInfo} className="user-pw" placeholder="비밀번호" />
       <button type="submit" className="login-btn">로그인</button>
       <span className="find-pw">비밀번호를 잊어버리셨나요?</span>
     </form>
