@@ -19,10 +19,10 @@ function LoginPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!userInfo.id || !userInfo.pw) return alert('아이디와 비밀번호를 입력해 주세요.');
+    if (!userInfo.id || !userInfo.password) return alert('아이디와 비밀번호를 입력해 주세요.');
     const fetchData = async () => {
       try {
-        const fetchedData = await axios.post("api/users/logIn", userInfo);
+        const fetchedData = await axios.post("http://localhost:5000/api/users/logIn", userInfo);
         console.log(fetchedData);
       } catch (error) {
         console.log(error);
