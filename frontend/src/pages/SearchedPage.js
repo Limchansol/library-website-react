@@ -30,7 +30,7 @@ function SearchedPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedData = await axios.get(`api/books/${category}=${keyword}`);
+      const fetchedData = await axios.get(`api/books?${category}=${keyword}`);
       const books = fetchedData.data;
       const wantedBooks = filterByKeyword(category, keyword, books);
       setSelectedBooks(wantedBooks);

@@ -7,7 +7,8 @@
   text-align: center;
 }
 
-.user-id, .user-pw {
+.user-id,
+.user-pw {
   margin: 5px 0;
   padding: 5px;
   width: 300px;
@@ -28,8 +29,12 @@
   letter-spacing: 0.2em;
 }
 
-.login-btn:hover { background-color: #8d6e63; }
-.login-btn:active { background-color: #a98274; }
+.login-btn:hover {
+  background-color: #8d6e63;
+}
+.login-btn:active {
+  background-color: #a98274;
+}
 
 .find-pw {
   display: inline-block;

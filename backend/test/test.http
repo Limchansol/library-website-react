@@ -33,3 +33,9 @@ Content-Type: application/json
   "dd": "24",
   "email": "chansol1024@naver.com"
 }
+
+###
+GET http://localhost:5000/api/books?writer=고경희
+
+###
+GET http://localhost:5000/api/books?all=고경희
