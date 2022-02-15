@@ -27,10 +27,10 @@ function SignUpPage() {
     name: [false, "한글이나 영문 대 소문자를 사용하세요."],
     id: [
       false,
-      "5~20자의 영문 소문자, 숫자, 특수기호(_),(-)만 사용 가능합니다.",
+      "5~20자의 영문 소문자, 숫자, 특수문자(_),(-)만 사용 가능합니다.",
     ],
-    password: [false, "8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요."],
-    password2: [false, "8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요."],
+    password: [false, "8~16자 영문 대 소문자, 숫자나 특수문자를 사용하세요."],
+    password2: [false, "8~16자 영문 대 소문자, 숫자나 특수문자를 사용하세요."],
     phone: [false, ""],
     gender: [false, ""],
     birthDate: [false, ""],
@@ -41,16 +41,17 @@ function SignUpPage() {
     let validity;
     let message;
     let color;
+    const idRegex = /^[a-z0-9_-]{5,20}$/g;
     if (!value) {
       message = "필수 정보입니다.";
       validity = false;
       color = "tomato";
-    } else if (value.length < 5 || value.length > 20) {
+    } else if (!idRegex.test(value)) {
       validity = false;
       message =
         "5~20자의 영문 소문자, 숫자, 특수기호(_),(-)만 사용 가능합니다.";
       color = "tomato";
-    } else if (value.length >= 5 && value.length <= 20) {
+    } else {
       validity = false;
       message = "아이디 확인 버튼을 눌러주세요.";
       color = "#795548";
@@ -94,17 +95,17 @@ function SignUpPage() {
 
   // 비밀번호 확인 함수도 같이 넣어야 함
   const checkPassword = (value) => {
-    console.log("체크패스퉈드");
     let validity;
     let message;
     let color;
+    const pwRegex = /^[^ ]{8,16}$/g;
     if (!value) {
       validity = false;
       message = "필수 정보입니다.";
       color = "tomato";
-    } else if (value.length < 8 || value.length > 16) {
+    } else if (!pwRegex.test(value)) {
       validity = false;
-      message = "8~16자의 영문 대 소문자, 숫자, 특수문자를 사용하세요.";
+      message = "8~16자의 영문 대 소문자, 숫자나 특수문자를 사용하세요.";
       color = "tomato";
     } else {
       validity = true;
@@ -118,7 +119,6 @@ function SignUpPage() {
   };
 
   const doubleCheckPassword = (e) => {
-    console.log("비번2");
     let validity;
     let message;
     let color;
@@ -138,15 +138,15 @@ function SignUpPage() {
   };
 
   const checkName = (value) => {
-    console.log("이름");
     let validity;
     let message;
     let color;
+    const nameRegex = /^[A-z가-힣.]{1,30}$/g;
     if (!value) {
       validity = false;
       message = "필수 정보입니다.";
       color = "tomato";
-    } else if (value.length > 30) {
+    } else if (!nameRegex.test(value)) {
       validity = false;
       message = "1~30자 한글이나 영문 대 소문자를 사용하세요.";
       color = "tomato";
@@ -162,7 +162,6 @@ function SignUpPage() {
   };
 
   const checkGender = (value) => {
-    console.log("성별");
     let validity;
     let message;
     let color;
@@ -182,15 +181,15 @@ function SignUpPage() {
   };
 
   const checkYear = (value) => {
-    console.log("year");
     let validity;
     let message;
     let color;
+    const yearRegex = /^\d{4}$/g;
     if (!value) {
       validity = false;
       message = "필수 정보입니다.";
       color = "tomato";
-    } else if (value.length !== 4 || isNaN(Number(value))) {
+    } else if (!yearRegex.test(value)) {
       validity = false;
       message = "생년월일을 다시 확인해 주세요.";
       color = "tomato";
@@ -206,15 +205,19 @@ function SignUpPage() {
   };
 
   const checkMonth = (value) => {
-    console.log("month");
     let validity;
     let message;
     let color;
+    const monthRegex = /^\d{2}$/g;
     if (!value) {
       validity = false;
       message = "필수 정보입니다.";
       color = "tomato";
-    } else if (Number(value) < 1 || Number(value) > 12 || value.length !== 2) {
+    } else if (
+      !monthRegex.test(value) ||
+      Number(value) < 1 ||
+      Number(value) > 12
+    ) {
       validity = false;
       message = "생년월일을 다시 확인해 주세요.";
       color = "tomato";
@@ -230,15 +233,19 @@ function SignUpPage() {
   };
 
   const checkDay = (value) => {
-    console.log("day");
     let validity;
     let message;
     let color;
+    const dayRegex = /^\d{2}$/g;
     if (!value) {
       validity = false;
       message = "필수 정보입니다.";
       color = "tomato";
-    } else if (Number(value) < 1 || Number(value) > 31 || value.length !== 2) {
+    } else if (
+      !dayRegex.test(value) ||
+      Number(value) < 1 ||
+      Number(value) > 31
+    ) {
       validity = false;
       message = "생년월일을 다시 확인해 주세요.";
       color = "tomato";
@@ -254,15 +261,15 @@ function SignUpPage() {
   };
 
   const checkPhone = (value) => {
-    console.log("핸드폰");
     let validity;
     let message;
     let color;
+    const phoneRegex = /^01[0|1|6|7|8|9]\d{7,8}$/g;
     if (!value) {
       validity = false;
       message = "필수 정보입니다.";
       color = "tomato";
-    } else if (value.length !== 11 || isNaN(Number(value))) {
+    } else if (!phoneRegex.test(value)) {
       validity = false;
       message = "휴대폰 번호를 다시 확인해 주세요.";
       color = "tomato";
@@ -278,15 +285,15 @@ function SignUpPage() {
   };
 
   const checkEmail = (value) => {
-    console.log("이메일");
     let validity;
     let message;
     let color;
+    const emailRegex = /^[A-z0-9-_]+@[\w]+\.[A-z0-9.]+$/g;
     if (!value) {
       validity = false;
       message = "필수 정보입니다.";
       color = "tomato";
-    } else if (!value.includes("@") || !value[value.indexOf("@") + 1]) {
+    } else if (!emailRegex.test(value)) {
       validity = false;
       message = "이메일 형식을 다시 확인해 주세요.";
       color = "tomato";
@@ -344,7 +351,6 @@ function SignUpPage() {
   // false인 애들만 골라서 메시지 띄워놓기
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(infoValidity);
     const valid = Object.values(infoValidity).every(
       (value) => value[0] === true
     );
@@ -359,7 +365,6 @@ function SignUpPage() {
       } catch (error) {
         console.log(error);
       } finally {
-        console.log("회원가입 요청 axios finally문");
       }
     };
     fetchData();
