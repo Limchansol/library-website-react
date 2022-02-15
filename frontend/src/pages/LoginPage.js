@@ -1,8 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
-import "./LoginPage.css";
+import "./LogInPage.css";
 
-function LoginPage() {
+function LogInPage() {
   const [userInfo, setUserInfo] = useState({
     id: "",
     password: "",
@@ -61,4 +61,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default LogInPage;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import "./SignupPage.css";
+import "./SignUpPage.css";
 
 function CheckMessage({ message, color = "#8c7b75" }) {
   return (
@@ -10,7 +10,7 @@ function CheckMessage({ message, color = "#8c7b75" }) {
   );
 }
 
-function SignupPage() {
+function SignUpPage() {
   const [signupInfo, setSignupInfo] = useState({
     name: "",
     id: "",
@@ -542,4 +542,4 @@ function SignupPage() {
   );
 }
 
-export default SignupPage;
+export default SignUpPage;
