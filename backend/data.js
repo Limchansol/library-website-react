@@ -1,3 +1,5 @@
+const rawBook = require("./rawBookData.js");
+
 const data = {
   users: [
     {
@@ -167,4 +169,13 @@ const data = {
   ],
 };
 
+rawBook.forEach((e, i) => {
+  data.books.push({
+    id: i + 3,
+    title: e.dcBookCatalogBasic.title,
+    writer: e.dcBookCatalogBasic.author,
+    publisher: e.dcBookCatalogBasic.publisher,
+    ISBN: e.dcBookCatalogBasic.isbn,
+  });
+});
 module.exports = data;
