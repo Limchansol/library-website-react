@@ -1,21 +1,25 @@
-
 .greetings {
   margin: 10px auto;
   width: 750px;
 }
 
-.meaning-table { 
+.meaning-table {
   margin: 20px auto;
   border-collapse: collapse;
 }
 
-caption { font-size: 20px; font-weight: bold; }
+caption {
+  font-size: 24px;
+  font-weight: bold;
+}
 
-.category { font-weight: bold; color: #494949; }
+.category {
+  font-weight: bold;
+  color: #494949;
+}
 
 td {
   width: 300px;
   height: 50px;
   border: 1px solid black;
-
 }

@@ -1,5 +1,4 @@
 import Map from "../components/Map";
-import entrance from "../images/entrance.jpg";
 
 function Intro2Page() {
   return (
@@ -9,7 +8,6 @@ function Intro2Page() {
         <div id="directions">
           <h3>오시는 길</h3>
           <Map />
-          {/* <img src={entrance} alt="bookarkhaneul_entrance" width="500px" /> */}
           <div className="address">
             <h4>도로명주소</h4>
             <p>(02821) 서울특별시 성북구 북악하늘</p>

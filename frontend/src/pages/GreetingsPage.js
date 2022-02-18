@@ -3,7 +3,7 @@ import "./GreetingsPage.css";
 function GreetingsPage() {
   return (
     <div className="greetings">
-      <p>
+      <p className="intro">
         <strong style={{ fontSize: "30px" }}>북악하늘</strong>은 정릉동
         508단지를 중심으로 건강하고 온정 있는 지역사회 공동체를 만들어가자는
         생각으로 생겨났습니다.
@@ -21,24 +21,20 @@ function GreetingsPage() {
           <tr>
             <td>명칭</td>
             <td>사회적 의미</td>
-            <td>기독교적 의미</td>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td className="category">북(Book)</td>
             <td>악(樂, ark)</td>
-            <td>하늘</td>
           </tr>
           <tr>
             <td className="category">악(樂 ark)</td>
             <td>독서와 음악과 즐거움</td>
-            <td>구원의 방주와 언약궤, 희락</td>
           </tr>
           <tr>
             <td className="category">하늘</td>
             <td>하늘과 맞닿은 북악스카이웨이</td>
-            <td>하나님의 나라</td>
           </tr>
           <tr>
             <td className="category">문화공간 북악하늘</td>
@@ -46,21 +42,25 @@ function GreetingsPage() {
               각종 문화 활동과 커뮤니티를 통해 지역사회의 문화 창달과 삶의 질을
               향상시킴
             </td>
-            <td>
-              문화를 통한 하나님 나라의 전파. 건강한 기독교 문화의 토대 위에
-              대안공동체로서의 역할을 감당
-            </td>
-          </tr>
-          <tr>
-            <td className="category">북악하늘 교회</td>
-            <td>열린 교회로서 지역사회와 더불어 존재하며 삶을 공유함</td>
-            <td>
-              복음주의적인 하나님 말씀의 선포를 통해 구원의 방주 역할을 담당하며
-              삶속에서 성령의 열매(희락)를 맺음
-            </td>
           </tr>
         </tbody>
       </table>
+      <div className="purpose">
+        <h2>북악하늘의 목적</h2>
+        <ul>
+          <li>한 잔의 차를 마시며 몸과 마음에 편안한 쉼을 제공하는 공간</li>
+          <li>책을 읽고 마음껏 생각에 잠기며 상상의 나래를 펼치는 공간</li>
+          <li>
+            작은 문화행사와 인문학 콘서트를 통해 끊임없는 배움의 기쁨이 커가는
+            공간
+          </li>
+          <li>지역주민들이 각자의 의견을 개진하며 소통하는 공간</li>
+          <li>소그룹 모임을 통해 자신을 돌아보며 삶을 나누는 공간</li>
+          <li>활발한 문화활동을 통해 자기계발을 도모하는 공간</li>
+          <li>작은 소품들을 전시하며 소소한 기쁨을 이웃과 공유하는 공간</li>
+          <li>영화를 보며 사회를 이해하고, 세상을 보는 안목을 넓히는 공간</li>
+        </ul>
+      </div>
     </div>
   );
 }
