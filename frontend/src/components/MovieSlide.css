@@ -1,17 +1,57 @@
-.movie-container {
+.slide-screen {
   margin: 10px auto;
   width: 750px;
   height: 400px;
+  position: relative;
   border: 1px solid black;
   overflow: hidden;
 }
 
+.movie-container {
+  border: 1px solid orange;
+  transition: transform 0.5s;
+}
+
 .movie {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  margin: 0 auto;
+  margin: 10px auto;
   width: 700px;
   height: 250px;
   border: 1px solid red;
+  background-color: gainsboro;
+  opacity: 0.3;
+}
+
+.movie.start,
+.movie.end {
+  margin: 0 auto;
+  height: 65px;
+}
+
+.movie.current {
+  margin: 10px auto;
+  width: 700px;
+  height: 250px;
+  background-color: white;
+  opacity: 1;
+}
+
+.movie-content {
+  width: 450px;
+}
+
+.previous-btn {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.next-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 50%;
+  transform: translateX(50%);
 }

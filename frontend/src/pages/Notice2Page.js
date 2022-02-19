@@ -1,5 +1,3 @@
-/** 영화로 세상읽기 */
-
 import MovieSlide from "../components/MovieSlide";
 
 function Notice2Page() {
@@ -11,6 +9,7 @@ function Notice2Page() {
       "선거는 국민이 참여하는 민주주의의 근간이자 핵심입니다. 유권자는 가장 올바르고 적당한 인물을 선출할 권리와 의무를 갖습니다. 그렇다면 우리는 어떤 기준과 어떤 가치관으로 정치를 보고, 어떻게 선거에 참여해야 할까요? 영화와 함께 생각해봅시다.",
     movies: [
       {
+        number: 1,
         title: "대통령의 연인 (The American President, 1995)",
         director: "롭 라이너",
         date: "1월 11일(화)",
@@ -18,6 +17,7 @@ function Notice2Page() {
           "1영화 내용 대충 써놓기. 무슨 내용인지 나도 모른다. 졸리다. 겸둥이. 영화 보고 싶다. 언차티드 재밌어보이던데 개강하기 전에 봐야겠다.",
       },
       {
+        number: 2,
         title: "불워스 (Bulworth, 1998)",
         director: "워렌 비티",
         date: "1월 18일(화)",
@@ -25,6 +25,7 @@ function Notice2Page() {
           "2영화 내용 대충 써놓기. 무슨 내용인지 나도 모른다. 졸리다. 겸둥이. 영화 보고 싶다. 언차티드 재밌어보이던데 개강하기 전에 봐야겠다.",
       },
       {
+        number: 3,
         title: "스윙 보트 (Swing Vote, 2008)",
         director: "조슈아 마이클 스턴",
         date: "1월 25일(화)",
@@ -32,6 +33,7 @@ function Notice2Page() {
           "3영화 내용 대충 써놓기. 무슨 내용인지 나도 모른다. 졸리다. 겸둥이. 영화 보고 싶다. 언차티드 재밌어보이던데 개강하기 전에 봐야겠다.",
       },
       {
+        number: 4,
         title: "킹메이커 (The Ides of March, 2011)",
         director: "조지 클루니",
         date: "2월 8일(화)",
@@ -39,6 +41,7 @@ function Notice2Page() {
           "4영화 내용 대충 써놓기. 무슨 내용인지 나도 모른다. 졸리다. 겸둥이. 영화 보고 싶다. 언차티드 재밌어보이던데 개강하기 전에 봐야겠다.",
       },
       {
+        number: 5,
         title: "선거 캠페인 (The Campaign, 2011)",
         director: "제이 로치",
         date: "2월 15일(화)",
