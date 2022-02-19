@@ -1,0 +1,27 @@
+h2 {
+  text-align: center;
+}
+
+table {
+  border: solid 1px black;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+caption {
+  font-size: 15px;
+}
+
+td {
+  border: solid 1px black;
+}
+
+.redDay {
+  border: none;
+  border: solid 3px red;
+}
+
+.orangeDay {
+  border: none;
+  border: solid 3px orange;
+}
