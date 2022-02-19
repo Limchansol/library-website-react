@@ -14,7 +14,7 @@ function Calender() {
   const nowMonthDays = Array(lastDay.getDate())
     .fill()
     .map((e, i) => {
-      if (today[2] == i + 1) return true;
+      if (today[2] === i + 1) return true;
       return false;
     });
   const days = ["일", "월", "화", "수", "목", "금", "토"];
@@ -48,9 +48,8 @@ function Calender() {
                     if (
                       initDay.getDay() + ind > 6 + i * 7 ||
                       initDay.getDay() + ind < i * 7
-                    ) {
-                      return;
-                    }
+                    )
+                      return undefined;
 
                     return (
                       <td

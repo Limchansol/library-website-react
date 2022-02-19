@@ -18,7 +18,7 @@ function CafePage() {
         <div className="menuHead">coffee</div>
         <ul>
           {cafeMenu.map((e) => {
-            if (e.type != "coffee") return;
+            if (e.type !== "coffee") return undefined;
             return (
               <li key={e._id}>
                 {e.name} \{e.price}
@@ -31,7 +31,7 @@ function CafePage() {
         <div className="menuHead">tea</div>
         <ul>
           {cafeMenu.map((e) => {
-            if (e.type != "tea") return;
+            if (e.type !== "tea") return undefined;
             return (
               <li key={e._id}>
                 {e.name} \{e.price}
@@ -44,7 +44,7 @@ function CafePage() {
         <div className="menuHead">beverage</div>
         <ul>
           {cafeMenu.map((e) => {
-            if (e.type != "beverage") return;
+            if (e.type !== "beverage") return undefined;
             return (
               <li key={e._id}>
                 {e.name} \{e.price}
@@ -57,7 +57,7 @@ function CafePage() {
         <div className="menuHead">snack</div>
         <ul>
           {cafeMenu.map((e) => {
-            if (e.type != "snack") return;
+            if (e.type !== "snack") return undefined;
             return (
               <li key={e._id}>
                 {e.name} \{e.price}

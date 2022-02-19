@@ -176,6 +176,7 @@ rawBook.forEach((e, i) => {
     writer: e.dcBookCatalogBasic.author,
     publisher: e.dcBookCatalogBasic.publisher,
     ISBN: e.dcBookCatalogBasic.isbn,
+    kdc: e.dcBookCatalogBasic.bookList[0].call_no,
   });
 });
 module.exports = data;
