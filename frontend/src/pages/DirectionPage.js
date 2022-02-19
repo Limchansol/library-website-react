@@ -1,6 +1,6 @@
 import Map from "../components/Map";
 
-function Intro2Page() {
+function DirectionPage() {
   return (
     <>
       <h2>도서관 소개2</h2>
@@ -43,4 +43,4 @@ function Intro2Page() {
   );
 }
 
-export default Intro2Page;
+export default DirectionPage;

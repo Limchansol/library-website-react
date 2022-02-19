@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-function Cafe1Page() {
+function CafePage() {
   const [cafeMenu, setCafeMenu] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -69,4 +69,4 @@ function Cafe1Page() {
   );
 }
 
-export default Cafe1Page;
+export default CafePage;

@@ -1,6 +1,6 @@
 import MovieSlide from "../components/MovieSlide";
 
-function Notice2Page() {
+function MovieProgramPage() {
   const programInfo = {
     year: 2022,
     season: 1,
@@ -71,4 +71,4 @@ function Notice2Page() {
   );
 }
 
-export default Notice2Page;
+export default MovieProgramPage;

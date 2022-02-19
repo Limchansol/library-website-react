@@ -5,24 +5,24 @@ import LogInPage from "./pages/LogInPage";
 import SignUpPage from "./pages/SignUpPage";
 import MyPage from "./pages/MyPage";
 import GreetingsPage from "./pages/GreetingsPage";
-import Intro2Page from "./pages/Intro2Page";
+import DirectionPage from "./pages/DirectionPage";
 import Intro3Page from "./pages/Intro3Page";
-import Rule1Page from "./pages/Rule1Page";
-import Rule2Page from "./pages/Rule2Page";
-import Rule3Page from "./pages/Rule3Page";
-import Notice1Page from "./pages/Notice1Page";
-import Notice2Page from "./pages/Notice2Page";
-import Notice3Page from "./pages/Notice3Page";
-import Material1Page from "./pages/Material1Page";
-import Material2Page from "./pages/Material2Page";
-import Material3Page from "./pages/Material3Page";
-import Cafe1Page from "./pages/Cafe1Page";
-import Cafe2Page from "./pages/Cafe2Page";
-import Cafe3Page from "./pages/Cafe3Page";
+import ServiceHoursPage from "./pages/ServiceHoursPage";
+import CheckOutAndReturnPage from "./pages/CheckOutAndReturnPage";
+import CafePage from "./pages/CafePage";
+import DetailedSearchPage from "./pages/DetailedSearchPage";
+import SubjectSearchPage from "./pages/SubjectSearchPage";
+import BookApplicationPage from "./pages/BookApplicationPage";
+import MovieProgramPage from "./pages/MovieProgramPage";
+import BookProgramPage from "./pages/BookProgramPage";
+import LocalProgramPage from "./pages/LocalProgramPage";
+import NoticePage from "./pages/NoticePage";
+import FAQPage from "./pages/FAQPage";
+import InquiryPage from "./pages/InquiryPage";
 import SearchedPage from "./pages/SearchedPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
-import './Main.css';
+import "./Main.css";
 
 function Main() {
   return (
@@ -35,28 +35,31 @@ function Main() {
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/introduction">
             <Route path="greetings" element={<GreetingsPage />} />
-            <Route path="intro2" element={<Intro2Page />} />
+            <Route path="direction" element={<DirectionPage />} />
             <Route path="intro3" element={<Intro3Page />} />
           </Route>
-          <Route path="/rules">
-            <Route path="rule1" element={<Rule1Page />} />
-            <Route path="rule2" element={<Rule2Page />} />
-            <Route path="rule3" element={<Rule3Page />} />
-          </Route>
-          <Route path="/notice">
-            <Route path="notice1" element={<Notice1Page />} />
-            <Route path="notice2" element={<Notice2Page />} />
-            <Route path="notice3" element={<Notice3Page />} />
+          <Route path="/service-guide">
+            <Route path="service-hours" element={<ServiceHoursPage />} />
+            <Route
+              path="checkOut-and-return"
+              element={<CheckOutAndReturnPage />}
+            />
+            <Route path="cafe" element={<CafePage />} />
           </Route>
           <Route path="/materials">
-            <Route path="material1" element={<Material1Page />} />
-            <Route path="material2" element={<Material2Page />} />
-            <Route path="material3" element={<Material3Page />} />
+            <Route path="detailed-search" element={<DetailedSearchPage />} />
+            <Route path="subject-search" element={<SubjectSearchPage />} />
+            <Route path="book-application" element={<BookApplicationPage />} />
           </Route>
-          <Route path="/cafe">
-            <Route path="cafe1" element={<Cafe1Page />} />
-            <Route path="cafe2" element={<Cafe2Page />} />
-            <Route path="cafe3" element={<Cafe3Page />} />
+          <Route path="/programs">
+            <Route path="movie-program" element={<MovieProgramPage />} />
+            <Route path="book-program" element={<BookProgramPage />} />
+            <Route path="local-program" element={<LocalProgramPage />} />
+          </Route>
+          <Route path="/notices-and-communication">
+            <Route path="notice" element={<NoticePage />} />
+            <Route path="FAQ" element={<FAQPage />} />
+            <Route path="inquiry" element={<InquiryPage />} />
           </Route>
           <Route path="/searched" element={<SearchedPage />}></Route>
           <Route path="*" element={<NotFoundPage />} />
@@ -66,6 +69,4 @@ function Main() {
   );
 }
 
-
 export default Main;
-

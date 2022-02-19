@@ -1,4 +1,4 @@
-function Rule1Page() {
+function ServiceHoursPage() {
   return (
     <>
       <h2>도서관 이용 안내</h2>
@@ -54,4 +54,4 @@ function Rule1Page() {
   );
 }
 
-export default Rule1Page;
+export default ServiceHoursPage;

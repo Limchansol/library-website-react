@@ -1,28 +1,28 @@
 const navItemsData = {
   "북악하늘 소개": [
     { title: "인사말", address: "/greetings" },
-    { title: "오시는 길", address: "/intro2" },
+    { title: "오시는 길", address: "/direction" },
     { title: "소개3", address: "/intro3" },
   ],
   "도서관 이용": [
-    { title: "이용시간", address: "/rule1" },
-    { title: "이용규칙2", address: "/rule2" },
-    { title: "이용규칙3", address: "/rule3" },
-  ],
-  "도서관 소식": [
-    { title: "공지사항", address: "/notice1" },
-    { title: "영화로 세상 읽기", address: "/notice2" },
-    { title: "도서관 소식3", address: "/notice3" },
+    { title: "이용시간", address: "/service-hours" },
+    { title: "도서 대여/예약/반납", address: "/checkOut-and-return" },
+    { title: "북악하늘 카페", address: "/cafe" },
   ],
   "도서관 자료": [
-    { title: "세부내용1", address: "/material1" },
-    { title: "세부내용2", address: "/material2" },
-    { title: "세부내용3", address: "/material3" },
+    { title: "상세검색", address: "/detailed-search" },
+    { title: "주제별 검색", address: "/subject-search" },
+    { title: "희망 도서 신청", address: "/book-application" },
   ],
-  "북악하늘 카페": [
-    { title: "메뉴", address: "/cafe1" },
-    { title: "카페2", address: "/cafe2" },
-    { title: "카페3", address: "/cafe3" },
+  "도서관 활동": [
+    { title: "영화로 세상 읽기", address: "/movie-program" },
+    { title: "책으로 무언가 하기", address: "/book-program" },
+    { title: "지역에서 무언가 하기", address: "/local-program" },
+  ],
+  "알림 및 소통": [
+    { title: "공지사항", address: "/notice" },
+    { title: "FAQ", address: "/FAQ" },
+    { title: "문의", address: "/inquiry" },
   ],
 };
 
