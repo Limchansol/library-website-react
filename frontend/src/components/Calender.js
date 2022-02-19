@@ -18,8 +18,8 @@ function Calender() {
   const days = ["일", "월", "화", "수", "목", "금", "토"];
   return (
     <>
-      <h2>도서관 일정</h2>
-      <table>
+      <h2 className="schedule-title">도서관 일정</h2>
+      <table className="schedule-calender">
         <caption>
           red: 휴무일
           <br /> orange: 영화상영일

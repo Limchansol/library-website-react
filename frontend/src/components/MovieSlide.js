@@ -9,17 +9,15 @@ import "./MovieSlide.css";
 function MovieSlide({ movies }) {
   const movieCnt = 5;
   const [currIndex, setCurrIndex] = useState(1);
-
   const containerLocation = {
     transform: `translateY(${-260 * (currIndex - 1)}px)`,
   };
 
   const toPreviousMovie = () => {
-    return setCurrIndex((prev) => prev - 1);
+    setCurrIndex((prev) => prev - 1);
   };
-
   const toNextMovie = () => {
-    return setCurrIndex((prev) => prev + 1);
+    setCurrIndex((prev) => prev + 1);
   };
 
   const movie1Class = currIndex === 1 ? "movie current" : "movie";

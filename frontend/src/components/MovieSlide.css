@@ -31,9 +31,9 @@
 }
 
 .movie.current {
-  margin: 10px auto;
+  /* margin: 10px auto;
   width: 700px;
-  height: 250px;
+  height: 250px; */
   background-color: white;
   opacity: 1;
 }

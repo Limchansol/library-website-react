@@ -1,27 +1,27 @@
-h2 {
+.schedule-title {
   text-align: center;
 }
 
-table {
+.schedule-calender {
   border: solid 1px black;
   border-collapse: collapse;
   text-align: center;
 }
 
-caption {
+.schedule-calender caption {
   font-size: 15px;
 }
 
-td {
+.schedule-calender td {
   border: solid 1px black;
 }
 
-.redDay {
+td.redDay {
   border: none;
   border: solid 3px red;
 }
 
-.orangeDay {
+td.orangeDay {
   border: none;
   border: solid 3px orange;
 }
