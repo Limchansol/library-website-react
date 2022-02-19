@@ -1,3 +1,7 @@
+#schedule {
+  width: 600px;
+}
+
 .schedule-title {
   text-align: center;
 }
@@ -6,6 +10,9 @@
   border: solid 1px black;
   border-collapse: collapse;
   text-align: center;
+  width: 600px;
+  height: 400px;
+  margin: auto;
 }
 
 .schedule-calender caption {
@@ -14,6 +21,9 @@
 
 .schedule-calender td {
   border: solid 1px black;
+  text-align: left;
+  vertical-align: top;
+  width: 90px;
 }
 
 td.redDay {
@@ -24,4 +34,11 @@ td.redDay {
 td.orangeDay {
   border: none;
   border: solid 3px orange;
+}
+
+td#today::after {
+  vertical-align: middle;
+  text-align: center;
+  font-size: 10px;
+  content: "today";
 }

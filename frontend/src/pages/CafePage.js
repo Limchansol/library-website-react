@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import "./CafePage.css";
 
 function CafePage() {
   const [cafeMenu, setCafeMenu] = useState([]);
@@ -11,8 +12,8 @@ function CafePage() {
     fetchData();
   }, []);
   return (
-    <div>
-      <h1>CAFE MENU</h1>
+    <div id="cafePage">
+      <div id="title">CAFE MENU</div>
       <div id="coffee">
         <div className="menuHead">coffee</div>
         <ul>
@@ -20,7 +21,7 @@ function CafePage() {
             if (e.type != "coffee") return;
             return (
               <li key={e._id}>
-                {e.name} {e.price}
+                {e.name} \{e.price}
               </li>
             );
           })}
@@ -33,7 +34,7 @@ function CafePage() {
             if (e.type != "tea") return;
             return (
               <li key={e._id}>
-                {e.name} {e.price}
+                {e.name} \{e.price}
               </li>
             );
           })}
@@ -46,7 +47,7 @@ function CafePage() {
             if (e.type != "beverage") return;
             return (
               <li key={e._id}>
-                {e.name} {e.price}
+                {e.name} \{e.price}
               </li>
             );
           })}
@@ -59,7 +60,7 @@ function CafePage() {
             if (e.type != "snack") return;
             return (
               <li key={e._id}>
-                {e.name} {e.price}
+                {e.name} \{e.price}
               </li>
             );
           })}

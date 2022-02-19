@@ -10,7 +10,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); //qs모듈을 사용해서 해석하도록(extended가 true) 객체의 깊이가 있을 경우 qs와 querystring모듈 2개가 다르게 parse한다.
+app.use(express.urlencoded({ extended: true })); //qs모듈을 사용해서 해석하도록(extended가 true), 객체의 깊이가 있을 경우 qs와 querystring모듈 2개가 다르게 parse한다.
 
 app.get("/", (req, res) => {
   res.send("Server is ready");

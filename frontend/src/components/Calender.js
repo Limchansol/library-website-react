@@ -2,19 +2,21 @@ import { useEffect, useState } from "react";
 import "./Calender.css";
 
 function Calender() {
-  const [nowYearAndMonth, setNowYearAndMonth] = useState([2022, 2]);
-  const [redDay, setRedDay] = useState([1, 8, 15]);
-  const [orangeDay, setorangeDay] = useState([2, 9, 16]); //쉬는 날은 redDay, 영화 상영일은 orangeDay, class이름도 동일
+  const [today, setToday] = useState([2022, 2, 1]);
+  const [redDay, setRedDay] = useState([1, 8, 15, 22]);
+  const [orangeDay, setorangeDay] = useState([2, 9, 16, 23]); //쉬는 날은 redDay, 영화 상영일은 orangeDay, class이름도 동일
   useEffect(() => {
     const now = new Date();
-    setNowYearAndMonth([now.getFullYear(), now.getMonth()]);
+    setToday([now.getFullYear(), now.getMonth(), now.getDate()]);
   }, []);
-  const initDay = new Date(nowYearAndMonth[0], nowYearAndMonth[1], 1);
-  const lastDay = new Date(nowYearAndMonth[0], nowYearAndMonth[1] + 1, 0);
-  console.log("here", nowYearAndMonth);
+  const initDay = new Date(today[0], today[1], 1);
+  const lastDay = new Date(today[0], today[1] + 1, 0);
   const nowMonthDays = Array(lastDay.getDate())
     .fill()
-    .map((e, i) => i);
+    .map((e, i) => {
+      if (today[2] == i + 1) return true;
+      return false;
+    });
   const days = ["일", "월", "화", "수", "목", "금", "토"];
   return (
     <>
@@ -32,37 +34,16 @@ function Calender() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            {Array(initDay.getDay())
-              .fill()
-              .map((e, i) => {
-                return <td key={i}></td>;
-              })}
-            {nowMonthDays.map((e, i) => {
-              if (initDay.getDay() + i > 6) {
-                return;
-              }
-              if (redDay.includes(e + 1))
-                return (
-                  <td key={i} className="redDay">
-                    {e + 1}
-                  </td>
-                );
-              if (orangeDay.includes(e + 1))
-                return (
-                  <td key={i} className="orangeDay">
-                    {e + 1}
-                  </td>
-                );
-              return <td key={i}>{e + 1}</td>;
-            })}
-          </tr>
           {Array(5)
             .fill()
             .map((e, i) => {
-              if (i === 0) return;
               return (
                 <tr>
+                  {Array(initDay.getDay() * !i) //i가 0일때만 array의 크기가 0이 아니게 되도록
+                    .fill()
+                    .map((e) => {
+                      return <td></td>;
+                    })}
                   {nowMonthDays.map((ele, ind) => {
                     if (
                       initDay.getDay() + ind > 6 + i * 7 ||
@@ -70,19 +51,21 @@ function Calender() {
                     ) {
                       return;
                     }
-                    if (redDay.includes(ele + 1))
-                      return (
-                        <td key={ind} className="redDay">
-                          {ele + 1}
-                        </td>
-                      );
-                    if (orangeDay.includes(ele + 1))
-                      return (
-                        <td key={ind} className="orangeDay">
-                          {ele + 1}
-                        </td>
-                      );
-                    return <td key={ind}>{ele + 1}</td>;
+
+                    return (
+                      <td
+                        id={ele ? "today" : ""}
+                        className={
+                          orangeDay.includes(ind + 1)
+                            ? "orangeDay"
+                            : redDay.includes(ind + 1)
+                            ? "redDay"
+                            : ""
+                        }
+                      >
+                        {ind + 1}
+                      </td>
+                    );
                   })}
                 </tr>
               );
