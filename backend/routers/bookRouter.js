@@ -47,6 +47,19 @@ bookRouter.get(
 );
 
 bookRouter.get(
+  "/subject",
+  expressAsyncHandler(async (req, res) => {
+    const books = await Book.find({
+      kdc: {
+        $gte: Number(req.query.subNum) * 100,
+        $lt: (Number(req.query.subNum) + 1) * 100,
+      },
+    });
+    res.send(books);
+  })
+);
+
+bookRouter.get(
   "/seed",
   expressAsyncHandler(async (req, res) => {
     const books = await Book.insertMany(data.books);

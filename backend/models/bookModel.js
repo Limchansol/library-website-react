@@ -8,7 +8,7 @@ const bookSchema = new mongoose.Schema(
     ISBN: { type: String },
     date: { type: String },
     keyword: { type: String },
-    kdc: { type: String }, //kdc는 한국십진분류표, 책의 형식나 주제를 요약해놓은 정보
+    kdc: { type: Number }, //kdc는 한국십진분류표, 책의 형식나 주제를 요약해놓은 정보
   },
   {
     timestamps: true,

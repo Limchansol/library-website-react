@@ -39,3 +39,5 @@ GET http://localhost:5000/api/books?writer=고경희
 
 ###
 GET http://localhost:5000/api/books?all=고경희
+###
+GET http://localhost:5000/api/books/subject?subNum=1

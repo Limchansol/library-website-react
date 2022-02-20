@@ -1,0 +1,55 @@
+#subjectButton {
+  display: grid;
+  width: 800px;
+  margin: auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 200px 200px;
+  align-items: center;
+  justify-items: center;
+}
+
+#subjectButton button {
+  width: 100px;
+  height: 140px;
+}
+
+#총류 {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+#철학 {
+  grid-column: 2/3;
+  grid-row: 1/2;
+}
+#종교 {
+  grid-column: 3/4;
+  grid-row: 1/2;
+}
+#사회과학 {
+  grid-column: 4/5;
+  grid-row: 1/2;
+}
+#자연과학 {
+  grid-column: 5/6;
+  grid-row: 1/2;
+}
+#기술과학 {
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+#예술 {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+#언어 {
+  grid-column: 3/4;
+  grid-row: 2/3;
+}
+#문학 {
+  grid-column: 4/5;
+  grid-row: 2/3;
+}
+#역사 {
+  grid-column: 5/6;
+  grid-row: 2/3;
+}
