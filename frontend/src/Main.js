@@ -21,7 +21,6 @@ import FAQPage from "./pages/FAQPage";
 import InquiryPage from "./pages/InquiryPage";
 import SearchedPage from "./pages/SearchedPage";
 import NotFoundPage from "./pages/NotFoundPage";
-
 import "./Main.css";
 
 function Main() {

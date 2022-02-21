@@ -1,0 +1,19 @@
+.FAQ-list {
+  margin: 10px auto;
+  padding: 10px;
+  width: 700px;
+  border: 1px solid red;
+}
+
+.FAQ-title {
+  border-bottom: 3px solid #a98274;
+  cursor: pointer;
+}
+
+.FAQ-content {
+  display: none;
+}
+
+.FAQ-content.is-active {
+  display: block;
+}

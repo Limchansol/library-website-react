@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import img1 from "../images/img1.png";
 import img2 from "../images/img2.png";
 import img3 from "../images/img3.png";
@@ -82,10 +83,10 @@ function Promotion() {
     index.currIndex === 4 ? "index-mark is-active" : "index-mark";
 
   const arrForImg = [
-    [img1Class, img1],
-    [img2Class, img2],
-    [img3Class, img3],
-    [img4Class, img4],
+    [img1Class, img1, "/programs/movie-program"],
+    [img2Class, img2, "#"],
+    [img3Class, img3, "#"],
+    [img4Class, img4, "#"],
   ];
   const arrForMark = [mark1Class, mark2Class, mark3Class, mark4Class];
 
@@ -94,15 +95,16 @@ function Promotion() {
       <div id="promotion">
         {arrForImg.map((property, i) => {
           return (
-            <img
-              id={`img${i + 1}`}
-              className={property[0]}
-              key={`img${i + 1}`}
-              src={property[1]}
-              alt={`img${i + 1}`}
-              width="270"
-              height="270"
-            />
+            <Link to={property[2]} key={`img${i + 1}`}>
+              <img
+                id={`img${i + 1}`}
+                className={property[0]}
+                src={property[1]}
+                alt={`img${i + 1}`}
+                width="270"
+                height="270"
+              />
+            </Link>
           );
         })}
         <button className="previous" onClick={toPreviousIMG}>

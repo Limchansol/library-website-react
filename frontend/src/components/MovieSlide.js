@@ -7,7 +7,7 @@ import movie5Poster from "../images/img5.png";
 import "./MovieSlide.css";
 
 function MovieSlide({ movies }) {
-  const movieCnt = 5;
+  const movieCnt = movies.length;
   const [currIndex, setCurrIndex] = useState(1);
   const containerLocation = {
     transform: `translateY(${-260 * (currIndex - 1)}px)`,
