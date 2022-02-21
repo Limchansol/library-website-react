@@ -1,10 +1,30 @@
 .slide-screen {
   margin: 10px auto;
-  width: 750px;
+  width: 770px;
   height: 400px;
   position: relative;
-  border: 1px solid black;
-  overflow: hidden;
+  overflow: overlay;
+  background-color: burlywood;
+  scroll-behavior: smooth;
+}
+
+.screen-helper1,
+.screen-helper2 {
+  width: 30px;
+  height: 400px;
+  position: absolute;
+  top: 0;
+}
+
+.screen-helper1 {
+  left: calc(50% - 400px);
+  border-radius: 50% 0 0 50%;
+  background-color: burlywood;
+}
+.screen-helper2 {
+  right: calc(50% - 400px);
+  border-radius: 40% 0 0 40%;
+  background-color: white;
 }
 
 .movie-container {
@@ -19,9 +39,9 @@
   margin: 10px auto;
   width: 700px;
   height: 250px;
-  border: 1px solid red;
-  background-color: gainsboro;
+  background-color: white;
   opacity: 0.3;
+  transition: opacity 0.3s;
 }
 
 .movie.start,
@@ -31,9 +51,6 @@
 }
 
 .movie.current {
-  /* margin: 10px auto;
-  width: 700px;
-  height: 250px; */
   background-color: white;
   opacity: 1;
 }

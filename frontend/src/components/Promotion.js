@@ -7,10 +7,10 @@ import img4 from "../images/img4.png";
 import "./Promotion.css";
 
 function Promotion() {
-  const numOfImgs = 4;
+  const imgCnt = 4;
   const [intervalID, setIntervalID] = useState(0);
   const [index, setIndex] = useState({
-    prevIndex: numOfImgs,
+    prevIndex: imgCnt,
     currIndex: 1,
     nextIndex: 2,
   });
@@ -21,7 +21,7 @@ function Promotion() {
         ...prev,
         prevIndex: prev.currIndex,
         currIndex: prev.nextIndex,
-        nextIndex: prev.nextIndex !== numOfImgs ? prev.nextIndex + 1 : 1,
+        nextIndex: prev.nextIndex !== imgCnt ? prev.nextIndex + 1 : 1,
       };
     });
   };
@@ -32,7 +32,7 @@ function Promotion() {
         ...prev,
         nextIndex: prev.currIndex,
         currIndex: prev.prevIndex,
-        prevIndex: prev.prevIndex !== 1 ? prev.prevIndex - 1 : numOfImgs,
+        prevIndex: prev.prevIndex !== 1 ? prev.prevIndex - 1 : imgCnt,
       };
     });
     const interval = setInterval(changePromotionImage, 2500);
@@ -45,7 +45,7 @@ function Promotion() {
         ...prev,
         prevIndex: prev.currIndex,
         currIndex: prev.nextIndex,
-        nextIndex: prev.nextIndex !== numOfImgs ? prev.nextIndex + 1 : 1,
+        nextIndex: prev.nextIndex !== imgCnt ? prev.nextIndex + 1 : 1,
       };
     });
     const interval = setInterval(changePromotionImage, 2500);
@@ -64,42 +64,27 @@ function Promotion() {
     };
   }, [intervalID]);
 
-  const img1Class =
-    index.currIndex === 1 ? "promotion-img is-active" : "promotion-img";
-  const img2Class =
-    index.currIndex === 2 ? "promotion-img is-active" : "promotion-img";
-  const img3Class =
-    index.currIndex === 3 ? "promotion-img is-active" : "promotion-img";
-  const img4Class =
-    index.currIndex === 4 ? "promotion-img is-active" : "promotion-img";
-
-  const mark1Class =
-    index.currIndex === 1 ? "index-mark is-active" : "index-mark";
-  const mark2Class =
-    index.currIndex === 2 ? "index-mark is-active" : "index-mark";
-  const mark3Class =
-    index.currIndex === 3 ? "index-mark is-active" : "index-mark";
-  const mark4Class =
-    index.currIndex === 4 ? "index-mark is-active" : "index-mark";
-
   const arrForImg = [
-    [img1Class, img1, "/programs/movie-program"],
-    [img2Class, img2, "#"],
-    [img3Class, img3, "#"],
-    [img4Class, img4, "#"],
+    [img1, "/programs/movie-program"],
+    [img2, "#"],
+    [img3, "#"],
+    [img4, "#"],
   ];
-  const arrForMark = [mark1Class, mark2Class, mark3Class, mark4Class];
 
   return (
     <>
       <div id="promotion">
         {arrForImg.map((property, i) => {
           return (
-            <Link to={property[2]} key={`img${i + 1}`}>
+            <Link to={property[1]} key={`img${i + 1}`}>
               <img
                 id={`img${i + 1}`}
-                className={property[0]}
-                src={property[1]}
+                className={
+                  index.currIndex === i + 1
+                    ? "promotion-img is-active"
+                    : "promotion-img"
+                }
+                src={property[0]}
                 alt={`img${i + 1}`}
                 width="270"
                 height="270"
@@ -114,9 +99,20 @@ function Promotion() {
           &gt;
         </button>
         <div className="index-mark-container">
-          {arrForMark.map((className, i) => {
-            return <span className={className} key={`mark${i + 1}`}></span>;
-          })}
+          {Array(imgCnt)
+            .fill()
+            .map((v, i) => {
+              return (
+                <span
+                  className={
+                    index.currIndex === i + 1
+                      ? "index-mark is-active"
+                      : "index-mark"
+                  }
+                  key={`mark${i + 1}`}
+                ></span>
+              );
+            })}
         </div>
       </div>
     </>
