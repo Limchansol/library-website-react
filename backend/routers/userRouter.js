@@ -3,6 +3,7 @@ const User = require("../models/userModel.js");
 const data = require("../data.js");
 const expressAsyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs/dist/bcrypt");
+const { generateToken } = require("../utils.js");
 
 const userRouter = express.Router();
 
@@ -22,7 +23,13 @@ userRouter.post(
     const user = await User.findOne({ id: req.body.id });
     if (user) {
       if (bcrypt.compareSync(req.body.password, user.password)) {
-        res.send(user);
+        res.send({
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          isAdmin: user.isAdmin,
+          token: generateToken(user),
+        });
         return;
       }
       res.status(401).send({ message: "there are no user like this" });

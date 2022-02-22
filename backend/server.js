@@ -4,10 +4,13 @@ const mongoose = require("mongoose"); //몽구스 연결
 const { userRouter } = require("./routers/userRouter.js");
 const { bookRouter } = require("./routers/bookRouter.js");
 const cafeMenuRouter = require("./routers/cafeMenuRouter.js");
+const dotenv = require("dotenv");
 
-mongoose.connect("mongodb://localhost/minilibrary");
+dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
+
+mongoose.connect(process.env.DB || "mongodb://localhost/minilibrary");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); //qs모듈을 사용해서 해석하도록(extended가 true), 객체의 깊이가 있을 경우 qs와 querystring모듈 2개가 다르게 parse한다.
