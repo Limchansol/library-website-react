@@ -30,7 +30,9 @@ function SearchedPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedData = await axios.get(`api/books?${category}=${keyword}`);
+      const fetchedData = await axios.get(
+        `api/books?${category}=${encodeURIComponent(keyword)}`
+      ); //keyword에 인코딩 필요!
       const books = fetchedData.data;
       const wantedBooks = filterByKeyword(category, keyword, books);
       setSelectedBooks(wantedBooks);

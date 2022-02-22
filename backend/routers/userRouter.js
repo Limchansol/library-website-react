@@ -2,6 +2,7 @@ const express = require("express");
 const User = require("../models/userModel.js");
 const data = require("../data.js");
 const expressAsyncHandler = require("express-async-handler");
+const bcrypt = require("bcryptjs/dist/bcrypt");
 
 const userRouter = express.Router();
 
@@ -20,7 +21,7 @@ userRouter.post(
   expressAsyncHandler(async (req, res) => {
     const user = await User.findOne({ id: req.body.id });
     if (user) {
-      if (user.password === req.body.password) {
+      if (bcrypt.compareSync(req.body.password, user.password)) {
         res.send(user);
         return;
       }
@@ -50,7 +51,7 @@ userRouter.post(
     const newUser = new User({
       name: req.body.name,
       id: req.body.id,
-      password: req.body.password,
+      password: bcrypt.hashSync(req.body.password, 10),
       isAdmin: false,
       phone: req.body.phone,
       gender: req.body.gender,

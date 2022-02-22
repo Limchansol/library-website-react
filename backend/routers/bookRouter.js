@@ -9,34 +9,60 @@ bookRouter.get(
   "/",
   expressAsyncHandler(async (req, res) => {
     if (req.query.ISBN !== undefined) {
-      const books = await Book.find({ ISBN: { $regex: req.query.ISBN } });
+      const books = await Book.find({
+        ISBN: req.query.ISBN,
+      });
       res.send(books);
       return;
     }
     if (req.query.publisher !== undefined) {
       const books = await Book.find({
-        publisher: { $regex: req.query.publisher },
+        publisher: {
+          $regex: req.query.publisher.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
+        },
       });
       res.send(books);
       return;
     }
     if (req.query.writer !== undefined) {
-      const books = await Book.find({ writer: { $regex: req.query.writer } });
+      const books = await Book.find({
+        writer: {
+          $regex: req.query.writer.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
+        },
+      });
       res.send(books);
       return;
     }
     if (req.query.title !== undefined) {
-      const books = await Book.find({ title: { $regex: req.query.title } });
+      const books = await Book.find({
+        title: {
+          $regex: req.query.title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
+        },
+      });
       res.send(books);
       return;
     }
     if (req.query.all !== undefined) {
       const books = await Book.find({
         $or: [
-          { title: { $regex: req.query.all } },
-          { writer: { $regex: req.query.all } },
-          { publisher: { $regex: req.query.all } },
-          { ISBN: { $regex: req.query.all } },
+          {
+            title: {
+              $regex: req.query.all.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
+            },
+          },
+          {
+            writer: {
+              $regex: req.query.all.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
+            },
+          },
+          {
+            publisher: {
+              $regex: req.query.all.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
+            },
+          },
+          {
+            ISBN: req.query.all,
+          },
         ],
       });
       res.send(books);
@@ -80,9 +106,7 @@ bookRouter.get(
           },
         },
         {
-          ISBN: {
-            $regex: req.query.isbn.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
-          },
+          ISBN: req.query.isbn,
         },
       ],
     }); //큰 버그가 존재한다! 검색시 특수기호를 포함한 쿼리가 있으면 그것을 인코딩하고 보내야 한다! 반드시 수정할 것.

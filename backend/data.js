@@ -1,3 +1,4 @@
+const bcrypt = require("bcryptjs/dist/bcrypt");
 const rawBook = require("./rawBookData.js");
 
 const data = {
@@ -5,7 +6,7 @@ const data = {
     {
       name: "wonwoo",
       id: "jww0418",
-      password: "123",
+      password: bcrypt.hashSync("123", 10),
       isAdmin: true,
       phone: "010-6738-1518",
       gender: "male",
