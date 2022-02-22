@@ -16,6 +16,7 @@ import BookApplicationPage from "./pages/BookApplicationPage";
 import MovieProgramPage from "./pages/MovieProgramPage";
 import BookProgramPage from "./pages/BookProgramPage";
 import LocalProgramPage from "./pages/LocalProgramPage";
+import NoticeListPage from "./pages/NoticeListPage";
 import NoticePage from "./pages/NoticePage";
 import FAQPage from "./pages/FAQPage";
 import InquiryPage from "./pages/InquiryPage";
@@ -56,7 +57,10 @@ function Main() {
             <Route path="local-program" element={<LocalProgramPage />} />
           </Route>
           <Route path="/notices-and-communication">
-            <Route path="notice" element={<NoticePage />} />
+            <Route path="notice">
+              <Route index element={<NoticeListPage />} />
+              <Route path=":noticeId" element={<NoticePage />} />
+            </Route>
             <Route path="FAQ" element={<FAQPage />} />
             <Route path="inquiry" element={<InquiryPage />} />
           </Route>

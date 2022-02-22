@@ -2,6 +2,7 @@ import { useState } from "react";
 import FAQItem from "../components/FAQItem";
 
 function FAQPage() {
+  // 나중에는 서버에서 받아올 것
   const rawFAQList = [
     {
       title: "회원탈퇴는 어떻게 하나요?",
@@ -52,6 +53,7 @@ function FAQPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (keyword.length === 0) return;
   };
 
   const handleKeywordChange = (e) => {
@@ -72,7 +74,7 @@ function FAQPage() {
       </form>
       <ul className="FAQ-list">
         {filteredFAQList.map((question) => {
-          return <FAQItem question={question} />;
+          return <FAQItem question={question} key={question.number} />;
         })}
       </ul>
     </>

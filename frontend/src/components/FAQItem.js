@@ -11,7 +11,7 @@ function FAQItem({ question }) {
   };
 
   return (
-    <li className="FAQ-item" key={question.number}>
+    <li className="FAQ-item">
       <h4 className="FAQ-title" onClick={toggleFAQItem}>
         Q. {question.title}
       </h4>
