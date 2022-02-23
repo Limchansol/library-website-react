@@ -12,9 +12,19 @@ function generateToken(user) {
     },
     process.env.JWT_SECRET || "temp_key",
     {
-      expiresIn: "30d",
+      expiresIn: "3d",
     }
   );
 }
 
+function checkValidToken(token) {
+  let decodedToken = undefined;
+  jwt.verify(token, process.env.JWT_SECRET || "temp_key", (error, decoded) => {
+    if (error) return console.log(error);
+    decodedToken = decoded;
+  });
+  return decodedToken;
+}
+
 exports.generateToken = generateToken;
+exports.checkValidToken = checkValidToken;

@@ -1,8 +1,15 @@
 import { atom, selector } from "recoil";
 
-const isLoggedIn = atom({
+export const loginBool = selector({
   key: "loggedin",
-  default: false,
+  get: ({ get }) => {
+    const loginBool = get(loginUserInfo);
+    if (!loginBool) return false;
+    return true;
+  },
 });
 
-export default isLoggedIn;
+export const loginUserInfo = atom({
+  key: "loggedUser",
+  default: "",
+});

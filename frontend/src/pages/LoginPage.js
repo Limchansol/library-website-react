@@ -1,15 +1,16 @@
 import { useState } from "react";
 import axios from "axios";
 import "./LogInPage.css";
-import loginBool from "../Atoms/LoginAtom.js";
-import { useRecoilState } from "recoil";
+import { loginBool, loginUserInfo } from "../Atoms/LoginAtom.js";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 function LogInPage() {
   const [userInfo, setUserInfo] = useState({
     id: "",
     password: "",
   });
-  const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginBool);
+  const isLoggedIn = useRecoilValue(loginBool);
+  const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
 
   const handleUserInfo = (e) => {
     const { name, value } = e.target;
@@ -27,8 +28,8 @@ function LogInPage() {
       try {
         const fetchedData = await axios.post("/api/users/logIn", userInfo);
         console.log(fetchedData);
-        setIsLoggedIn(true);
-        console.log(isLoggedIn);
+        setLoginInfo(fetchedData.data);
+        console.log(isLoggedIn, loginInfo);
       } catch (error) {
         console.log(error);
       } finally {

@@ -3,7 +3,7 @@ const User = require("../models/userModel.js");
 const data = require("../data.js");
 const expressAsyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs/dist/bcrypt");
-const { generateToken } = require("../utils.js");
+const { generateToken, checkValidToken } = require("../utils.js");
 
 const userRouter = express.Router();
 
@@ -36,6 +36,14 @@ userRouter.post(
     } else {
       res.status(401).send({ message: "there are no user like this" });
     }
+  })
+);
+
+userRouter.get(
+  "/checkLogIn",
+  expressAsyncHandler(async (req, res) => {
+    const token = checkValidToken(req.query.token);
+    res.send(token);
   })
 );
 
