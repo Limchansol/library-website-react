@@ -38,11 +38,11 @@ function Calender() {
             .fill()
             .map((e, i) => {
               return (
-                <tr>
+                <tr key={i}>
                   {Array(initDay.getDay() * !i) //i가 0일때만 array의 크기가 0이 아니게 되도록
                     .fill()
-                    .map((e) => {
-                      return <td></td>;
+                    .map((e, i) => {
+                      return <td key={i}></td>;
                     })}
                   {nowMonthDays.map((ele, ind) => {
                     if (
@@ -61,6 +61,7 @@ function Calender() {
                             ? "redDay"
                             : ""
                         }
+                        key={ind}
                       >
                         {ind + 1}
                       </td>

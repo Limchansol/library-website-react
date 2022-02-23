@@ -36,9 +36,16 @@
   background-color: #a98274;
 }
 
+.find-id,
 .find-pw {
   display: inline-block;
+  margin: 0 10px;
   color: #8c7b75;
   font-size: 12px;
   text-decoration: underline;
+}
+.find-bar {
+  display: inline-block;
+  color: #8c7b75;
+  font-size: 13px;
 }

@@ -1,12 +1,15 @@
 import { useState } from "react";
 import axios from "axios";
 import "./LogInPage.css";
+import loginBool from "../Atoms/LoginAtom.js";
+import { useRecoilState } from "recoil";
 
 function LogInPage() {
   const [userInfo, setUserInfo] = useState({
     id: "",
     password: "",
   });
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginBool);
 
   const handleUserInfo = (e) => {
     const { name, value } = e.target;
@@ -24,6 +27,8 @@ function LogInPage() {
       try {
         const fetchedData = await axios.post("/api/users/logIn", userInfo);
         console.log(fetchedData);
+        setIsLoggedIn(true);
+        console.log(isLoggedIn);
       } catch (error) {
         console.log(error);
       } finally {
@@ -56,7 +61,9 @@ function LogInPage() {
       <button type="submit" className="login-btn">
         로그인
       </button>
-      <span className="find-pw">비밀번호를 잊어버리셨나요?</span>
+      <span className="find-id">아이디 찾기</span>
+      <span className="find-bar">|</span>
+      <span className="find-pw">비밀번호 찾기</span>
     </form>
   );
 }
