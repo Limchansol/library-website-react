@@ -20,7 +20,7 @@ function generateToken(user) {
 function checkValidToken(token) {
   let decodedToken = undefined;
   jwt.verify(token, process.env.JWT_SECRET || "temp_key", (error, decoded) => {
-    if (error) return console.log(error);
+    if (error) return error;
     decodedToken = decoded;
   });
   return decodedToken;
