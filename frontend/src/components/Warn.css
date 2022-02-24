@@ -1,5 +1,13 @@
-.inquiry-btn {
-  display: block;
+#warning {
+  margin: 10px auto;
+  width: 800px;
+  border: 1px solid red;
+  text-align: center;
+}
+
+button#to-login {
+  display: inline-block;
+  margin: 10px;
   width: 150px;
   height: 45px;
   border: none;
@@ -10,9 +18,9 @@
   letter-spacing: 0.2em;
   cursor: pointer;
 }
-.inquiry-btn:hover {
+button#to-login:hover {
   background-color: #8d6e63;
 }
-.inquiry-btn:active {
+button#to-login:active {
   background-color: #a98274;
 }

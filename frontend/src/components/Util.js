@@ -1,9 +1,10 @@
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { loginUserInfo } from "../Atoms/LoginAtom.js";
 import axios from "axios";
 import "./Util.css";
-import { useEffect, useState } from "react";
+
 function getLinkStyle({ isActive }) {
   return {
     fontWeight: isActive ? "bold" : "normal",
@@ -12,23 +13,20 @@ function getLinkStyle({ isActive }) {
 
 function Util() {
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
-  // const [isLoggedIn, setIsLoggedIn] = useState();
 
   useEffect(() => {
     const logInFetch = async () => {
       try {
-        const logInFetched = await axios.get(`/api/users/checkLogIn`, {
+        const logInFetched = await axios.get("/api/users/checkLogIn", {
           headers: { token: loginInfo.token },
         });
-        // setIsLoggedIn(logInFetched.data);
       } catch (error) {
         console.log(error);
       }
     };
     logInFetch();
-    console.log("dkdk");
+    console.log(loginInfo, "로그인인포");
   }, [loginInfo]);
-  console.log("adf");
 
   const logOut = () => {
     setLoginInfo("");

@@ -6,8 +6,13 @@
   border-radius: 4px;
 }
 
-fieldset { border: none; }
-.info { margin: 20px auto; width: 350px; }
+fieldset {
+  border: none;
+}
+.info {
+  margin: 20px auto;
+  width: 350px;
+}
 
 #signup-form button {
   border: none;
@@ -16,10 +21,17 @@ fieldset { border: none; }
   color: white;
   cursor: pointer;
 }
-#signup-form button:hover { background-color: #8d6e63; }
-#signup-form button:active { background-color: #a98274; }
+#signup-form button:hover {
+  background-color: #8d6e63;
+}
+#signup-form button:active {
+  background-color: #a98274;
+}
 
-.info label { display: block; font-size: 14px; }
+.info label {
+  display: block;
+  font-size: 14px;
+}
 .info .user-info {
   display: inline-block;
   margin: 5px 0;
@@ -29,7 +41,10 @@ fieldset { border: none; }
   border: 2px solid #dfdfdf;
   border-radius: 5px;
 }
-.info .message { font-size: 12px; color: #8c7b75; }
+.info .message {
+  font-size: 12px;
+  color: #8c7b75;
+}
 .info .container {
   display: flex;
   justify-content: space-between;
@@ -37,7 +52,18 @@ fieldset { border: none; }
   width: 350px;
 }
 
-.info .user-info.user-bd { width: 110px; }
+.info .user-info#id {
+  width: 230px;
+}
+.info #id-check {
+  display: inline-block;
+  width: 110px;
+  height: 35px;
+}
+
+.info .user-info.user-bd {
+  width: 110px;
+}
 
 #signup-btn {
   display: block;

@@ -4,7 +4,11 @@
   width: 400px;
   border: 2px solid #8c7b75;
   border-radius: 4px;
-  text-align: center;
+}
+
+#login-form .container {
+  margin: 0 auto;
+  width: 300px;
 }
 
 .user-id,
@@ -17,8 +21,16 @@
   border-radius: 5px;
 }
 
-.login-btn {
+.login-failed {
+  display: block;
   margin: 5px 0;
+  font-size: 12px;
+  color: tomato;
+}
+
+.login-btn {
+  display: block;
+  margin: 10px auto;
   width: 300px;
   height: 45px;
   border: none;
@@ -27,6 +39,7 @@
   color: white;
   font-weight: bold;
   letter-spacing: 0.2em;
+  cursor: pointer;
 }
 
 .login-btn:hover {
@@ -36,16 +49,20 @@
   background-color: #a98274;
 }
 
+.find-info {
+  margin: 0 auto;
+  width: 300px;
+  text-align: center;
+}
+
 .find-id,
 .find-pw {
-  display: inline-block;
   margin: 0 10px;
   color: #8c7b75;
   font-size: 12px;
   text-decoration: underline;
 }
 .find-bar {
-  display: inline-block;
   color: #8c7b75;
   font-size: 13px;
 }

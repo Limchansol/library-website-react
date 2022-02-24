@@ -376,20 +376,22 @@ function SignUpPage() {
       <fieldset>
         <div id="id-container" className="info">
           <label htmlFor="id">아이디</label>
-          <input
-            type="text"
-            name="id"
-            id="id"
-            value={signupInfo.id}
-            onChange={handleSignupInfo}
-            className="user-info"
-            autoFocus
-            minLength="5"
-            maxLength="20"
-          />
-          <button type="button" id="id-check" onClick={confirmId}>
-            아이디 확인
-          </button>
+          <div className="container">
+            <input
+              type="text"
+              name="id"
+              id="id"
+              value={signupInfo.id}
+              onChange={handleSignupInfo}
+              className="user-info"
+              autoFocus
+              minLength="5"
+              maxLength="20"
+            />
+            <button type="button" id="id-check" onClick={confirmId}>
+              아이디 확인
+            </button>
+          </div>
           <CheckMessage
             message={infoValidity.id[1]}
             color={infoValidity.id[2]}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginBool, loginUserInfo } from "../Atoms/LoginAtom.js";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -12,7 +12,9 @@ function LogInPage() {
   });
   const isLoggedIn = useRecoilValue(loginBool);
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
+  const [logInFailed, setLogInFailed] = useState(false);
   const navigate = useNavigate();
+  const pwRef = useRef();
 
   const handleUserInfo = (e) => {
     const { name, value } = e.target;
@@ -34,6 +36,12 @@ function LogInPage() {
         console.log(isLoggedIn, loginInfo);
         navigate("/", { replace: true });
       } catch (error) {
+        setLogInFailed(true);
+        setUserInfo((prev) => ({
+          ...prev,
+          password: "",
+        }));
+        pwRef.current.focus();
         console.log(error);
       } finally {
         console.log("로그인 요청 axios finally문");
@@ -45,29 +53,40 @@ function LogInPage() {
 
   return (
     <form id="login-form" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="id"
-        value={userInfo.id}
-        onChange={handleUserInfo}
-        className="user-id"
-        placeholder="아이디"
-        autoFocus
-      />
-      <input
-        type="password"
-        name="password"
-        value={userInfo.password}
-        onChange={handleUserInfo}
-        className="user-pw"
-        placeholder="비밀번호"
-      />
+      <div className="container">
+        <input
+          type="text"
+          name="id"
+          value={userInfo.id}
+          onChange={handleUserInfo}
+          className="user-id"
+          placeholder="아이디"
+          autoFocus
+        />
+        <input
+          type="password"
+          name="password"
+          value={userInfo.password}
+          onChange={handleUserInfo}
+          ref={pwRef}
+          className="user-pw"
+          placeholder="비밀번호"
+        />
+        {logInFailed && (
+          <span className="login-failed">
+            아이디나 비밀번호가 올바르지 않습니다.
+          </span>
+        )}
+      </div>
+
       <button type="submit" className="login-btn">
         로그인
       </button>
-      <span className="find-id">아이디 찾기</span>
-      <span className="find-bar">|</span>
-      <span className="find-pw">비밀번호 찾기</span>
+      <div className="find-info">
+        <span className="find-id">아이디 찾기</span>
+        <span className="find-bar">|</span>
+        <span className="find-pw">비밀번호 찾기</span>
+      </div>
     </form>
   );
 }
