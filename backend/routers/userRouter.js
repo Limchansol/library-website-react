@@ -42,7 +42,7 @@ userRouter.post(
 userRouter.get(
   "/checkLogIn",
   expressAsyncHandler(async (req, res) => {
-    const token = checkValidToken(req.query.token);
+    const token = checkValidToken(req.headers.token);
     res.send(token);
   })
 );
