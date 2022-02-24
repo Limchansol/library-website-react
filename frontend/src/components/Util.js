@@ -42,6 +42,7 @@ function Util() {
             <li className="util-item" onClick={logOut}>
               로그아웃
             </li>
+            <li className="util-item">{loginInfo.name}님</li>
             <NavLink to="/mypage" style={getLinkStyle}>
               <li className="util-item">나의 공간</li>
             </NavLink>

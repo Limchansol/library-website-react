@@ -1,8 +1,9 @@
 import { useState } from "react";
-import axios from "axios";
-import "./LogInPage.css";
+import { useNavigate } from "react-router-dom";
 import { loginBool, loginUserInfo } from "../Atoms/LoginAtom.js";
 import { useRecoilState, useRecoilValue } from "recoil";
+import axios from "axios";
+import "./LogInPage.css";
 
 function LogInPage() {
   const [userInfo, setUserInfo] = useState({
@@ -11,6 +12,7 @@ function LogInPage() {
   });
   const isLoggedIn = useRecoilValue(loginBool);
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
+  const navigate = useNavigate();
 
   const handleUserInfo = (e) => {
     const { name, value } = e.target;
@@ -30,6 +32,7 @@ function LogInPage() {
         console.log(fetchedData);
         setLoginInfo(fetchedData.data);
         console.log(isLoggedIn, loginInfo);
+        navigate("/", { replace: true });
       } catch (error) {
         console.log(error);
       } finally {
