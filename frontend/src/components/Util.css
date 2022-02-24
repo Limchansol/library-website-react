@@ -13,5 +13,8 @@
   float: left;
   color: #3e2723;
   font-size: 13px;
+  cursor: pointer;
 }
-.util-item:hover { background-color: #efebe9; }
+.util-item:hover {
+  background-color: #efebe9;
+}
