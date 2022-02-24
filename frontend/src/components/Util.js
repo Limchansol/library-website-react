@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { loginUserInfo } from "../Atoms/LoginAtom.js";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { loginBool, loginUserInfo } from "../Atoms/LoginAtom.js";
 import axios from "axios";
 import "./Util.css";
 import { useEffect, useState } from "react";
@@ -13,15 +13,15 @@ function getLinkStyle({ isActive }) {
 
 function Util() {
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
-  const [isLoggedIn, setIsLoggedIn] = useState();
+  const isLoggedIn = useRecoilValue(loginBool);
 
   useEffect(() => {
     const logInFetch = async () => {
       try {
-        const logInFetched = await axios.get(
-          `/api/users/checkLogIn?token=${loginInfo.token}`
-        );
-        setIsLoggedIn(logInFetched.data);
+        const logInFetched = await axios.get(`/api/users/checkLogIn`, {
+          headers: { token: loginInfo.token },
+        }); //headers에 토큰 넣어서 보내는 방법
+        setLoginInfo(logInFetched.data);
       } catch (error) {
         console.log(error);
       }
@@ -30,7 +30,8 @@ function Util() {
   }, [loginInfo]);
 
   const logOut = () => {
-    setIsLoggedIn(false);
+    // setIsLoggedIn(false); 이거 왜 필요하지??
+    setLoginInfo("");
   };
 
   return (
