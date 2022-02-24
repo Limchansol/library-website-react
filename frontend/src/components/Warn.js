@@ -1,7 +1,7 @@
 function Warn() {
   return (
     <>
-      <div>로그인 안됨</div>
+      <div>로그인을 먼저 해주세요.</div>
     </>
   );
 }

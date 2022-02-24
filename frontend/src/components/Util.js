@@ -13,7 +13,7 @@ function getLinkStyle({ isActive }) {
 
 function Util() {
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
-  const [isLoggedIn, setIsLoggedIn] = useState();
+  // const [isLoggedIn, setIsLoggedIn] = useState();
 
   useEffect(() => {
     const logInFetch = async () => {
@@ -21,21 +21,23 @@ function Util() {
         const logInFetched = await axios.get(
           `/api/users/checkLogIn?token=${loginInfo.token}`
         );
-        setIsLoggedIn(logInFetched.data);
+        // setIsLoggedIn(logInFetched.data);
       } catch (error) {
         console.log(error);
       }
     };
     logInFetch();
+    console.log("dkdk");
   }, [loginInfo]);
+  console.log("adf");
 
   const logOut = () => {
-    setIsLoggedIn(false);
+    setLoginInfo("");
   };
 
   return (
     <>
-      {isLoggedIn ? (
+      {loginInfo ? (
         <div id="header-top">
           <ul className="util">
             <li className="util-item" onClick={logOut}>
