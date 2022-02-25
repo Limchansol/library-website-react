@@ -75,13 +75,34 @@ bookRouter.get(
 bookRouter.get(
   "/subject",
   expressAsyncHandler(async (req, res) => {
-    const books = await Book.find({
-      kdc: {
-        $gte: Number(req.query.subNum) * 100,
-        $lt: (Number(req.query.subNum) + 1) * 100,
+    const cursor = req.query.cursor;
+    const limit = req.query.limit;
+    const afterCursorBooks = await Book.find({
+      $and: [
+        {
+          kdc: {
+            $gte: Number(req.query.subNum) * 100,
+            $lt: (Number(req.query.subNum) + 1) * 100,
+          },
+        },
+        cursor
+          ? {
+              _id: { $gte: cursor },
+            }
+          : {}, //cursor에 값 없으면 무조건 true리턴하도록 해야 함.(처음 요청에는 cursor쿼리가 없을 수도 있음)
+      ],
+    });
+    const books = afterCursorBooks.filter((e, i) => {
+      return i < limit;
+    });
+    let nextCursor = afterCursorBooks[limit]?._id;
+    if (nextCursor === undefined) nextCursor = null;
+    res.send({
+      books,
+      paging: {
+        nextCursor: nextCursor,
       },
     });
-    res.send(books);
   })
 );
 
