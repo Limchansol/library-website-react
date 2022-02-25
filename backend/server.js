@@ -30,6 +30,7 @@ app.use((req, res, next) => {
 });
 //expressAsyncHandler와 함께 쓰면 강력한 에러처리 코드가 된다. 저것을 쓰면 발생한 오류는 모두 아래 오류처리 미들웨어로 넘어온다.
 app.use((err, req, res, next) => {
+  console.log("에러발생!");
   res.status(500).send({ message: err.message });
 });
 

@@ -35,14 +35,14 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:5000/api/books?writer=고경희
+GET http://localhost:5000/api/books?writer=123
 
 ###
-GET http://localhost:5000/api/books?all=고경희
+GET http://localhost:5000/api/books?all=인간&limit=3
 ###
-GET http://localhost:5000/api/books/subject?subNum=1&limit=3&nextCursor=6217731f60c9f772762328fa
+GET http://localhost:5000/api/books/subject?subNum=1&limit=3&cursor=6217731f60c9f772762328fa
 ###
-GET http://localhost:5000/api/books/detailed?title=Do%20it!%20HTML%20%2B%20CSS%20%2B%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EC%9B%B9%20%ED%91%9C%EC%A4%80%EC%9D%98%20%EC%A0%95%EC%84%9D&writer=고경희&isbn=9791163032212&publisher=이지스퍼블리싱
+GET http://localhost:5000/api/books/detailed?title=Do&writer=경&isbn=&publisher=&limit=3
 ###
 GET http://localhost:5000/api/users/checkLogIn?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjE1MGM4NDg1ZjY4ODg5OGY5ZWUyMTYiLCJuYW1lIjoid29ud29vIiwiZW1haWwiOiJqd3cwNDE4QG5hdmVyLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0NTY0MTkxNiwiZXhwIjoxNjQ1OTAxMTE2fQ.mEmFQ3DeK0BBzAs2WKSYNXGV8Ju2f_947jA_JTNlwm0
 ###
