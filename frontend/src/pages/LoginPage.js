@@ -14,7 +14,8 @@ function LogInPage() {
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
   const [logInFailed, setLogInFailed] = useState(false);
   const navigate = useNavigate();
-  const pwRef = useRef();
+  // const $password = useRef(); 라고 해보자
+  const $password = useRef();
 
   const handleUserInfo = (e) => {
     const { name, value } = e.target;
@@ -41,7 +42,7 @@ function LogInPage() {
           ...prev,
           password: "",
         }));
-        pwRef.current.focus();
+        $password.current.focus();
         console.log(error);
       } finally {
         console.log("로그인 요청 axios finally문");
@@ -68,7 +69,7 @@ function LogInPage() {
           name="password"
           value={userInfo.password}
           onChange={handleUserInfo}
-          ref={pwRef}
+          ref={$password}
           className="user-pw"
           placeholder="비밀번호"
         />

@@ -228,7 +228,7 @@ rawBook.forEach((e, i) => {
     ISBN: e.dcBookCatalogBasic.isbn,
     kdc: Number(e.dcBookCatalogBasic.bookList[0].call_no)
       ? Number(e.dcBookCatalogBasic.bookList[0].call_no)
-      : -1, //kdc에서 문제 일어나는 애들 출력해봤더니, "808 863"이렇게 2개를 가지거나 "812,123.3"이런 형태가 있어서 형변환이 안되는 경우가 존재했음.
+      : -418, //kdc에서 문제 일어나는 애들 출력해봤더니, "808 863"이렇게 2개를 가지거나 "812,123.3"이런 형태가 있어서 형변환이 안되는 경우가 존재했음.
   });
 });
 module.exports = data;
