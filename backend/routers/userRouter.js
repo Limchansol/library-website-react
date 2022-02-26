@@ -43,7 +43,8 @@ userRouter.get(
   "/checkLogIn",
   expressAsyncHandler(async (req, res) => {
     const token = checkValidToken(req.headers.token);
-    res.send(token);
+    const user = await User.findOne({ _id: token._id });
+    res.send(user);
   })
 );
 

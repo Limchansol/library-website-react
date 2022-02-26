@@ -194,7 +194,6 @@ bookRouter.get(
         nextCursor: nextCursor,
       },
     });
-    res.send(books);
   })
 );
 

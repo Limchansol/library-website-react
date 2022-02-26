@@ -44,7 +44,5 @@ GET http://localhost:5000/api/books/subject?subNum=1&limit=3&cursor=6217731f60c9
 ###
 GET http://localhost:5000/api/books/detailed?title=Do&writer=경&isbn=&publisher=&limit=3
 ###
-GET http://localhost:5000/api/users/checkLogIn?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjE1MGM4NDg1ZjY4ODg5OGY5ZWUyMTYiLCJuYW1lIjoid29ud29vIiwiZW1haWwiOiJqd3cwNDE4QG5hdmVyLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0NTY0MTkxNiwiZXhwIjoxNjQ1OTAxMTE2fQ.mEmFQ3DeK0BBzAs2WKSYNXGV8Ju2f_947jA_JTNlwm0
-###
 GET http://localhost:5000/api/users/checkLogIn
 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjE1MGM4NDg1ZjY4ODg5OGY5ZWUyMTYiLCJuYW1lIjoid29ud29vIiwiZW1haWwiOiJqd3cwNDE4QG5hdmVyLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0NTY0MTkxNiwiZXhwIjoxNjQ1OTAxMTE2fQ.mEmFQ3DeK0BBzAs2WKSYNXGV8Ju2f_947jA_JTNlwm0
