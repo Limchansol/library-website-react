@@ -14,6 +14,24 @@ const data = {
       mm: "04",
       dd: "18",
       email: "jww0418@naver.com",
+      borrowedBooks: [
+        {
+          title: "Do it! HTML + CSS + 자바스크립트 웹 표준의 정석",
+          loanStartYYYY: 2022,
+          loanStartMM: 2,
+          loanStartDD: 22,
+        },
+        {
+          title: "Do it! 점프 투 파이썬",
+          loanStartYYYY: 2022,
+          loanStartMM: 2,
+          loanStartDD: 23,
+        },
+      ],
+      interestingBooks: [
+        "62191d387d697cc5c0dad548",
+        "62191d387d697cc5c0dad54a",
+      ],
     },
   ],
   books: [

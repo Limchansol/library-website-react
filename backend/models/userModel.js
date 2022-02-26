@@ -12,6 +12,8 @@ const userSchema = new mongoose.Schema(
     mm: { type: String, required: true },
     dd: { type: String, required: true },
     email: { type: String, required: true },
+    borrowedBooks: { type: Array },
+    interestingBooks: { type: Array },
   },
   {
     timestamps: true,
