@@ -2,7 +2,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px auto;
-  width: 1000px;
+  margin: 30px auto;
+  width: 800px;
   border: 1px solid red;
+}
+
+.book-program-title {
+  width: 50%;
+  padding: 15px 40px;
+  font-size: large;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 1em;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid dodgerblue;
+  background-color: #d3b8ae;
+}
+
+.book-program-title.is-active {
+  background-color: #795548;
 }
