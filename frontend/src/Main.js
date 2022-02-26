@@ -6,7 +6,6 @@ import SignUpPage from "./pages/SignUpPage";
 import MyPage from "./pages/MyPage";
 import GreetingsPage from "./pages/GreetingsPage";
 import DirectionPage from "./pages/DirectionPage";
-import Intro3Page from "./pages/Intro3Page";
 import ServiceHoursPage from "./pages/ServiceHoursPage";
 import CheckOutAndReturnPage from "./pages/CheckOutAndReturnPage";
 import CafePage from "./pages/CafePage";
@@ -36,7 +35,6 @@ function Main() {
           <Route path="/introduction">
             <Route path="greetings" element={<GreetingsPage />} />
             <Route path="direction" element={<DirectionPage />} />
-            <Route path="intro3" element={<Intro3Page />} />
           </Route>
           <Route path="/service-guide">
             <Route path="service-hours" element={<ServiceHoursPage />} />

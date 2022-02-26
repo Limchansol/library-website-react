@@ -2,11 +2,10 @@ const navItemsData = {
   "북악하늘 소개": [
     { title: "인사말", address: "/greetings" },
     { title: "오시는 길", address: "/direction" },
-    { title: "소개3", address: "/intro3" },
   ],
   "도서관 이용": [
     { title: "이용시간", address: "/service-hours" },
-    { title: "도서 대여/예약/반납", address: "/checkOut-and-return" },
+    { title: "도서 대여/반납/예약/연장", address: "/checkOut-and-return" },
     { title: "북악하늘 카페", address: "/cafe" },
   ],
   "도서관 자료": [
