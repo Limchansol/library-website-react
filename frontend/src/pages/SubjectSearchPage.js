@@ -22,14 +22,16 @@ function SubjectSearchPage() {
 
   const fetchBookForSubj = async (limit, cursor) => {
     const subNum = subject.findIndex((a) => a === kdc);
-    const response = await axios.get(
-      `/api/books/subject?subNum=${subNum}&limit=${limit}&nextCursor=${cursor}` // 왜 cursor로 보내면 500에러 뜨지
+    const subjBooksRes = await axios.get(
+      `/api/books/subject?subNum=${subNum}&limit=${limit}&cursor=${
+        cursor ? cursor : ""
+      }`
     );
-    console.log(response, "리스폰스");
+    console.log(subjBooksRes, "리스폰스");
     const {
       books,
       paging: { nextCursor },
-    } = response.data;
+    } = subjBooksRes.data;
     if (!cursor) {
       setKdcBooks(books);
     } else {
@@ -74,7 +76,7 @@ function SubjectSearchPage() {
           );
         })}
       </div>
-      <div id="showBook">
+      <div className="searched-books">
         {kdcBooks.length !== 0 &&
           kdcBooks.map((book, i) => {
             return (

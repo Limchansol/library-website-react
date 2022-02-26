@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useState } from "react";
+import axios from "axios";
 import "./DetailedSearchPage.css";
 
 function DetailedSearchPage() {
@@ -9,6 +9,9 @@ function DetailedSearchPage() {
     isbn: "",
     publisher: "",
   });
+  const [detailedBooks, setDetailedBooks] = useState([]);
+  const [cursor, setCursor] = useState();
+  const LIMIT = 7;
 
   const handleDetailedSearchValue = (e) => {
     const { id, value } = e.target;
@@ -22,7 +25,8 @@ function DetailedSearchPage() {
     title = "",
     writer = "",
     isbn = "",
-    publisher = ""
+    publisher = "",
+    cursor
   ) => {
     const encodedQuery = [
       encodeURIComponent(title),
@@ -30,9 +34,24 @@ function DetailedSearchPage() {
       encodeURIComponent(isbn),
       encodeURIComponent(publisher),
     ];
-    const books = await axios.get(
-      `/api/books/detailed?title=${encodedQuery[0]}&writer=${encodedQuery[1]}&isbn=${encodedQuery[2]}&publisher=${encodedQuery[3]}`
+    const detailedRes = await axios.get(
+      `/api/books/detailed?title=${encodedQuery[0]}&writer=${
+        encodedQuery[1]
+      }&isbn=${encodedQuery[2]}&publisher=${
+        encodedQuery[3]
+      }&limit=${LIMIT}&cursor=${cursor ? cursor : ""}`
     );
+    const {
+      books,
+      paging: { nextCursor },
+    } = detailedRes.data;
+    if (!cursor) {
+      setDetailedBooks(books);
+    } else {
+      setDetailedBooks((prev) => [...prev, ...books]);
+    }
+    setCursor(nextCursor);
+
     return books;
   };
 
@@ -41,6 +60,11 @@ function DetailedSearchPage() {
     const { title, writer, isbn, publisher } = detailedSearchValue;
     const books = fetchDetailedBook(title, writer, isbn, publisher);
     console.log(books);
+  };
+
+  const handleLoadMore = () => {
+    const { title, writer, isbn, publisher } = detailedSearchValue;
+    fetchDetailedBook(title, writer, isbn, publisher, cursor);
   };
 
   return (
@@ -91,6 +115,23 @@ function DetailedSearchPage() {
           <br />
           <button id="searchButton">검색</button>
         </form>
+      </div>
+      <div className="show-books">
+        {detailedBooks.length !== 0 &&
+          detailedBooks.map((book, i) => {
+            return (
+              <div className="book" key={i}>
+                <h3>책 제목: {book.title}</h3>
+                <p>글쓴이: {book.writer}</p>
+                <p>출판사: {book.publisher}</p>
+              </div>
+            );
+          })}
+        {cursor && (
+          <button className="load-more" onClick={handleLoadMore}>
+            더보기
+          </button>
+        )}
       </div>
     </>
   );

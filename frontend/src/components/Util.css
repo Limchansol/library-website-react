@@ -7,10 +7,19 @@
   line-height: 30px;
 }
 
+.util-user {
+  margin: 0;
+  padding: 5px 10px;
+  color: #3e2723;
+  font-size: 13px;
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: default;
+}
+
 .util-item {
   margin: 0;
   padding: 5px 10px;
-  float: left;
   color: #3e2723;
   font-size: 13px;
   cursor: pointer;
