@@ -42,7 +42,7 @@ function Book({ book }) {
     }
   }, []);
 
-  const onClickReservation = () => {
+  const onClickReservation = async () => {
     if (!checkLogin(loginInfo, navigate)) return;
 
     const confirmReservation = window.confirm(
@@ -51,6 +51,14 @@ function Book({ book }) {
     if (!confirmReservation) return;
 
     // 이곳에 예약 코드 작성
+    await axios.put("/api/users/reservedBookUpdate", {
+      token: loginInfo.token,
+      reservedBooks: book._id,
+    });
+    await axios.put("/api/books/reservedBookUpdate", {
+      _id: book._id,
+      changeTo: "reservation",
+    });
 
     moveToMyPage(`『${book.title}』 예약이 완료되었습니다.`, navigate);
   };

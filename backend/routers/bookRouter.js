@@ -207,7 +207,7 @@ bookRouter.get(
 );
 
 bookRouter.put(
-  "/interestingBookUpdate",
+  "/reservedBookUpdate",
   expressAsyncHandler(async (req, res) => {
     const book = await Book.updateOne(
       { _id: req.body._id },
@@ -215,6 +215,6 @@ bookRouter.put(
     );
     res.send(book);
   })
-); //이거 필요없음;; 예약만 표시하면 됌.
+);
 
 exports.bookRouter = bookRouter;
