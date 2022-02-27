@@ -86,4 +86,17 @@ userRouter.post(
   })
 );
 
+userRouter.put(
+  "/interestingBookUpdate",
+  expressAsyncHandler(async (req, res) => {
+    const token = checkValidToken(req.body.token);
+    const user = await User.updateOne(
+      { _id: token._id },
+      { $push: { interestingBooks: req.body.interestingBooks } }
+    );
+    console.log(token.name, req.body.interestingBooks);
+    res.send(user);
+  })
+);
+
 exports.userRouter = userRouter;

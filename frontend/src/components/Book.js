@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
@@ -54,12 +55,16 @@ function Book({ book }) {
     moveToMyPage(`『${book.title}』 예약이 완료되었습니다.`, navigate);
   };
 
-  const onClickSaveInterest = () => {
+  const onClickSaveInterest = async () => {
     if (!checkLogin(loginInfo, navigate)) return;
 
     // 이곳에 관심 도서 담기 코드 작성
+    await axios.put("/api/users/interestingBookUpdate", {
+      token: loginInfo.token,
+      interestingBooks: book._id,
+    });
 
-    moveToMyPage(`『${book.title}』을 관심 도서에 담았습니다.`);
+    moveToMyPage(`『${book.title}』을 관심 도서에 담았습니다.`, navigate);
   };
 
   console.log(bookState);

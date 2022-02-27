@@ -1,12 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { loginUserInfo } from "../Atoms/LoginAtom.js";
+import { loginBool, loginUserInfo } from "../Atoms/LoginAtom.js";
 import axios from "axios";
 import Warn from "../components/Warn.js";
 import "./MyPage.css";
 
 function MyPage() {
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
+  const [userData, setUserData] = useState({});
   let alreadyFetched = false;
 
   useEffect(() => {
@@ -16,7 +17,7 @@ function MyPage() {
         const loginRes = await axios.get("/api/users/checkLogIn", {
           headers: { token: loginInfo.token },
         });
-        setLoginInfo(loginRes.data);
+        setUserData(loginRes.data);
         alreadyFetched = true;
       } catch (error) {
         console.log(error);
@@ -27,16 +28,16 @@ function MyPage() {
   }, [loginInfo]);
   return (
     <>
-      {!alreadyFetched ? (
+      {loginInfo ? (
         <>
           <div id="userInfo">
             <h1>회원정보</h1>
-            <p>이름: {loginInfo.name}</p>
-            <p>아이디: {loginInfo.id}</p>
-            <p>휴대전화: {loginInfo.phone}</p>
-            <p>이메일: {loginInfo.email}</p>
+            <p>이름: {userData.name}</p>
+            <p>아이디: {userData.id}</p>
+            <p>휴대전화: {userData.phone}</p>
+            <p>이메일: {userData.email}</p>
             <p>
-              생년월일: {loginInfo.yyyy}-{loginInfo.mm}-{loginInfo.dd}
+              생년월일: {userData.yyyy}-{userData.mm}-{userData.dd}
             </p>
           </div>
           <div id="rentalBooks">
@@ -49,7 +50,7 @@ function MyPage() {
                 <th>대여 상태</th>
                 <th>연장하기</th>
               </tr>
-              {loginInfo.borrowedBooks.map((e) => {
+              {userData.borrowedBooks?.map?.((e) => {
                 const returnDay = new Date(
                   e.loanStartYYYY,
                   e.loanStartMM - 1,
@@ -81,7 +82,7 @@ function MyPage() {
             <p>
               추후에 수정하세요. 지금은 당장 관심도서 아이디만 보여주겠습니다.
             </p>
-            {loginInfo.interestingBooks.map((e) => {
+            {userData?.interestingBooks?.map((e) => {
               return <p>{e}</p>;
             })}
           </div>

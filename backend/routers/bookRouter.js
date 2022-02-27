@@ -1,5 +1,6 @@
 const express = require("express");
 const expressAsyncHandler = require("express-async-handler");
+const res = require("express/lib/response");
 const data = require("../data.js");
 const Book = require("../models/bookModel.js");
 
@@ -204,5 +205,16 @@ bookRouter.get(
     res.send(books);
   })
 );
+
+bookRouter.put(
+  "/interestingBookUpdate",
+  expressAsyncHandler(async (req, res) => {
+    const book = await Book.updateOne(
+      { _id: req.body._id },
+      { $set: { state: req.body.changeTo } }
+    );
+    res.send(book);
+  })
+); //이거 필요없음;; 예약만 표시하면 됌.
 
 exports.bookRouter = bookRouter;

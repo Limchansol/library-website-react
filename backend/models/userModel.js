@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true },
     borrowedBooks: { type: Array },
     interestingBooks: { type: Array },
+    reservedBooks: { type: Array },
   },
   {
     timestamps: true,
