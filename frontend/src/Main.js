@@ -9,8 +9,8 @@ import DirectionPage from "./pages/DirectionPage";
 import ServiceHoursPage from "./pages/ServiceHoursPage";
 import CheckOutAndReturnPage from "./pages/CheckOutAndReturnPage";
 import CafePage from "./pages/CafePage";
-import DetailedSearchPage from "./pages/DetailedSearchPage";
-import SubjectSearchPage from "./pages/SubjectSearchPage";
+import SearchDetailPage from "./pages/SearchDetailPage";
+import SearchKdcPage from "./pages/SearchKdcPage";
 import BookApplicationPage from "./pages/BookApplicationPage";
 import MovieProgramPage from "./pages/MovieProgramPage";
 import BookProgramPage from "./pages/BookProgramPage";
@@ -45,8 +45,8 @@ function Main() {
             <Route path="cafe" element={<CafePage />} />
           </Route>
           <Route path="/materials">
-            <Route path="detailed-search" element={<DetailedSearchPage />} />
-            <Route path="subject-search" element={<SubjectSearchPage />} />
+            <Route path="search-detail" element={<SearchDetailPage />} />
+            <Route path="search-kdc" element={<SearchKdcPage />} />
             <Route path="book-application" element={<BookApplicationPage />} />
           </Route>
           <Route path="/programs">

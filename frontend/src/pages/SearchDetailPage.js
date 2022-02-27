@@ -1,8 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
-import "./DetailedSearchPage.css";
+import Book from "../components/Book";
+import LoadMoreBtn from "../components/LoadMoreBtn";
+import "./SearchDetailPage.css";
 
-function DetailedSearchPage() {
+function SearchDetailPage() {
   const [detailedSearchValue, setDetailedSearchValue] = useState({
     title: "",
     writer: "",
@@ -119,22 +121,12 @@ function DetailedSearchPage() {
       <div className="show-books">
         {detailedBooks.length !== 0 &&
           detailedBooks.map((book, i) => {
-            return (
-              <div className="book" key={i}>
-                <h3>책 제목: {book.title}</h3>
-                <p>글쓴이: {book.writer}</p>
-                <p>출판사: {book.publisher}</p>
-              </div>
-            );
+            return <Book book={book} key={i} />;
           })}
-        {cursor && (
-          <button className="load-more" onClick={handleLoadMore}>
-            더보기
-          </button>
-        )}
+        {cursor && <LoadMoreBtn handleLoadMore={handleLoadMore} />}
       </div>
     </>
   );
 } //추후 수정
 
-export default DetailedSearchPage;
+export default SearchDetailPage;

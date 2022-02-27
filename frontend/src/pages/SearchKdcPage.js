@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "./SubjectSearchPage.css";
+import Book from "../components/Book";
+import LoadMoreBtn from "../components/LoadMoreBtn";
+import "./SearchKdcPage.css";
 
-function SubjectSearchPage() {
+function SearchKdcPage() {
   const subject = [
     "총류",
     "철학",
@@ -27,7 +29,6 @@ function SubjectSearchPage() {
         cursor ? cursor : ""
       }`
     );
-    console.log(subjBooksRes, "리스폰스");
     const {
       books,
       paging: { nextCursor },
@@ -37,9 +38,6 @@ function SubjectSearchPage() {
     } else {
       setKdcBooks((prev) => [...prev, ...books]);
     }
-    console.log(books, "책들");
-    console.log(cursor, "현재 커서");
-    console.log(nextCursor, "다음커서");
     setCursor(nextCursor);
   };
 
@@ -50,7 +48,6 @@ function SubjectSearchPage() {
 
   // 더보기
   const handleLoadMore = () => {
-    console.log(cursor, " 커서");
     fetchBookForSubj(LIMIT, cursor);
     // findSubjectNumber(kdc, cursor);
   };
@@ -79,22 +76,12 @@ function SubjectSearchPage() {
       <div className="searched-books">
         {kdcBooks.length !== 0 &&
           kdcBooks.map((book, i) => {
-            return (
-              <div className="book" key={i}>
-                <h3>책 제목: {book.title}</h3>
-                <p>글쓴이: {book.writer}</p>
-                <p>출판사: {book.publisher}</p>
-              </div>
-            );
+            return <Book book={book} key={i} />;
           })}
-        {cursor && (
-          <button className="load-more" onClick={handleLoadMore}>
-            더보기
-          </button>
-        )}
+        {cursor && <LoadMoreBtn handleLoadMore={handleLoadMore} />}
       </div>
     </>
   );
 }
 
-export default SubjectSearchPage;
+export default SearchKdcPage;

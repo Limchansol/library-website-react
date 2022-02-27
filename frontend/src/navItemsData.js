@@ -9,8 +9,8 @@ const navItemsData = {
     { title: "북악하늘 카페", address: "/cafe" },
   ],
   "도서관 자료": [
-    { title: "상세검색", address: "/detailed-search" },
-    { title: "주제별 검색", address: "/subject-search" },
+    { title: "상세검색", address: "/search-detail" },
+    { title: "주제별 검색", address: "/search-kdc" },
     { title: "희망 도서 신청", address: "/book-application" },
   ],
   "도서관 활동": [

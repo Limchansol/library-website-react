@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import Book from "../components/Book";
+import LoadMoreBtn from "../components/LoadMoreBtn";
 
 function SearchedPage() {
   const category = useLocation().state.category;
@@ -70,19 +72,9 @@ function SearchedPage() {
     <div className="searched-books">
       {selectedBooks.length !== 0 &&
         selectedBooks.map((book, i) => {
-          return (
-            <div className="book" key={i}>
-              <h3>책 제목: {book.title}</h3>
-              <p>글쓴이: {book.writer}</p>
-              <p>출판사: {book.publisher}</p>
-            </div>
-          );
+          return <Book book={book} key={i} />;
         })}
-      {cursor && (
-        <button className="load-more" onClick={handleLoadMore}>
-          더보기
-        </button>
-      )}
+      {cursor && <LoadMoreBtn handleLoadMore={handleLoadMore} />}
     </div>
   );
 }
