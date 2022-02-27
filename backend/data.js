@@ -43,6 +43,7 @@ const data = {
       ISBN: "9791163032212",
       date: "2021-01-22",
       keyword: "프론트엔드 frontend javascript",
+      state: false,
     },
     {
       id: 2,
@@ -52,6 +53,7 @@ const data = {
       ISBN: "9791163030911",
       date: "2019-06-20",
       keyword: "python",
+      state: false,
     },
   ],
   cafeMenu: [
@@ -247,6 +249,7 @@ rawBook.forEach((e, i) => {
     kdc: Number(e.dcBookCatalogBasic.bookList[0].call_no)
       ? Number(e.dcBookCatalogBasic.bookList[0].call_no)
       : -418, //kdc에서 문제 일어나는 애들 출력해봤더니, "808 863"이렇게 2개를 가지거나 "812,123.3"이런 형태가 있어서 형변환이 안되는 경우가 존재했음.
+    state: "none",
   });
 });
 module.exports = data;

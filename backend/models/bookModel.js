@@ -9,6 +9,7 @@ const bookSchema = new mongoose.Schema(
     date: { type: String },
     keyword: { type: String },
     kdc: { type: Number }, //kdc는 한국십진분류표, 책의 형식나 주제를 요약해놓은 정보
+    state: { type: String }, //none: 대여가능 reservation: 예약된 책 rental: 대출 중인 책
   },
   {
     timestamps: true,
