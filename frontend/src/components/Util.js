@@ -38,6 +38,11 @@ function Util() {
         <div id="header-top">
           <ul className="util">
             <li className="util-user">{loginInfo.name}님</li>
+            {loginInfo.isAdmin && (
+              <NavLink to="/administrator" style={getLinkStyle}>
+                <li className="util-item">웹사이트 관리</li>
+              </NavLink>
+            )}
             <NavLink to="/mypage" style={getLinkStyle}>
               <li className="util-item">나의 공간</li>
             </NavLink>
