@@ -1,3 +1,7 @@
+.book-programs {
+  margin: 50px auto;
+}
+
 .book-programs .titles ul {
   display: flex;
   justify-content: center;
@@ -8,7 +12,7 @@
   border-radius: 5px;
 }
 
-.book-program-title {
+.title {
   width: 50%;
   padding: 15px 40px;
   font-size: large;
@@ -20,6 +24,6 @@
   background-color: #d3b8ae;
 }
 
-.book-program-title.is-active {
+.title.is-active {
   background-color: #795548;
 }
