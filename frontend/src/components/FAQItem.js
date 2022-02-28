@@ -1,21 +1,23 @@
 import { useState } from "react";
-import "./FAQItem.css";
+import style from "./FAQItem.module.css";
 
 function FAQItem({ question }) {
   const [selected, setSelected] = useState(false);
 
-  const FAQContentClass = selected ? "FAQ-content is-active" : "FAQ-content";
+  const FAQContentClass = selected ? "is-active" : "";
 
   const toggleFAQItem = () => {
     setSelected((prev) => (prev ? false : true));
   };
 
   return (
-    <li className="FAQ-item">
-      <h4 className="FAQ-title" onClick={toggleFAQItem}>
+    <li className={style["FAQ-item"]}>
+      <h4 className={style["FAQ-title"]} onClick={toggleFAQItem}>
         Q. {question.title}
       </h4>
-      <div className={FAQContentClass}>A. {question.content}</div>
+      <div className={`${style["FAQ-content"]} ${style[FAQContentClass]}`}>
+        A. {question.content}
+      </div>
     </li>
   );
 }

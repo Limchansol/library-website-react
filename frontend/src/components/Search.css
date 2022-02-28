@@ -5,7 +5,10 @@
   position: relative;
 }
 
-.logo { margin: 0; padding: 0; }
+.logo {
+  margin: 0;
+  padding: 0;
+}
 
 .search-form {
   display: flex;
@@ -26,6 +29,7 @@
   border-radius: 50px 0 0 50px;
   background-color: #efebe9;
   text-align: center;
+  color: #3e2723;
 }
 
 .search-input {
@@ -43,7 +47,12 @@
   border: none;
   border-radius: 0 50px 50px 0;
   background-color: #efebe9;
+  color: #3e2723;
   cursor: pointer;
 }
-.search-btn:hover { background-color: #ebe3df; }
-.search-btn:active { background-color: #efebe9; }
+.search-btn:hover {
+  background-color: #ebe3df;
+}
+.search-btn:active {
+  background-color: #efebe9;
+}

@@ -4,7 +4,7 @@ function BookStart() {
   return (
     <>
       <h2 className={style.title}>북스타트</h2>
-      <div className={style.bookStart}>
+      <div id={style["book-start"]}>
         <p>
           <span>북스타트</span>는 아이들을 위한 <span>북악하늘 작은도서관</span>
           의 상시 프로그램 중 하나입니다.

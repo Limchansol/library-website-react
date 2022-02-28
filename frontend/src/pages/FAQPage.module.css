@@ -15,7 +15,7 @@
 
 .FAQSearchForm button {
   display: inline-block;
-  margin: 10px 30px;
+  margin: 10px 20px;
   width: 100px;
   height: 45px;
   border: none;
@@ -35,7 +35,7 @@
 }
 
 .FAQList {
-  margin: 10px auto;
+  margin: 0 auto;
   padding: 10px;
   width: 750px;
 }
