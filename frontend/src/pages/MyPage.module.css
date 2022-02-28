@@ -29,3 +29,64 @@
   border: 1px black solid;
   padding: 20px;
 }
+
+#bookShelf {
+  background-image: url("../images/bookShelf.png");
+  width: 900px;
+  height: 480px;
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 340px 220px 340px;
+  grid-template-rows: 240px 240px;
+  align-items: center;
+  justify-items: center;
+  z-index: 1;
+}
+
+.indBooks {
+  background-image: url("../images/book.png");
+  width: 200px;
+  height: 120px;
+  background-size: cover;
+  z-index: 2;
+  text-align: center;
+  font-weight: bold;
+  padding: 20px;
+}
+
+.indBooks:nth-child(1) {
+  grid-column: 1/ 2;
+  grid-row: 1/2;
+}
+
+.indBooks:nth-child(2) {
+  grid-column: 2/ 3;
+  grid-row: 1/2;
+}
+
+.indBooks:nth-child(3) {
+  grid-column: 3/ 4;
+  grid-row: 1/2;
+}
+
+.indBooks:nth-child(4) {
+  grid-column: 1/ 2;
+  grid-row: 2/3;
+}
+
+.indBooks:nth-child(5) {
+  grid-column: 2/ 3;
+  grid-row: 2/3;
+}
+
+.indBooks:nth-child(6) {
+  grid-column: 3/ 4;
+  grid-row: 2/3;
+}
+
+.indBooksText {
+  vertical-align: bottom;
+}

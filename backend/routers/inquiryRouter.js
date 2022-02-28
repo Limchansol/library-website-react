@@ -4,6 +4,14 @@ const Inquiry = require("../models/inquiryModel");
 
 const inquiryRouter = express.Router();
 
+inquiryRouter.get(
+  "/",
+  expressAsyncHandler(async (req, res) => {
+    const inquiry = await Inquiry.find({});
+    res.send(inquiry);
+  })
+);
+
 inquiryRouter.post(
   "/sendInquiry",
   expressAsyncHandler(async (req, res) => {

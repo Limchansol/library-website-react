@@ -8,6 +8,7 @@ const movieRouter = require("./routers/movieRouter.js");
 const FAQRouter = require("./routers/FAQRouter.js");
 const noticeRouter = require("./routers/noticeRouter.js");
 const inquiryRouter = require("./routers/inquiryRouter.js");
+const calenderRouter = require("./routers/calenderRouter.js");
 
 dotenv.config();
 const app = express();
@@ -29,6 +30,7 @@ app.use("/api/movies", movieRouter);
 app.use("/api/FAQs", FAQRouter);
 app.use("/api/notices", noticeRouter);
 app.use("/api/inquiries", inquiryRouter);
+app.use("/api/calenders", calenderRouter);
 //요청한 페이지가 존재하지 않으면 404에러
 app.use((req, res, next) => {
   res.status(404).send("not found");

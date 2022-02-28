@@ -8,6 +8,7 @@ import style from "./MyPage.module.css";
 function MyPage() {
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
   const [userData, setUserData] = useState({});
+  const [interestingBooks, setInterestingBooks] = useState([]);
   let alreadyFetched = false;
 
   useEffect(() => {
@@ -18,14 +19,20 @@ function MyPage() {
           headers: { token: loginInfo.token },
         });
         setUserData(loginRes.data);
+        const bookRes = await axios.get("/api/books/searchID", {
+          headers: {
+            idarray: JSON.stringify(loginRes?.data?.interestingBooks),
+          },
+        });
+        setInterestingBooks(bookRes.data);
         alreadyFetched = true;
       } catch (error) {
         console.log(error);
       }
-      console.log(loginInfo);
     };
     logInFetch();
   }, [loginInfo]);
+
   return (
     <>
       {loginInfo ? (
@@ -84,11 +91,20 @@ function MyPage() {
             <div id={style.interestingBooks}>
               <h2>관심 도서</h2>
               <p>
-                추후에 수정하세요. 지금은 당장 관심도서 아이디만 보여주겠습니다.
+                관심도서 목록에 추가한 책들이 책장에 보여집니다!
+                <br />
+                당신이 좋아하는 책, 관심 있는 책, 푹 빠져버린 책을 책장에 꽂아
+                장식하세요!
               </p>
-              {userData?.interestingBooks?.map((e) => {
-                return <p>{e}</p>;
-              })}
+              <div id={style.bookShelf}>
+                {interestingBooks?.map?.((e) => {
+                  return (
+                    <div key={e._id} className={style.indBooks}>
+                      <span className={style.indBooksText}>{e.title}</span>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </>

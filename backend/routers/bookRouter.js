@@ -201,6 +201,20 @@ bookRouter.get(
 );
 
 bookRouter.get(
+  "/searchID",
+  expressAsyncHandler(async (req, res) => {
+    const idArr = JSON.parse(req.headers.idarray);
+    const books = await Promise.all(
+      idArr?.map?.((e, i) => {
+        const target = Book.findOne({ _id: e });
+        return target;
+      })
+    );
+    res.send(books);
+  }) //map안에서 async함수 쓸 때에는 Promise.all메소드 이용하기!
+);
+
+bookRouter.get(
   "/seed",
   expressAsyncHandler(async (req, res) => {
     const books = await Book.insertMany(data.books);
