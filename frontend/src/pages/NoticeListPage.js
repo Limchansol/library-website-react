@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./NoticeListPage.css";
+import style from "./NoticeListPage.module.css";
 
 function NoticeListPage() {
   // 나중에는 서버에서 받아올 것
@@ -24,19 +24,57 @@ function NoticeListPage() {
 
   return (
     <>
-      <h2 className="notice-list-page">공지사항 리스트 페이지</h2>
-      <div className="notice-list">
-        {noticeList.map((notice) => {
-          return (
-            <Link to={notice.id} key={notice.id} state={{ notice: notice }}>
-              <div className="notice-item">
-                <span className="number">{notice.id}</span>
-                <span className="title">{notice.title}</span>
-                <span className="writer">{notice.writer}</span>
-              </div>
-            </Link>
-          );
-        })}
+      <h2 className={style["notice-list-page"]}>공지사항</h2>
+      {/* <table>
+        <thead>
+          <tr>
+            <th className={style["number"]}>번호</th>
+            <th className={style["title"]}>제목</th>
+            <th className={style["writer"]}>작성자</th>
+          </tr>
+        </thead>
+        <tbody className={style["notice-list"]}>
+          {noticeList
+            ?.slice()
+            ?.reverse()
+            ?.map((notice) => {
+              return (
+                // <Link to={notice.id} key={notice.id} state={{ notice: notice }}>
+                <tr
+                  className={style["notice-item"]}
+                  id={notice.id}
+                  onClick={moveToNoticeItem}
+                  key={notice.id}
+                >
+                  <td className={style["number"]}>{notice.id}</td>
+                  <td className={style["title"]}>{notice.title}</td>
+                  <td className={style["writer"]}>{notice.writer}</td>
+                </tr>
+                // </Link>
+              );
+            })}
+        </tbody>
+      </table> */}
+      <div className={style["list-title"]}>
+        <span className={style["number"]}>번호</span>
+        <span className={style["title"]}>제목</span>
+        <span className={style["writer"]}>작성자</span>
+      </div>
+      <div className={style["notice-list"]}>
+        {noticeList
+          .slice()
+          .reverse()
+          .map((notice) => {
+            return (
+              <Link to={notice.id} key={notice.id} state={{ notice: notice }}>
+                <div className={style["notice-item"]}>
+                  <span className={style["number"]}>{notice.id}</span>
+                  <span className={style["title"]}>{notice.title}</span>
+                  <span className={style["writer"]}>{notice.writer}</span>
+                </div>
+              </Link>
+            );
+          })}
       </div>
     </>
   );
