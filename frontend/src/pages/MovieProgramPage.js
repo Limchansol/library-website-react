@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import MovieSlide from "../components/MovieSlide";
+import style from "./MovieProgramPage.module.css";
 
 function MovieProgramPage() {
   const [programInfo, setProgramInfo] = useState({
@@ -27,19 +28,19 @@ function MovieProgramPage() {
     fetchData();
   }, []);
   return (
-    <div className="page-container">
-      <div className="program-container">
-        <h3 className="program-title">
+    <div className={style.pageContainer}>
+      <div className={style.programContainer}>
+        <h2 className={style.programTitle}>
           {programInfo.year}년 북악하늘 {"<"}영화로 세상 읽기{">"} 시즌
           {programInfo.season}
-        </h3>
-        <p className="program-info">
+        </h2>
+        <p className={style.programInfo}>
           "영화로 세상 읽기" 프로그램 설명 쓰는 자리입니다.
         </p>
       </div>
-      <div className="season-container">
-        <h2 className="season-theme">"{programInfo.theme}"</h2>
-        <p className="season-info">{programInfo.intro}</p>
+      <div className={style.seasonContainer}>
+        <h2 className={style.seasonTheme}>"{programInfo.theme}"</h2>
+        <p className={style.seasonInfo}>{programInfo.intro}</p>
         <MovieSlide movies={programInfo.movies} />
       </div>
     </div>

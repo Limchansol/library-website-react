@@ -78,3 +78,6 @@
   right: 50%;
   transform: translateX(50%);
 }
+.movieSlides {
+  margin-bottom: 100px;
+}

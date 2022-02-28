@@ -1,0 +1,20 @@
+.programContainer {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.programTitle {
+  margin-bottom: 50px;
+}
+
+.seasonTheme,
+.seasonInfo {
+  width: 750px;
+  margin: 50px auto;
+  line-height: 250%;
+}
+
+.seasonTheme {
+  text-align: center;
+}

@@ -1,0 +1,31 @@
+#titleText {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+#container {
+  width: 900px;
+  margin: 50px auto;
+  line-height: 250%;
+}
+
+#container h2 {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+#userInfo,
+#rentalBooks,
+#interestingBooks {
+  margin: 70px 0px;
+}
+
+#rentalBooks table {
+  border-collapse: collapse;
+}
+
+#rentalBooks td {
+  border: 1px black solid;
+  padding: 20px;
+}

@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil";
 import { loginUserInfo } from "../Atoms/LoginAtom";
 import axios from "axios";
 import Warn from "../components/Warn";
-import "./InquiryPage.css";
+import style from "./InquiryPage.module.css";
 
 function InquiryPage() {
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
@@ -50,19 +50,21 @@ function InquiryPage() {
   return (
     <>
       {loginInfo ? (
-        <div className="inquiry">
+        <div className={style.inquiry}>
           <h2>문의</h2>
-          <form className="inquiry-form" onSubmit={handleSubmit}>
-            <label htmlFor="title">제목</label>
-            <input
-              type="text"
-              name="title"
-              id="title"
-              value={inquiryInfo.title}
-              onChange={handleInquiryInfo}
-              placeholder="제목을 적어주세요."
-            />
-            <div className="inquiry-sort">
+          <form className={style.inquiryForm} onSubmit={handleSubmit}>
+            <div className={style.inquiryTitle}>
+              <label htmlFor="title">제목</label>
+              <input
+                type="text"
+                name="title"
+                id="title"
+                value={inquiryInfo.title}
+                onChange={handleInquiryInfo}
+                placeholder="제목을 적어주세요."
+              />
+            </div>
+            <div className={style.inquirySort}>
               <span>분류</span>
               <input
                 type="radio"
@@ -119,7 +121,7 @@ function InquiryPage() {
               onChange={handleInquiryInfo}
               placeholder="문의 내용을 적어주세요."
             ></textarea>
-            <button className="inquiry-btn">문의 등록</button>
+            <button className={style.inquiryBtn}>문의 등록</button>
           </form>
         </div>
       ) : (

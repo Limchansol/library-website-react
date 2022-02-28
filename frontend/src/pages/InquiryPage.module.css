@@ -1,0 +1,72 @@
+.inquiry h2 {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.inquiryForm {
+  margin: auto;
+  margin-bottom: 50px;
+  width: 750px;
+}
+.inquiryTitle label {
+  font-weight: bold;
+  margin-right: 20px;
+  font-size: 20px;
+}
+
+.inquiryTitle input {
+  width: 300px;
+  height: 35px;
+  font-size: 17px;
+}
+.inquiry textarea {
+  width: 750px;
+  font-size: 15px;
+}
+.inquirySort {
+  margin: 50px 0px;
+}
+
+.inquirySort label {
+  margin-right: 10px;
+}
+
+.inquirySort label::after {
+  content: "☀";
+  margin-left: 10px;
+}
+
+.inquirySort input:checked + label::after {
+  content: "☀";
+  color: red;
+}
+
+.inquirySort input {
+  display: none;
+}
+
+.inquirySort span {
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.inquiryBtn {
+  margin: 30px auto;
+  display: block;
+  width: 150px;
+  height: 45px;
+  border: none;
+  border-radius: 5px;
+  background-color: #a98274;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+}
+.inquiryBtn:hover {
+  background-color: #8d6e63;
+}
+.inquiryBtn:active {
+  background-color: #a98274;
+}

@@ -51,7 +51,7 @@ function MovieSlide({ movies }) {
   };
 
   return (
-    <div style={{ position: "relative" }}>
+    <div className="movieSlides" style={{ position: "relative" }}>
       <div className="slide-screen" onScroll={handleSlideScroll} ref={screen}>
         <div className="movie-container">
           <div className="movie start"></div>
