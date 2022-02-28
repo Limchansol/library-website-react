@@ -43,7 +43,7 @@ const data = {
       ISBN: "9791163032212",
       date: "2021-01-22",
       keyword: "프론트엔드 frontend javascript",
-      state: false,
+      state: "none",
     },
     {
       id: 2,
@@ -53,7 +53,7 @@ const data = {
       ISBN: "9791163030911",
       date: "2019-06-20",
       keyword: "python",
-      state: false,
+      state: "none",
     },
   ],
   cafeMenu: [

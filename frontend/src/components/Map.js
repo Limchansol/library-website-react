@@ -22,7 +22,7 @@ function Map() {
   return (
     <div
       className="map"
-      style={{ width: "600px", height: "300px" }}
+      style={{ width: "750px", height: "300px" }}
       ref={$container}
     ></div>
   );

@@ -1,6 +1,5 @@
 const express = require("express");
 const expressAsyncHandler = require("express-async-handler");
-const res = require("express/lib/response");
 const data = require("../data.js");
 const Book = require("../models/bookModel.js");
 
@@ -145,6 +144,9 @@ bookRouter.get(
     const title = req.query?.title;
     const cursor = req.query.cursor;
     const limit = req.query.limit;
+    if (!ISBN && !publisher && !writer && !title) {
+      res.status(404).send({ message: "Not Found" });
+    }
     const afterCursorBooks = await Book.find({
       $and: [
         title

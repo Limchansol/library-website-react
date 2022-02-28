@@ -1,9 +1,11 @@
+import style from "./ServiceHoursPage.module.css";
+
 function ServiceHoursPage() {
   return (
     <>
-      <h2>도서관 이용 안내</h2>
-      <div id="contents">
-        <div className="service-users container">
+      <h2 id={style.title}>도서관 이용 안내</h2>
+      <div id={style.contents}>
+        <div className={`${style.serviceUsers} ${style.container}`}>
           <h3>이용 대상</h3>
           <ul>
             <li>자료 열람을 원하는 누구나 이용 가능합니다.</li>
@@ -13,7 +15,7 @@ function ServiceHoursPage() {
             </li>
           </ul>
         </div>
-        <div className="service-hours container">
+        <div className={`${style.serviceHours} ${style.container}`}>
           <h3>이용 시간</h3>
           <p>
             이용 시간은 조금씩 변동될 수 있으며, <br /> 문의 시 협의 하에 이용
@@ -41,7 +43,7 @@ function ServiceHoursPage() {
             </tbody>
           </table>
         </div>
-        <div className="closed-day container">
+        <div className={`${style.closedDay} ${style.container}`}>
           <h3>휴관일</h3>
           <ul>
             <li>매주 월요일과 일요일</li>

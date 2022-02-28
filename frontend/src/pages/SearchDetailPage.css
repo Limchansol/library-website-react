@@ -1,5 +1,11 @@
 #detailedSearchtext {
   text-align: center;
+  line-height: 250%;
+  margin: 50px 0px;
+}
+
+#detailedSearchtext h1 {
+  margin-bottom: 50px;
 }
 
 #detailedSearchForm {
@@ -16,18 +22,28 @@
 }
 
 #detailedSearchForm button {
-  background-color: burlywood;
-  border-radius: 20px;
+  display: block;
+  margin: 10px auto;
+  width: 250px;
+  height: 45px;
   border: none;
-  text-align: center;
-  padding: 10px;
-  width: 150px;
-  height: 50px;
-  font-size: 15px;
-  margin-left: 40%;
-  margin-bottom: 30px;
+  border-radius: 5px;
+  background-color: #a98274;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 1em;
+  cursor: pointer;
 }
 
 #detailedSearchForm button:hover {
-  background-color: rgba(222, 184, 135, 0.692);
+  background-color: #8d6e63;
+}
+#detailedSearchForm button:active {
+  background-color: #a98274;
+}
+
+#detailedSearchForm .container {
+  display: flex;
+  justify-content: space-between;
+  width: 350px;
 }

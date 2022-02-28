@@ -1,0 +1,28 @@
+#title {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+#contents {
+  width: 750px;
+  margin: auto;
+  line-height: 250%;
+}
+
+.container {
+  margin: 50px 0px;
+}
+
+.container table {
+  text-align: center;
+  margin: auto;
+  border-collapse: collapse;
+  width: 600px;
+  height: 300px;
+}
+
+.container td {
+  border: 1px solid black;
+  padding: 3px;
+}

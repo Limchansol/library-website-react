@@ -3,14 +3,28 @@
   width: 750px;
 }
 
+.intro {
+  line-height: 250%;
+}
+
+.purpose {
+  line-height: 300%;
+}
+
+.purpose h2 {
+  text-align: center;
+}
+
 .meaning-table {
   margin: 20px auto;
   border-collapse: collapse;
+  text-align: center;
 }
 
 caption {
   font-size: 24px;
   font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .category {
@@ -22,4 +36,5 @@ caption {
   width: 300px;
   height: 50px;
   border: 1px solid black;
+  padding: 10px 5px;
 }

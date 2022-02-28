@@ -83,37 +83,45 @@ function SearchDetailPage() {
       </div>
       <div id="detailedSearchForm">
         <form onSubmit={detailedSearch}>
-          <label htmlFor="title">도서명: </label>
-          <input
-            type="text"
-            id="title"
-            onChange={handleDetailedSearchValue}
-            value={detailedSearchValue.title}
-          />
+          <div className="container">
+            <label htmlFor="title">도서명: </label>
+            <input
+              type="text"
+              id="title"
+              onChange={handleDetailedSearchValue}
+              value={detailedSearchValue.title}
+            />
+          </div>
           <br />
-          <label htmlFor="writer">저자: </label>
-          <input
-            type="text"
-            id="writer"
-            onChange={handleDetailedSearchValue}
-            value={detailedSearchValue.writer}
-          />
+          <div className="container">
+            <label htmlFor="writer">저자: </label>
+            <input
+              type="text"
+              id="writer"
+              onChange={handleDetailedSearchValue}
+              value={detailedSearchValue.writer}
+            />
+          </div>
           <br />
-          <label htmlFor="isbn">ISBN: </label>
-          <input
-            type="text"
-            id="isbn"
-            onChange={handleDetailedSearchValue}
-            value={detailedSearchValue.isbn}
-          />
+          <div className="container">
+            <label htmlFor="isbn">ISBN: </label>
+            <input
+              type="text"
+              id="isbn"
+              onChange={handleDetailedSearchValue}
+              value={detailedSearchValue.isbn}
+            />
+          </div>
           <br />
-          <label htmlFor="publisher">출판사: </label>
-          <input
-            type="text"
-            id="publisher"
-            onChange={handleDetailedSearchValue}
-            value={detailedSearchValue.publisher}
-          />
+          <div className="container">
+            <label htmlFor="publisher">출판사: </label>
+            <input
+              type="text"
+              id="publisher"
+              onChange={handleDetailedSearchValue}
+              value={detailedSearchValue.publisher}
+            />
+          </div>
           <br />
           <button id="searchButton">검색</button>
         </form>

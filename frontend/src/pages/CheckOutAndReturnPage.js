@@ -1,15 +1,17 @@
+import style from "./CheckOutAndReturnPage.module.css";
+
 function CheckOutAndReturnPage() {
   return (
     <>
-      <h2>도서 대여/반납/예약/연장 안내</h2>
-      <p>
+      <h2 id={style.title}>도서 대여/반납/예약/연장 안내</h2>
+      <p id={style.titlePara}>
         대여와 반납은 북악하늘 작은도서관에 직접 오셔야 가능하며, 예약은
         북악하늘 작은도서관 웹사이트에서 할 수 있습니다. <br />
         대여 기간 연장은 온라인과 오프라인 모두에서 가능합니다.
       </p>
-      <div className="contents">
-        <div className="checkout container">
-          <h4>대여</h4>
+      <div className={style.contents}>
+        <div className={`${style.checkout} ${style.container}`}>
+          <h3>대여</h3>
           <p>북악하늘 작은도서관 현장에서 가능합니다.</p>
           <ul>
             <li>대여: 도서관 회원만 대여 가능합니다.</li>
@@ -20,8 +22,8 @@ function CheckOutAndReturnPage() {
             </li>
           </ul>
         </div>
-        <div className="return container">
-          <h4>반납</h4>
+        <div className={`${style.return} ${style.container}`}>
+          <h3>반납</h3>
           <p>북악하늘 작은도서관 현장에서 가능합니다.</p>
           <ul>
             <li>
@@ -36,8 +38,8 @@ function CheckOutAndReturnPage() {
             </li>
           </ul>
         </div>
-        <div className="reservation container">
-          <h4>예약</h4>
+        <div className={`${style.reservation} ${style.container}`}>
+          <h3>예약</h3>
           <p>북악하늘 작은도서관 웹사이트에서 가능합니다.</p>
           <ul>
             <li>
@@ -57,8 +59,8 @@ function CheckOutAndReturnPage() {
             </li>
           </ul>
         </div>
-        <div className="extension">
-          <h4>연장</h4>
+        <div className={`${style.extension} ${style.container}`}>
+          <h3>연장</h3>
           <p>북악하늘 작은도서관 현장과 웹사이트 모두에서 가능합니다.</p>
           <ul>
             <li>
