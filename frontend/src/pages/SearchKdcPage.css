@@ -9,7 +9,7 @@
 
 #subjectButton {
   display: grid;
-  width: 800px;
+  width: 1000px;
   margin: auto;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 200px 200px;
@@ -17,9 +17,19 @@
   justify-items: center;
 }
 
-#subjectButton button {
-  width: 100px;
-  height: 140px;
+#subjectButton .btn {
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+}
+#subjectButton .btn:hover {
+  background-color: #eee;
+}
+
+#subjectButton img,
+#subjectButton span {
+  display: block;
+  margin: 5px;
 }
 
 #총류 {

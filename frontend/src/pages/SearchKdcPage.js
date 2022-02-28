@@ -2,6 +2,16 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Book from "../components/Book";
 import LoadMoreBtn from "../components/LoadMoreBtn";
+import 총류 from "../images/총류.png";
+import 철학 from "../images/철학.png";
+import 문학 from "../images/문학.png";
+import 기술과학 from "../images/기술과학.png";
+import 사회과학 from "../images/사회과학.png";
+import 언어 from "../images/언어.png";
+import 역사 from "../images/역사.png";
+import 예술 from "../images/예술.png";
+import 자연과학 from "../images/자연과학.png";
+import 종교 from "../images/종교.png";
 import "./SearchKdcPage.css";
 
 function SearchKdcPage() {
@@ -16,6 +26,18 @@ function SearchKdcPage() {
     "언어",
     "문학",
     "역사",
+  ];
+  const subjectImg = [
+    총류,
+    철학,
+    종교,
+    사회과학,
+    자연과학,
+    기술과학,
+    예술,
+    언어,
+    문학,
+    역사,
   ];
   const [kdc, setKdc] = useState("");
   const [kdcBooks, setKdcBooks] = useState([]);
@@ -75,9 +97,17 @@ function SearchKdcPage() {
       <div id="subjectButton">
         {subject.map((e, i) => {
           return (
-            <button id={e} key={i} onClick={handleKdcChange}>
-              {e}
-            </button>
+            <div className="btn">
+              <img
+                id={e}
+                key={i}
+                src={subjectImg[i]}
+                onClick={handleKdcChange}
+                height="100px"
+                width="100px"
+              />
+              <span className="btnName">{e}</span>
+            </div>
           );
         })}
       </div>
