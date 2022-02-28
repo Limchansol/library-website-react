@@ -37,13 +37,17 @@ function InquiryPage() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!inquiryInfo.title || !inquiryInfo.content) {
       alert("문의 제목과 내용을 적어주세요.");
       return;
     }
-    console.log(inquiryInfo);
+    const fetchedData = await axios.post(
+      "/api/inquiries/sendInquiry",
+      inquiryInfo
+    );
+    console.log(fetchedData);
     alert("문의 등록이 완료되었습니다.");
   };
 
