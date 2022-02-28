@@ -1,5 +1,4 @@
 const express = require("express");
-const data = require("./data.js");
 const mongoose = require("mongoose"); //몽구스 연결
 const { userRouter } = require("./routers/userRouter.js");
 const { bookRouter } = require("./routers/bookRouter.js");
@@ -7,6 +6,7 @@ const cafeMenuRouter = require("./routers/cafeMenuRouter.js");
 const dotenv = require("dotenv");
 const movieRouter = require("./routers/movieRouter.js");
 const FAQRouter = require("./routers/FAQRouter.js");
+const noticeRouter = require("./routers/noticeRouter.js");
 
 dotenv.config();
 const app = express();
@@ -26,6 +26,7 @@ app.use("/api/users", userRouter);
 app.use("/api/cafeMenu", cafeMenuRouter);
 app.use("/api/movies", movieRouter);
 app.use("/api/FAQs", FAQRouter);
+app.use("/api/notices", noticeRouter);
 //요청한 페이지가 존재하지 않으면 404에러
 app.use((req, res, next) => {
   res.status(404).send("not found");
