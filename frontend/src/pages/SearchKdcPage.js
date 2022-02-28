@@ -76,7 +76,7 @@ function SearchKdcPage() {
 
   // 주제별 버튼 누르면 kdc state 바꿈
   const handleKdcChange = (e) => {
-    setKdc(e.target.id);
+    setKdc(e.currentTarget.id); //currentTarget으로 해야된다. 그냥 target으로 하면 이벤트가 일어난 바로 그 target을 가리키기 때문!
   };
 
   // kdc 바뀔 때마다 실행
@@ -97,8 +97,8 @@ function SearchKdcPage() {
       <div id="subjectButton">
         {subject.map((e, i) => {
           return (
-            <div className="btn" onClick={handleKdcChange} key={i}>
-              <img id={e} src={subjectImg[i]} height="100px" width="100px" />
+            <div id={e} className="btn" onClick={handleKdcChange} key={i}>
+              <img src={subjectImg[i]} height="100px" width="100px" />
               <span className="btnName">{e}</span>
             </div>
           );
