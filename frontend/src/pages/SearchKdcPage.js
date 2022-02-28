@@ -97,15 +97,8 @@ function SearchKdcPage() {
       <div id="subjectButton">
         {subject.map((e, i) => {
           return (
-            <div className="btn">
-              <img
-                id={e}
-                key={i}
-                src={subjectImg[i]}
-                onClick={handleKdcChange}
-                height="100px"
-                width="100px"
-              />
+            <div className="btn" onClick={handleKdcChange} key={i}>
+              <img id={e} src={subjectImg[i]} height="100px" width="100px" />
               <span className="btnName">{e}</span>
             </div>
           );
