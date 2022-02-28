@@ -1,0 +1,46 @@
+.notice-list-page {
+  text-align: center;
+  margin: 50px;
+}
+
+.list-title {
+  display: flex;
+  width: 700px;
+  margin: 0 auto;
+  font-weight: bold;
+  border: 3px solid #dfdfdf;
+}
+
+.notice-list {
+  margin: 10px auto;
+  width: 700px;
+  border: 3px solid #dfdfdf;
+}
+
+.notice-item {
+  display: flex;
+  width: 700px;
+}
+
+.number,
+.title,
+.writer {
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 3px;
+}
+
+.number {
+  border-right: 2px solid #dfdfdf;
+  flex-basis: 10%;
+}
+
+.title {
+  border-right: 2px solid #dfdfdf;
+  flex-basis: 70%;
+}
+
+.writer {
+  flex-basis: 20%;
+}

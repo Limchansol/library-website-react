@@ -1,5 +1,31 @@
+.notice {
+  margin: 50px auto;
+  width: 750px;
+}
+
+.notice-info {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #dfdfdf;
+}
+
+.notice-title {
+  display: inline-block;
+  flex-basis: 70%;
+}
+
+.date {
+  padding: 0 15px;
+  flex-basis: 20%;
+}
+.writer {
+  padding: 0 15px;
+  flex-basis: 10%;
+}
+
 .back-to-notice-list {
   display: block;
+  margin: 0 auto;
   width: 120px;
   height: 40px;
   color: white;
