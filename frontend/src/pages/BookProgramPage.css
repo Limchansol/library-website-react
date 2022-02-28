@@ -4,7 +4,8 @@
   align-items: center;
   margin: 30px auto;
   width: 800px;
-  border: 1px solid red;
+  border: 3px solid #dfdfdf;
+  border-radius: 5px;
 }
 
 .book-program-title {
@@ -16,7 +17,6 @@
   letter-spacing: 1em;
   text-align: center;
   cursor: pointer;
-  border: 1px solid dodgerblue;
   background-color: #d3b8ae;
 }
 

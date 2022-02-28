@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./SignUpPage.css";
 
@@ -94,6 +95,7 @@ function SignUpPage() {
   };
 
   // 비밀번호 확인 함수도 같이 넣어야 함
+
   const checkPassword = (value) => {
     let validity;
     let message;
@@ -348,6 +350,7 @@ function SignUpPage() {
     }
   };
 
+  const navigate = useNavigate();
   // false인 애들만 골라서 메시지 띄워놓기
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -362,9 +365,11 @@ function SignUpPage() {
       try {
         const fetchedData = await axios.post("/api/users/signUp", signupInfo);
         console.log(fetchedData);
+        alert("회원가입이 완료되었습니다. 홈으로 이동합니다.");
+        navigate("/", { replace: true });
       } catch (error) {
         console.log(error);
-      } finally {
+        alert("예기치 못한 오류가 발생했습니다. 회원가입을 다시 시도해주세요.");
       }
     };
     fetchData();
