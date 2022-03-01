@@ -36,6 +36,11 @@ td.orangeDay {
   border: solid 3px orange;
 }
 
+td.greenDay {
+  border: none;
+  border: solid 3px green;
+}
+
 td#today::after {
   vertical-align: middle;
   text-align: center;

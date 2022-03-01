@@ -11,4 +11,22 @@ calenderRouter.get(
   })
 );
 
+calenderRouter.put(
+  "/changeSchedule",
+  expressAsyncHandler(async (req, res) => {
+    const calender = await Calender.updateOne({}, { specialDay: req.body });
+    res.send(calender);
+  })
+);
+
+calenderRouter.get(
+  "/seed",
+  expressAsyncHandler(async (req, res) => {
+    const calender = await Calender.insertMany([
+      { specialDay: { redDay: [], orangeDay: [], greenDay: [] } },
+    ]);
+    res.send(calender);
+  })
+);
+
 module.exports = calenderRouter;
