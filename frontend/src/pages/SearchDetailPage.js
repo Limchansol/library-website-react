@@ -123,7 +123,7 @@ function SearchDetailPage() {
             />
           </div>
           <br />
-          <button id="searchButton">검색</button>
+          <button id="searchButton">검색하기</button>
         </form>
       </div>
       <div className="show-books">

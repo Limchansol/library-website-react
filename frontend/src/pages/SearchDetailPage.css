@@ -8,6 +8,10 @@
   margin-bottom: 50px;
 }
 
+#detailedSearchtext p {
+  font-size: 18px;
+}
+
 #detailedSearchForm {
   border: 1px solid black;
   width: 50%;
@@ -26,13 +30,9 @@
   margin: 10px auto;
   width: 250px;
   height: 45px;
-  border: none;
-  border-radius: 5px;
-  background-color: #a98274;
-  color: white;
+  font-size: 16px;
   font-weight: bold;
   letter-spacing: 1em;
-  cursor: pointer;
 }
 
 #detailedSearchForm button:hover {

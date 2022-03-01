@@ -3,7 +3,7 @@ import style from "./ServiceHoursPage.module.css";
 function ServiceHoursPage() {
   return (
     <>
-      <h2 id={style.title}>도서관 이용 안내</h2>
+      <h1 id={style.title}>도서관 이용 안내</h1>
       <div id={style.contents}>
         <div className={`${style.serviceUsers} ${style.container}`}>
           <h3>이용 대상</h3>

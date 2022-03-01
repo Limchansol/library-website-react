@@ -87,7 +87,7 @@ function SearchKdcPage() {
   return (
     <>
       <div id="titleText">
-        <h2>주제별 검색</h2>
+        <h1>주제별 검색</h1>
         <p>
           당신이 흥미를 느끼는 주제의 더 많은 책을 검색하세요!
           <br />책 속을 주제와 함께 여행해 봅시다.

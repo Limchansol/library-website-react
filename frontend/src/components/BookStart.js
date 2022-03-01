@@ -3,14 +3,14 @@ import style from "./BookStart.module.css";
 function BookStart() {
   return (
     <>
-      <h2 className={style.title}>북스타트</h2>
+      <h1 className={style.title}>북스타트</h1>
       <div id={style["book-start"]}>
         <p>
           <span>북스타트</span>는 아이들을 위한 <span>북악하늘 작은도서관</span>
           의 상시 프로그램 중 하나입니다.
         </p>
         <div id="about" className={style.container}>
-          <h3 className={style.subtitle}>북스타트란?</h3>
+          <h2 className={style.subtitle}>북스타트란?</h2>
           <div className={style.content}>
             정릉동 508단지는 지역 특성상 아이들에게 그다지 좋은 환경이 아니기
             때문에 아이들이 많지 않습니다.
@@ -27,14 +27,14 @@ function BookStart() {
           </div>
         </div>
         <div id="activity" className={style.container}>
-          <h3 className={style.subtitle}>북스타트 활동</h3>
+          <h2 className={style.subtitle}>북스타트 활동</h2>
           <div className={style.content}>
             '북스타트'라는 이름에 걸맞게 친구들과 함께 책을 읽기도 하고, '물감
             찍기', '제기차기' 등 다양한 놀이를 즐기기도 합니다.
           </div>
         </div>
         <div id="hours" className={style.container}>
-          <h3 className={style.subtitle}>북스타트 활동 시간</h3>
+          <h2 className={style.subtitle}>북스타트 활동 시간</h2>
           <div className={style.content}>
             북악하늘 작은도서관의 북스타트는{" "}
             <span>매월 셋째주 토요일 11시</span>에 진행됩니다.
@@ -42,7 +42,7 @@ function BookStart() {
           </div>
         </div>
         <div id="participate" className={style.container}>
-          <h3 className={style.subtitle}>북스타트 참여 방법</h3>
+          <h2 className={style.subtitle}>북스타트 참여 방법</h2>
           <div className={style.content}>
             새로운 북스타트가 시작되기 전, 함께 참여할 아이들을 찾는 글이{" "}
             <b>공지사항</b>에 올라갑니다.

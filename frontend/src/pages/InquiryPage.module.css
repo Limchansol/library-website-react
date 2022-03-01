@@ -1,71 +1,71 @@
-.inquiry h2 {
+#inquiry h1 {
   text-align: center;
   margin-top: 50px;
   margin-bottom: 50px;
 }
 
-.inquiryForm {
+#inquiryForm {
   margin: auto;
   margin-bottom: 50px;
   width: 750px;
 }
-.inquiryTitle label {
+#titleBox label {
   font-weight: bold;
   margin-right: 20px;
-  font-size: 20px;
+  font-size: 24px;
 }
 
-.inquiryTitle input {
-  width: 300px;
-  height: 45px;
+#titleBox input {
+  width: 320px;
+  height: 50px;
   font-size: 15px;
 }
-.inquiry textarea {
+
+#inquirySort {
+  margin: 50px 0px;
+}
+
+#inquirySort span {
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+#inquirySort label {
+  margin-right: 25px;
+  font-size: 18px;
+}
+
+#inquirySort label::after {
+  content: "☀";
+  margin-left: 10px;
+}
+
+#inquirySort input:checked + label::after {
+  content: "☀";
+  color: red;
+}
+
+#inquirySort input {
+  display: none;
+}
+
+#inquiryForm textarea {
   padding: 10px;
   width: 750px;
   font-size: 15px;
   border: 3px solid #dfdfdf;
   border-radius: 5px;
 }
-.inquirySort {
-  margin: 50px 0px;
-}
-
-.inquirySort label {
-  margin-right: 20px;
-}
-
-.inquirySort label::after {
-  content: "☀";
-  margin-left: 10px;
-}
-
-.inquirySort input:checked + label::after {
-  content: "☀";
-  color: red;
-}
-
-.inquirySort input {
-  display: none;
-}
-
-.inquirySort span {
-  font-weight: bold;
-  margin-right: 20px;
-}
 
 .inquiryBtn {
   margin: 30px auto;
   display: block;
-  width: 150px;
-  height: 45px;
-  border: none;
-  border-radius: 5px;
-  background-color: #a98274;
-  color: white;
+  width: 200px;
+  height: 50px;
+  font-size: 16px;
   font-weight: bold;
-  letter-spacing: 0.2em;
-  cursor: pointer;
+  letter-spacing: 0.4em;
 }
 .inquiryBtn:hover {
   background-color: #8d6e63;

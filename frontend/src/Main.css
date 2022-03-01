@@ -1,3 +1,21 @@
+/* IE8 이하는 지원하지 않음. 지원하려면 EOT 확장자 필요 */
+@font-face {
+  font-family: SeoulHangang;
+  font-style: normal;
+  font-weight: normal;
+  src: local("서울한강체 M"), url("./fonts/SeoulHangangM.woff2") format("woff2"),
+    url("./fonts/SeoulHangangM.woff") format("woff");
+}
+
+@font-face {
+  font-family: SeoulHangang;
+  font-style: normal;
+  font-weight: bold; /* 굵은 폰트 */
+  src: local("서울한강체 EB"),
+    url("./fonts/SeoulHangangEB.woff2") format("woff2"),
+    url("./fonts/SeoulHangangEB.woff") format("woff");
+}
+
 * {
   box-sizing: border-box;
 }
@@ -5,6 +23,7 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: SeoulHangang, "맑은 고딕", "malgun gothic";
 }
 
 a {
@@ -28,6 +47,7 @@ button {
   border: none;
   border-radius: 5px;
   background-color: #a98274;
+  font-family: SeoulHangang, "맑은 고딕", "malgun gothic";
   color: white;
   cursor: pointer;
 }

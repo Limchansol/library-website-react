@@ -6,5 +6,8 @@
   position: relative;
   color: white;
   cursor: default;
+  font-size: 18px;
 }
-.nav-item:hover { border-bottom: 5px solid #795548; }
+.nav-item:hover {
+  border-bottom: 5px solid #795548;
+}

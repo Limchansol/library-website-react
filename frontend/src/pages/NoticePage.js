@@ -8,11 +8,11 @@ function NoticePage() {
   return (
     <>
       <div className={style["notice"]}>
-        <p className={style["notice-info"]}>
-          <h3 className={style["notice-title"]}>{notice.title}</h3>
+        <div className={style["notice-info"]}>
+          <h2 className={style["notice-title"]}>{notice.title}</h2>
           <span className={style["date"]}>{notice.createdAt}</span>
           <span className={style["writer"]}>{notice.writer}</span>
-        </p>
+        </div>
         <p className={style["notice-content"]}>{notice.content}</p>
       </div>
       <Link to="/notices-and-communication/notice">

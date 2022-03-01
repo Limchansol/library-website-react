@@ -1,11 +1,11 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./SignUpPage.css";
+import style from "./SignUpPage.module.css";
 
 function CheckMessage({ message, color = "#8c7b75" }) {
   return (
-    <span className="message" style={{ color: `${color}` }}>
+    <span className={style.message} style={{ color: `${color}` }}>
       {message}
     </span>
   );
@@ -377,23 +377,23 @@ function SignUpPage() {
   };
 
   return (
-    <form id="signup-form" onSubmit={handleSubmit}>
+    <form id={style["signup-form"]} onSubmit={handleSubmit}>
       <fieldset>
-        <div id="id-container" className="info">
+        <div id={style["id-container"]} className={style.info}>
           <label htmlFor="id">아이디</label>
-          <div className="container">
+          <div className={style.container}>
             <input
               type="text"
               name="id"
-              id="id"
+              id={style.id}
               value={signupInfo.id}
               onChange={handleSignupInfo}
-              className="user-info"
+              className={style["user-info"]}
               autoFocus
               minLength="5"
               maxLength="20"
             />
-            <button type="button" id="id-check" onClick={confirmId}>
+            <button type="button" id={style["id-check"]} onClick={confirmId}>
               아이디 확인
             </button>
           </div>
@@ -402,15 +402,15 @@ function SignUpPage() {
             color={infoValidity.id[2]}
           />
         </div>
-        <div id="password-container" className="info">
+        <div id="password-container" className={style.info}>
           <label htmlFor="pw">비밀번호</label>
           <input
             type="password"
             name="password"
-            id="password"
+            id={style.password}
             value={signupInfo.password}
             onChange={handleSignupInfo}
-            className="user-info"
+            className={style["user-info"]}
             minLength="8"
             maxLength="16"
           />
@@ -419,14 +419,14 @@ function SignUpPage() {
             color={infoValidity.password[2]}
           />
         </div>
-        <div id="password2-container" className="info">
+        <div id={style["password2-container"]} className={style.info}>
           <label htmlFor="password2">비밀번호 확인</label>
           <input
             type="password"
             name="password2"
-            id="password2"
+            id={style.password2}
             onChange={doubleCheckPassword}
-            className="user-info"
+            className={style["user-info"]}
             minLength="8"
             maxLength="16"
           />
@@ -437,15 +437,15 @@ function SignUpPage() {
         </div>
       </fieldset>
       <fieldset>
-        <div id="name-container" className="info">
+        <div id={style["name-container"]} className={style.info}>
           <label htmlFor="name">이름</label>
           <input
             type="text"
             name="name"
-            id="name"
+            id={style.name}
             value={signupInfo.name}
             onChange={handleSignupInfo}
-            className="user-info"
+            className={style["user-info"]}
             minLength="1"
             maxLength="30"
           />
@@ -454,14 +454,14 @@ function SignUpPage() {
             color={infoValidity.name[2]}
           />
         </div>
-        <div id="gender-container" className="info">
+        <div id={style["gender-container"]} className={style.info}>
           <label htmlFor="gender">성별</label>
           <select
-            id="gender"
+            id={style.gender}
             name="gender"
             value={signupInfo.gender}
             onChange={handleSignupInfo}
-            className="user-info"
+            className={style["user-info"]}
           >
             <option value="not-selected">성별</option>
             <option value="male">남자</option>
@@ -473,16 +473,16 @@ function SignUpPage() {
             color={infoValidity.gender[2]}
           />
         </div>
-        <div id="birthdate-container" className="info">
+        <div id={style["birthdate-container"]} className={style.info}>
           <label htmlFor="birthdate">생년월일</label>
-          <div id="birthdate" className="container">
+          <div id={style.birthdate} className={style.container}>
             <input
               type="text"
               name="yyyy"
-              id="yyyy"
+              id={style.yyyy}
               value={signupInfo.yyyy}
               onChange={handleSignupInfo}
-              className="user-info user-bd"
+              className={`${style["user-info"]} ${style["user-bd"]}`}
               placeholder="년 (4자리)"
               minLength="4"
               maxLength="4"
@@ -490,10 +490,10 @@ function SignUpPage() {
             <input
               type="text"
               name="mm"
-              id="mm"
+              id={style.mm}
               value={signupInfo.mm}
               onChange={handleSignupInfo}
-              className="user-info user-bd"
+              className={`${style["user-info"]} ${style["user-bd"]}`}
               placeholder="월 (2자리)"
               minLength="2"
               maxLength="2"
@@ -501,10 +501,10 @@ function SignUpPage() {
             <input
               type="text"
               name="dd"
-              id="dd"
+              id={style.dd}
               value={signupInfo.dd}
               onChange={handleSignupInfo}
-              className="user-info user-bd"
+              className={`${style["user-info"]} ${style["user-bd"]}`}
               placeholder="일 (2자리)"
               minLength="2"
               maxLength="2"
@@ -515,15 +515,15 @@ function SignUpPage() {
             color={infoValidity.birthDate[2]}
           />
         </div>
-        <div id="phone-container" className="info">
+        <div id={style["phone-container"]} className={style.info}>
           <label htmlFor="phone">휴대전화</label>
           <input
             type="tel"
             name="phone"
-            id="phone"
+            id={style.phone}
             value={signupInfo.phone}
             onChange={handleSignupInfo}
-            className="user-info"
+            className={style["user-info"]}
             placeholder="숫자만 입력해 주세요."
             minLength="11"
             maxLength="11"
@@ -533,15 +533,15 @@ function SignUpPage() {
             color={infoValidity.phone[2]}
           />
         </div>
-        <div id="email-container" className="info">
+        <div id={style["email-container"]} className={style.info}>
           <label htmlFor="email">이메일</label>
           <input
             type="email"
             name="email"
-            id="email"
+            id={style.email}
             value={signupInfo.email}
             onChange={handleSignupInfo}
-            className="user-info"
+            className={style["user-info"]}
           />
           <CheckMessage
             message={infoValidity.email[1]}
@@ -549,7 +549,7 @@ function SignUpPage() {
           />
         </div>
       </fieldset>
-      <button id="signup-btn">회원가입</button>
+      <button id={style["signup-btn"]}>회원가입</button>
     </form>
   );
 }

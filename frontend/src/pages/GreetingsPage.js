@@ -1,9 +1,9 @@
-import "./GreetingsPage.css";
+import style from "./GreetingsPage.module.css";
 
 function GreetingsPage() {
   return (
-    <div className="greetings">
-      <p className="intro">
+    <div id={style.greetings}>
+      <p className={style.intro}>
         <strong style={{ fontSize: "30px" }}>북악하늘</strong>은 정릉동
         508단지를 중심으로 건강하고 온정 있는 지역사회 공동체를 만들어가자는
         생각으로 생겨났습니다.
@@ -15,7 +15,7 @@ function GreetingsPage() {
         우리 동네가 만들어지기를 소망하는 마음으로 소통의 공간(場)인 카페형
         작은도서관을 시작하였습니다.
       </p>
-      <table className="meaning-table">
+      <table id={style["meaning-table"]}>
         <caption>'북악하늘'의 의미</caption>
         <thead>
           <tr>
@@ -25,19 +25,19 @@ function GreetingsPage() {
         </thead>
         <tbody>
           <tr>
-            <td className="category">북(Book)</td>
+            <td className={style.category}>북(Book)</td>
             <td>악(樂, ark)</td>
           </tr>
           <tr>
-            <td className="category">악(樂 ark)</td>
+            <td className={style.category}>악(樂 ark)</td>
             <td>독서와 음악과 즐거움</td>
           </tr>
           <tr>
-            <td className="category">하늘</td>
+            <td className={style.category}>하늘</td>
             <td>하늘과 맞닿은 북악스카이웨이</td>
           </tr>
           <tr>
-            <td className="category">문화공간 북악하늘</td>
+            <td className={style.category}>문화공간 북악하늘</td>
             <td>
               각종 문화 활동과 커뮤니티를 통해 지역사회의 문화 창달과 삶의 질을
               향상시킴
@@ -45,7 +45,7 @@ function GreetingsPage() {
           </tr>
         </tbody>
       </table>
-      <div className="purpose">
+      <div id={style.purpose}>
         <h2>북악하늘의 목적</h2>
         <ul>
           <li>

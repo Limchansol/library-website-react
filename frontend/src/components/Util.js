@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { loginUserInfo } from "../Atoms/LoginAtom.js";
 import axios from "axios";
-import "./Util.css";
+import style from "./Util.module.css";
 
 function getLinkStyle({ isActive }) {
   return {
@@ -35,30 +35,30 @@ function Util() {
   return (
     <>
       {loginInfo ? (
-        <div id="header-top">
-          <ul className="util">
-            <li className="util-user">{loginInfo.name}님</li>
+        <div id={style["header-top"]}>
+          <ul id={style.util}>
+            <li className={style["util-user"]}>{loginInfo.name}님</li>
             {loginInfo.isAdmin && (
               <NavLink to="/administrator" style={getLinkStyle}>
-                <li className="util-item">웹사이트 관리</li>
+                <li className={style["util-item"]}>웹사이트 관리</li>
               </NavLink>
             )}
             <NavLink to="/mypage" style={getLinkStyle}>
-              <li className="util-item">나의 공간</li>
+              <li className={style["util-item"]}>나의 공간</li>
             </NavLink>
-            <li className="util-item" onClick={logOut}>
+            <li className={style["util-item"]} onClick={logOut}>
               로그아웃
             </li>
           </ul>
         </div>
       ) : (
-        <div id="header-top">
-          <ul className="util">
+        <div id={style["header-top"]}>
+          <ul id={style.util}>
             <NavLink to="/logIn" style={getLinkStyle}>
-              <li className="util-item">로그인</li>
+              <li className={style["util-item"]}>로그인</li>
             </NavLink>
             <NavLink to="/signUp" style={getLinkStyle}>
-              <li className="util-item">회원가입</li>
+              <li className={style["util-item"]}>회원가입</li>
             </NavLink>
           </ul>
         </div>

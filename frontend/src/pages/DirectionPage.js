@@ -4,19 +4,19 @@ import style from "./DirectionPage.module.css";
 function DirectionPage() {
   return (
     <>
-      <h2 id={style.title}>오시는 길</h2>
+      <h1 id={style.title}>오시는 길</h1>
       <div id={style.contents}>
         <div id={style.directions}>
           <h3>상세 지도</h3>
           <Map />
           <div className={`${style.address} ${style.paragraph}`}>
-            <h4>도로명주소</h4>
+            <h3>도로명주소</h3>
             <p>(02821) 서울특별시 성북구 북악하늘</p>
-            <h4>지번주소</h4>
+            <h3>지번주소</h3>
             <p>(02821) 서울특별시 성북구 북악하늘</p>
           </div>
           <div className={`${style.publicTransportation} ${style.paragraph}`}>
-            <h4>대중교통 이용 방법</h4>
+            <h3>대중교통 이용 방법</h3>
             <p>
               지하철 4호선 성신여대역 6번출구 혹은 6호선 보문역 4번출구로
               나와서, 시내버스 1162를 타고 508 스카이 단지 내 '골드하우스'
@@ -26,7 +26,7 @@ function DirectionPage() {
           </div>
         </div>
         <div className={`${style.connectNumber} ${style.paragraph}`}>
-          <h4>연락처</h4>
+          <h3>연락처</h3>
           <p>
             북악하늘: 070-0000-0000
             <br />

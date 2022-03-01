@@ -28,10 +28,7 @@ const data = {
           loanStartDD: 23,
         },
       ],
-      interestingBooks: [
-        "62191d387d697cc5c0dad548",
-        "62191d387d697cc5c0dad54a",
-      ],
+      interestingBooks: [],
     },
   ],
   books: [

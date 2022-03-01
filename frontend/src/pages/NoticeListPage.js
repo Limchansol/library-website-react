@@ -16,7 +16,7 @@ function NoticeListPage() {
 
   return (
     <>
-      <h2 className={style["notice-list-page"]}>공지사항</h2>
+      <h1 className={style["notice-list-page"]}>공지사항</h1>
       {/* <table>
         <thead>
           <tr>

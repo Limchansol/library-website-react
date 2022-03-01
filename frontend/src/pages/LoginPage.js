@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { loginBool, loginUserInfo } from "../Atoms/LoginAtom.js";
 import { useRecoilState, useRecoilValue } from "recoil";
 import axios from "axios";
-import "./LogInPage.css";
+import style from "./LogInPage.module.css";
 
 function LogInPage() {
   const [userInfo, setUserInfo] = useState({
@@ -53,14 +53,14 @@ function LogInPage() {
   };
 
   return (
-    <form id="login-form" onSubmit={handleSubmit}>
-      <div className="container">
+    <form id={style["login-form"]} onSubmit={handleSubmit}>
+      <div className={style.container}>
         <input
           type="text"
           name="id"
           value={userInfo.id}
           onChange={handleUserInfo}
-          className="user-id"
+          className={style["user-id"]}
           placeholder="아이디"
           autoFocus
         />
@@ -70,23 +70,23 @@ function LogInPage() {
           value={userInfo.password}
           onChange={handleUserInfo}
           ref={$password}
-          className="user-pw"
+          className={style["user-pw"]}
           placeholder="비밀번호"
         />
         {logInFailed && (
-          <span className="login-failed">
+          <span id={style["wrong-info"]}>
             아이디나 비밀번호가 올바르지 않습니다.
           </span>
         )}
       </div>
 
-      <button type="submit" className="login-btn">
+      <button type="submit" id={style["login-btn"]}>
         로그인
       </button>
-      <div className="find-info">
-        <span className="find-id">아이디 찾기</span>
-        <span className="find-bar">|</span>
-        <span className="find-pw">비밀번호 찾기</span>
+      <div id={style["find-info"]}>
+        <span id={style["find-id"]}>아이디 찾기</span>
+        <span className={style.partition}>|</span>
+        <span id={style["find-pw"]}>비밀번호 찾기</span>
       </div>
     </form>
   );

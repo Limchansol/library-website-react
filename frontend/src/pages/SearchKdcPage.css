@@ -3,8 +3,12 @@
   margin: 50px 0px;
   line-height: 250%;
 }
-#titleText h2 {
+#titleText h1 {
   margin-bottom: 50px;
+}
+
+#titleText p {
+  font-size: 18px;
 }
 
 #subjectButton {

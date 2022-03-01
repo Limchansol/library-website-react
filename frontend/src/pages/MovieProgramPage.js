@@ -30,10 +30,10 @@ function MovieProgramPage() {
   return (
     <div className={style.pageContainer}>
       <div className={style.programContainer}>
-        <h2 className={style.programTitle}>
+        <h1 className={style.programTitle}>
           {programInfo.year}년 북악하늘 {"<"}영화로 세상 읽기{">"} 시즌
           {programInfo.season}
-        </h2>
+        </h1>
         <p className={style.programInfo}>
           "영화로 세상 읽기" 프로그램 설명 쓰는 자리입니다.
         </p>

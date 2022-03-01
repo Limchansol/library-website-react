@@ -54,10 +54,10 @@ function InquiryPage() {
   return (
     <>
       {loginInfo ? (
-        <div className={style.inquiry}>
-          <h2>문의</h2>
-          <form className={style.inquiryForm} onSubmit={handleSubmit}>
-            <div className={style.inquiryTitle}>
+        <div id={style.inquiry}>
+          <h1>문의</h1>
+          <form id={style.inquiryForm} onSubmit={handleSubmit}>
+            <div id={style.titleBox}>
               <label htmlFor="title">제목</label>
               <input
                 type="text"
@@ -68,7 +68,7 @@ function InquiryPage() {
                 placeholder="제목을 적어주세요."
               />
             </div>
-            <div className={style.inquirySort}>
+            <div id={style.inquirySort}>
               <span>분류</span>
               <input
                 type="radio"
