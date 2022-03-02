@@ -102,8 +102,8 @@ function MyPage() {
               <div id={style.bookShelf}>
                 {interestingBooks?.map?.((e) => {
                   return (
-                    <div key={e._id} className={style.indBooks}>
-                      <span className={style.indBooksText}>{e.title}</span>
+                    <div key={e?._id} className={style.indBooks}>
+                      <span className={style.indBooksText}>{e?.title}</span>
                     </div>
                   );
                 })}

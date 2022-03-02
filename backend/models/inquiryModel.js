@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const inquirySchema = new mongoose.Schema(
   {
+    id: { type: String },
     title: { type: String },
     sort: { type: String },
     content: { type: String },

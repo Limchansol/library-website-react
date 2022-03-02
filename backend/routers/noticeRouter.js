@@ -13,6 +13,15 @@ noticeRouter.get(
   })
 );
 
+noticeRouter.post(
+  "/sendNotice",
+  expressAsyncHandler(async (req, res) => {
+    const notice = new Notice(req.body);
+    notice.save();
+    res.send(notice);
+  })
+);
+
 noticeRouter.get(
   "/seed",
   expressAsyncHandler(async (req, res) => {

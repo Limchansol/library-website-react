@@ -8,6 +8,7 @@ import style from "./InquiryPage.module.css";
 function InquiryPage() {
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
   const [inquiryInfo, setInquiryInfo] = useState({
+    id: "",
     title: "",
     sort: "all",
     content: "",
@@ -21,6 +22,11 @@ function InquiryPage() {
         const loginRes = await axios.get("/api/users/checkLogIn", {
           headers: { token: loginInfo.token },
         });
+        console.log(loginRes.data._id);
+        setInquiryInfo((prev) => ({
+          ...prev,
+          id: loginRes.data._id,
+        }));
       } catch (error) {
         console.log(error);
       }
