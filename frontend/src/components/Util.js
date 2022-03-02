@@ -14,22 +14,24 @@ function getLinkStyle({ isActive }) {
 function Util() {
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
 
-  useEffect(() => {
-    const logInFetch = async () => {
-      try {
-        const logInFetched = await axios.get("/api/users/checkLogIn", {
-          headers: { token: loginInfo.token },
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    logInFetch();
-    console.log(loginInfo, "로그인인포");
-  }, [loginInfo]);
+  // useEffect(() => {
+  //   const logInFetch = async () => {
+  //     try {
+  //       const logInFetched = await axios.get("/api/users/checkLogIn", {
+  //         headers: { token: loginInfo.token },
+  //       });
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   logInFetch();
+  //   console.log(loginInfo, "로그인인포");
+  // }, [loginInfo]);
 
   const logOut = () => {
+    // 로그아웃시 리코일과 로컬 스토리지 초기화 후 새로고침
     setLoginInfo("");
+    localStorage.clear();
     window.location.reload();
   };
 

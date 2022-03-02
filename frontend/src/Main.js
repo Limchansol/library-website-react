@@ -1,4 +1,7 @@
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { loginUserInfo } from "./Atoms/LoginAtom.js";
 import ScrollToTop from "./components/ScrollToTop";
 import App from "./components/App";
 import HomePage from "./pages/HomePage";
@@ -26,6 +29,13 @@ import NotFoundPage from "./pages/NotFoundPage";
 import "./Main.css";
 
 function Main() {
+  // 로컬 스토리지에 저장된 값 불러와서 리코일 loginUserInfo 업데이트
+  const user = JSON.parse(localStorage.getItem("user"));
+  let setLoginInfo = useSetRecoilState(loginUserInfo);
+  useEffect(() => {
+    setLoginInfo(user);
+  }, []);
+
   return (
     <BrowserRouter>
       <ScrollToTop />

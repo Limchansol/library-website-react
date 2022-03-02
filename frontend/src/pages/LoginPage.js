@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { loginBool, loginUserInfo } from "../Atoms/LoginAtom.js";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { loginBool, loginUserInfo } from "../Atoms/LoginAtom.js";
 import axios from "axios";
 import style from "./LogInPage.module.css";
 
@@ -14,7 +14,7 @@ function LogInPage() {
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
   const [logInFailed, setLogInFailed] = useState(false);
   const navigate = useNavigate();
-  // const $password = useRef(); 라고 해보자
+  const location = useLocation();
   const $password = useRef();
 
   const handleUserInfo = (e) => {
@@ -32,9 +32,10 @@ function LogInPage() {
     const fetchData = async () => {
       try {
         const fetchedData = await axios.post("/api/users/logIn", userInfo);
-        console.log(fetchedData);
+        // 새로고침해도 로그인 유지되게 하려면 로컬 스토리지에 저장.
+        // 문자열로만 저장할 수 있으므로 JSON.stringify
+        localStorage.setItem("user", JSON.stringify(fetchedData.data));
         setLoginInfo(fetchedData.data);
-        console.log(isLoggedIn, loginInfo);
         navigate("/", { replace: true });
       } catch (error) {
         setLogInFailed(true);
