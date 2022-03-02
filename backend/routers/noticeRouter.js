@@ -14,10 +14,19 @@ noticeRouter.get(
 );
 
 noticeRouter.post(
-  "/sendNotice",
+  "/addNotice",
   expressAsyncHandler(async (req, res) => {
     const notice = new Notice(req.body);
     notice.save();
+    res.send(notice);
+  })
+);
+
+noticeRouter.delete(
+  "/removeNotice/:id",
+  expressAsyncHandler(async (req, res) => {
+    const removeId = req.params.id;
+    const notice = await Notice.deleteOne({ id: removeId });
     res.send(notice);
   })
 );

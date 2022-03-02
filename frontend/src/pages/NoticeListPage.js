@@ -10,6 +10,8 @@ function NoticeListPage() {
   const [noticeList, setNoticeList] = useState([]);
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [removeNumber, setRemoveNumber] = useState("0");
+
   const [newNotice, setNewNotice] = useState({
     id: "3",
     title: "",
@@ -44,11 +46,21 @@ function NoticeListPage() {
     }));
   }
 
+  function handleRemoveNumber(e) {
+    const { value } = e.target;
+    setRemoveNumber(value);
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(isAdmin);
     if (!isAdmin) return;
-    await axios.post("/api/notices/sendNotice", newNotice);
+    await axios.post("/api/notices/addNotice", newNotice);
+  }
+
+  async function handleRemoveSubmit(e) {
+    e.preventDefault();
+    if (!isAdmin) return;
+    await axios.delete(`/api/notices/removeNotice/${removeNumber}`);
   }
 
   return (
@@ -76,30 +88,47 @@ function NoticeListPage() {
           })}
       </div>
       {isAdmin ? (
-        <div id={style.newNotice}>
-          <form id={style.newNoticeForm} onSubmit={handleSubmit}>
-            <div id={style.titleBox}>
-              <label htmlFor="title">제목</label>
+        <div id={style.noticeForAdmin}>
+          <div id={style.newNotice}>
+            <form id={style.newNoticeForm} onSubmit={handleSubmit}>
+              <div id={style.titleBox}>
+                <label htmlFor="title">제목</label>
+                <input
+                  type="text"
+                  name="title"
+                  id="title"
+                  value={newNotice.title}
+                  onChange={handleNewNotice}
+                  placeholder="제목을 적어주세요."
+                />
+              </div>
+              <textarea
+                name="content"
+                id="content"
+                cols="80"
+                rows="15"
+                value={newNotice.content}
+                onChange={handleNewNotice}
+                placeholder="공지사항을 적어주세요."
+              ></textarea>
+              <button className={style.newNoticeBtn}>공지 등록</button>
+            </form>
+          </div>
+
+          <div id={style.removeNotice}>
+            <form id={style.removeNoticeForm} onSubmit={handleRemoveSubmit}>
+              <label htmlFor="removeNum">삭제할 공지</label>
               <input
                 type="text"
-                name="title"
-                id="title"
-                value={newNotice.title}
-                onChange={handleNewNotice}
-                placeholder="제목을 적어주세요."
+                name="removeNum"
+                id="removeNum"
+                value={removeNumber}
+                onChange={handleRemoveNumber}
+                placeholder="삭제할 공지의 번호를 적어주세요."
               />
-            </div>
-            <textarea
-              name="content"
-              id="content"
-              cols="80"
-              rows="15"
-              value={newNotice.content}
-              onChange={handleNewNotice}
-              placeholder="공지사항을 적어주세요."
-            ></textarea>
-            <button className={style.newNoticeBtn}>문의 등록</button>
-          </form>
+              <button className={style.removeNoticeBtn}>공지 삭제</button>
+            </form>
+          </div>
         </div>
       ) : undefined}
     </div>
