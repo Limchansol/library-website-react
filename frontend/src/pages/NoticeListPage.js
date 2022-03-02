@@ -122,13 +122,13 @@ function NoticeListPage() {
                 onChange={handleNewNotice}
                 placeholder="공지사항을 적어주세요."
               ></textarea>
-              <button className={style.newNoticeBtn}>공지 등록</button>
+              <button className={style.noticeBtn}>공지 등록</button>
             </form>
           </div>
 
           <div id={style.removeNotice}>
             <form id={style.removeNoticeForm} onSubmit={handleRemoveSubmit}>
-              <label htmlFor="removeNum">삭제할 공지</label>
+              <label htmlFor="removeNum">삭제할 공지 번호</label>
               <input
                 type="text"
                 name="removeNum"
@@ -136,8 +136,8 @@ function NoticeListPage() {
                 value={removeNumber}
                 onChange={handleRemoveNumber}
                 placeholder="삭제할 공지의 번호를 적어주세요."
-              />
-              <button className={style.removeNoticeBtn}>공지 삭제</button>
+              />{" "}
+              <button className={style.noticeBtn}>공지 삭제</button>
             </form>
           </div>
         </div>

@@ -51,12 +51,12 @@ function AdministratorPage() {
 
   return (
     <>
-      <div id="inquiryCheck">
-        <h2>들어온 문의</h2>
+      <div id={style.inquiryCheck}>
+        <h2 id={style.title}>들어온 문의</h2>
         <ul>
           {inquiry?.map?.((inq, i) => {
             return (
-              <li key={inq._id} data-ind={i}>
+              <li key={inq._id} data-ind={i} className={style.content}>
                 <h3>문의 순번: {i + 1}</h3>
                 <p>제목: {inq?.title}</p>
                 <p>내용: {inq?.content}</p>

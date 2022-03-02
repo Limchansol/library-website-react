@@ -49,3 +49,26 @@
   flex-basis: 20%;
   text-align: center;
 }
+
+#noticeForAdmin {
+  width: 700px;
+  margin: auto;
+}
+
+.noticeBtn {
+  display: block;
+  margin: auto;
+}
+
+#noticeForAdmin input {
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+#noticeForAdmin label {
+  margin-right: 20px;
+}
+
+#removeNoticeForm {
+  margin: auto;
+}

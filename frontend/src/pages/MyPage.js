@@ -118,7 +118,7 @@ function MyPage() {
               <h2>내가 한 문의</h2>
               {inquiries?.map?.((inq, i) => {
                 return (
-                  <div>
+                  <div key={i} className={style.inqContent}>
                     <h3>문의 순서: {i + 1}</h3>
                     <p>제목: {inq?.title}</p>
                     <p>내용: {inq?.content}</p>

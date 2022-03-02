@@ -1,3 +1,8 @@
+#calender {
+  width: 600px;
+  margin: auto;
+}
+
 #schedule {
   width: 600px;
 }
@@ -46,4 +51,13 @@ td#today::after {
   text-align: center;
   font-size: 10px;
   content: "today";
+}
+
+#changeDay {
+  margin: auto;
+  text-align: center;
+}
+
+#changeDay label {
+  margin-right: 10px;
 }

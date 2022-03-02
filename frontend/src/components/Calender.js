@@ -80,10 +80,10 @@ function Calender() {
     });
   const days = ["일", "월", "화", "수", "목", "금", "토"];
   return (
-    <div>
+    <div id={style.calender}>
       <h2 className={style.scheduleTitle}>도서관 일정</h2>
       {isAdmin ? (
-        <form onSubmit={sendData}>
+        <form onSubmit={sendData} id={style.changeDay}>
           <span>수정할 일정 종류 선택</span>
           <input
             type="radio"

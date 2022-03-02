@@ -1,0 +1,19 @@
+#inquiryCheck {
+  width: 900px;
+  margin: auto;
+}
+
+#title {
+  margin-top: 50px;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.content {
+  margin-bottom: 50px;
+  border-top: 1px black solid;
+}
+
+.content button {
+  display: block;
+}
