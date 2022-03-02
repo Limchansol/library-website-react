@@ -6,7 +6,7 @@ function Warn() {
     <div id={style.warning}>
       <div>로그인 후 이용할 수 있는 서비스입니다.</div>
       <Link to="/logIn">
-        <button class={style["to-login"]}>로그인</button>
+        <button className={style["to-login"]}>로그인</button>
       </Link>
     </div>
   );

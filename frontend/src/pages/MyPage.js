@@ -9,10 +9,11 @@ function MyPage() {
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
   const [userData, setUserData] = useState({});
   const [interestingBooks, setInterestingBooks] = useState([]);
+  const [inquiries, setInquiries] = useState([]);
   let alreadyFetched = false;
 
   useEffect(() => {
-    const logInFetch = async () => {
+    const fetchData = async () => {
       try {
         if (alreadyFetched) return;
         const loginRes = await axios.get("/api/users/checkLogIn", {
@@ -25,12 +26,16 @@ function MyPage() {
           },
         });
         setInterestingBooks(bookRes.data);
+        const inquiryRes = await axios.get(
+          `/api/inquiries/${loginRes?.data?._id}`
+        );
+        setInquiries(inquiryRes.data);
         alreadyFetched = true;
       } catch (error) {
         console.log(error);
       }
     };
-    logInFetch();
+    fetchData();
   }, [loginInfo]);
 
   return (
@@ -64,7 +69,7 @@ function MyPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {userData.borrowedBooks?.map?.((e) => {
+                  {userData.borrowedBooks?.map?.((e, i) => {
                     const returnDay = new Date(
                       e.loanStartYYYY,
                       e.loanStartMM - 1,
@@ -72,7 +77,7 @@ function MyPage() {
                     );
                     const now = new Date();
                     return (
-                      <tr>
+                      <tr key={i}>
                         <td>
                           {e.loanStartYYYY}-{e.loanStartMM}-{e.loanStartDD}
                         </td>
@@ -108,6 +113,19 @@ function MyPage() {
                   );
                 })}
               </div>
+            </div>
+            <div id={style.inquiries}>
+              <h2>내가 한 문의</h2>
+              {inquiries?.map?.((inq, i) => {
+                return (
+                  <div>
+                    <h3>문의 순서: {i + 1}</h3>
+                    <p>제목: {inq?.title}</p>
+                    <p>내용: {inq?.content}</p>
+                    <p>답변: {inq?.answer}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </>

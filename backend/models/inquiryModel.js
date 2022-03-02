@@ -7,6 +7,7 @@ const inquirySchema = new mongoose.Schema(
     sort: { type: String },
     content: { type: String },
     userName: { type: String },
+    answer: { type: String, default: "아직 답변이 등록되지 않았습니다" },
     createdAt: { type: String },
   },
   {
