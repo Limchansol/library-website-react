@@ -1,10 +1,15 @@
+.movieSlides {
+  margin-bottom: 100px;
+}
+
 .slide-screen {
   margin: 10px auto;
   width: 770px;
   height: 400px;
   position: relative;
-  overflow: overlay;
-  background-color: burlywood;
+  overflow: scroll;
+  background-color: #4b2c20;
+  border-radius: 15px;
   scroll-behavior: smooth;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -53,7 +58,7 @@
 .movie.end {
   margin: 0 auto;
   height: 65px;
-  background-color: burlywood;
+  background-color: #4b2c20;
 }
 
 .movie.current {
@@ -63,6 +68,15 @@
 
 .movie-content {
   width: 450px;
+}
+
+.movieSlides button {
+  width: 120px;
+  height: 40px;
+  letter-spacing: 0.1em;
+}
+.movieSlides button:hover {
+  background-color: #be9c91;
 }
 
 .previous-btn {
@@ -77,7 +91,4 @@
   bottom: 20px;
   right: 50%;
   transform: translateX(50%);
-}
-.movieSlides {
-  margin-bottom: 100px;
 }

@@ -3,8 +3,9 @@
   font-family: SeoulHangang;
   font-style: normal;
   font-weight: normal;
-  src: local("서울한강체 M"), url("./fonts/SeoulHangangM.woff2") format("woff2"),
-    url("./fonts/SeoulHangangM.woff") format("woff");
+  src: local("서울한강체 M"),
+    url("../public/fonts/SeoulHangangM.woff2") format("woff2"),
+    url("../public/fonts/SeoulHangangM.woff") format("woff");
 }
 
 @font-face {
@@ -12,8 +13,8 @@
   font-style: normal;
   font-weight: bold; /* 굵은 폰트 */
   src: local("서울한강체 EB"),
-    url("./fonts/SeoulHangangEB.woff2") format("woff2"),
-    url("./fonts/SeoulHangangEB.woff") format("woff");
+    url("../public/fonts/SeoulHangangEB.woff2") format("woff2"),
+    url("../public/fonts/SeoulHangangEB.woff") format("woff");
 }
 
 * {

@@ -1,9 +1,17 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import style from "./NoticeListPage.module.css";
+import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import axios from "axios";
 import { loginUserInfo } from "../Atoms/LoginAtom";
+import axios from "axios";
+import style from "./NoticeListPage.module.css";
+
+function moveToHomePage(navigate, message) {
+  const confirmMoveToHome = window.confirm(
+    `${message}\n홈으로 이동하시겠습니까?`
+  );
+  if (!confirmMoveToHome) return window.location.reload();
+  navigate("/");
+}
 
 function NoticeListPage() {
   // 나중에는 서버에서 받아올 것
@@ -11,7 +19,6 @@ function NoticeListPage() {
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
   const [isAdmin, setIsAdmin] = useState(false);
   const [removeNumber, setRemoveNumber] = useState("0");
-
   const [newNotice, setNewNotice] = useState({
     id: "3",
     title: "",
@@ -19,6 +26,7 @@ function NoticeListPage() {
     writer: "",
     createdAt: "",
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +35,7 @@ function NoticeListPage() {
       const loginRes = await axios.get("/api/users/checkLogIn", {
         headers: { token: loginInfo.token },
       });
+      console.log(loginRes.data.isAdmin, "어드민ㄴㄹ");
       setIsAdmin(loginRes?.data?.isAdmin);
       setNewNotice((prev) => ({
         ...prev,
@@ -55,12 +64,14 @@ function NoticeListPage() {
     e.preventDefault();
     if (!isAdmin) return;
     await axios.post("/api/notices/addNotice", newNotice);
+    moveToHomePage(navigate, "새로운 공지가 등록되었습니다.");
   }
 
   async function handleRemoveSubmit(e) {
     e.preventDefault();
     if (!isAdmin) return;
     await axios.delete(`/api/notices/removeNotice/${removeNumber}`);
+    moveToHomePage(navigate, `${removeNumber}번 공지가 삭제되었습니다.`);
   }
 
   return (

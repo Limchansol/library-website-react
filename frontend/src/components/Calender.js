@@ -67,6 +67,7 @@ function Calender() {
     e.preventDefault();
     if (!isAdmin) return;
     await axios.put("/api/calenders/changeSchedule", specialDay);
+    alert("일정이 변경되었습니다.");
   }
 
   const initDay = new Date(today[0], today[1], 1);
