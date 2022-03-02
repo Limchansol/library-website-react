@@ -17,6 +17,15 @@ userRouter.get(
   }) //expressAsyncHandler: 발생한 모든 에러를 server.js에 있는 에러 처리 코드로 넘겨준다.
 );
 
+userRouter.get(
+  "/checkLogIn",
+  expressAsyncHandler(async (req, res) => {
+    const token = checkValidToken(req.headers.token);
+    const user = await User.findOne({ _id: token._id });
+    res.send(user);
+  })
+);
+
 userRouter.post(
   "/logIn",
   expressAsyncHandler(async (req, res) => {
@@ -36,15 +45,6 @@ userRouter.post(
     } else {
       res.status(401).send({ message: "there are no user like this" });
     }
-  })
-);
-
-userRouter.get(
-  "/checkLogIn",
-  expressAsyncHandler(async (req, res) => {
-    const token = checkValidToken(req.headers.token);
-    const user = await User.findOne({ _id: token._id });
-    res.send(user);
   })
 );
 
@@ -106,6 +106,24 @@ userRouter.put(
       { _id: token._id },
       { $push: { reservedBooks: req.body.reservedBooks } }
     );
+    res.send(user);
+  })
+);
+
+userRouter.put(
+  "/userUpdate",
+  expressAsyncHandler(async (req, res) => {
+    const token = checkValidToken(req.body.token);
+    const user = await User.updateOne({ _id: token._id }, req.body);
+    res.send(user);
+  })
+);
+
+userRouter.delete(
+  "/secession/:userId",
+  expressAsyncHandler(async (req, res) => {
+    const { userId } = req.params;
+    const user = await User.deleteOne({ _id: userId });
     res.send(user);
   })
 );

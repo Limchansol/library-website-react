@@ -116,16 +116,20 @@ function MyPage() {
             </div>
             <div id={style.inquiries}>
               <h2>내가 한 문의</h2>
-              {inquiries?.map?.((inq, i) => {
-                return (
-                  <div key={i} className={style.inqContent}>
-                    <h3>문의 순서: {i + 1}</h3>
-                    <p>제목: {inq?.title}</p>
-                    <p>내용: {inq?.content}</p>
-                    <p>답변: {inq?.answer}</p>
-                  </div>
-                );
-              })}
+              {inquiries.length !== 0 ? (
+                inquiries?.map?.((inq, i) => {
+                  return (
+                    <div key={i} className={style.inqContent}>
+                      <h3>문의 순서: {i + 1}</h3>
+                      <p>제목: {inq?.title}</p>
+                      <p>내용: {inq?.content}</p>
+                      <p>답변: {inq?.answer}</p>
+                    </div>
+                  );
+                })
+              ) : (
+                <p>문의 내용이 없습니다.</p>
+              )}
             </div>
           </div>
         </>
