@@ -15,6 +15,7 @@ function InquiryPage() {
     userName: loginInfo.name,
     createdAt: "",
   });
+  console.log(loginInfo, "로그인인포");
 
   useEffect(() => {
     const logInFetch = async () => {

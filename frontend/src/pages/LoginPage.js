@@ -32,9 +32,9 @@ function LogInPage() {
     const fetchData = async () => {
       try {
         const fetchedData = await axios.post("/api/users/logIn", userInfo);
-        // 새로고침해도 로그인 유지되게 하려면 로컬 스토리지에 저장.
+        // 새로고침해도 로그인 유지되게 하려면 세션 스토리지에 저장.
         // 문자열로만 저장할 수 있으므로 JSON.stringify
-        localStorage.setItem("user", JSON.stringify(fetchedData.data));
+        sessionStorage.setItem("user", JSON.stringify(fetchedData.data));
         setLoginInfo(fetchedData.data);
         navigate("/", { replace: true });
       } catch (error) {

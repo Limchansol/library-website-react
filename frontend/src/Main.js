@@ -29,11 +29,13 @@ import NotFoundPage from "./pages/NotFoundPage";
 import "./Main.css";
 
 function Main() {
-  // 로컬 스토리지에 저장된 값 불러와서 리코일 loginUserInfo 업데이트
-  const user = JSON.parse(localStorage.getItem("user"));
+  // 세션 스토리지에 저장된 값 불러와서 리코일 loginUserInfo 업데이트
+  const user = JSON.parse(sessionStorage.getItem("user"));
   let setLoginInfo = useSetRecoilState(loginUserInfo);
   useEffect(() => {
-    setLoginInfo(user);
+    if (user) {
+      setLoginInfo(user);
+    }
   }, []);
 
   return (

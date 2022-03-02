@@ -29,9 +29,9 @@ function Util() {
   // }, [loginInfo]);
 
   const logOut = () => {
-    // 로그아웃시 리코일과 로컬 스토리지 초기화 후 새로고침
+    // 로그아웃시 리코일과 세션 스토리지 초기화 후 새로고침
     setLoginInfo("");
-    localStorage.clear();
+    sessionStorage.clear();
     window.location.reload();
   };
 
