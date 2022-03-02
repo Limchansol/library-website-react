@@ -7,10 +7,6 @@
   margin-bottom: 50px;
 }
 
-#titleText p {
-  font-size: 18px;
-}
-
 #subjectButton {
   display: grid;
   width: 1000px;

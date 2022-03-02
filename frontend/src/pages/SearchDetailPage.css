@@ -8,20 +8,22 @@
   margin-bottom: 50px;
 }
 
-#detailedSearchtext p {
-  font-size: 18px;
-}
-
 #detailedSearchForm {
-  border: 1px solid black;
-  width: 50%;
   margin: auto;
-  padding: 30px 20px;
-  font-size: 20px;
+  padding: 40px 30px;
+  width: 50%;
+  border: 1px solid black;
 }
 
-#detailedSearchForm input {
-  margin-bottom: 20px;
+#detailedSearchForm .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px auto;
+  width: 350px;
+}
+
+#detailedSearchForm label {
   font-size: 20px;
 }
 
@@ -30,9 +32,8 @@
   margin: 10px auto;
   width: 250px;
   height: 45px;
-  font-size: 16px;
   font-weight: bold;
-  letter-spacing: 1em;
+  letter-spacing: 0.4em;
 }
 
 #detailedSearchForm button:hover {
@@ -40,10 +41,4 @@
 }
 #detailedSearchForm button:active {
   background-color: #a98274;
-}
-
-#detailedSearchForm .container {
-  display: flex;
-  justify-content: space-between;
-  width: 350px;
 }

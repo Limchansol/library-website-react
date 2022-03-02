@@ -1,24 +1,27 @@
-.notice-list-page {
+.page-title {
   text-align: center;
   margin: 50px;
 }
 
 .list-title {
   display: flex;
-  width: 700px;
+  align-items: center;
   margin: 0 auto;
+  width: 700px;
   font-weight: bold;
   border: 3px solid #dfdfdf;
 }
 
 .notice-list {
   margin: 10px auto;
+  padding: 10px 0;
   width: 700px;
   border: 3px solid #dfdfdf;
 }
 
 .notice-item {
   display: flex;
+  align-items: center;
   width: 694px;
 }
 
@@ -26,9 +29,9 @@
 .title,
 .writer {
   display: inline-block;
-  height: 30px;
+  height: 40px;
   line-height: 30px;
-  padding: 0 3px;
+  padding: 5px 10px;
 }
 
 .number {
@@ -38,8 +41,8 @@
 }
 
 .title {
-  border-right: 2px solid #dfdfdf;
   flex-basis: 70%;
+  border-right: 2px solid #dfdfdf;
 }
 
 .writer {

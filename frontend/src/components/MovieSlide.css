@@ -34,7 +34,6 @@
 } */
 
 .movie-container {
-  border: 1px solid orange;
   transition: transform 0.5s;
 }
 
@@ -54,6 +53,7 @@
 .movie.end {
   margin: 0 auto;
   height: 65px;
+  background-color: burlywood;
 }
 
 .movie.current {

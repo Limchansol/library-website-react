@@ -15,38 +15,8 @@ function NoticeListPage() {
   }, []);
 
   return (
-    <>
-      <h1 className={style["notice-list-page"]}>공지사항</h1>
-      {/* <table>
-        <thead>
-          <tr>
-            <th className={style["number"]}>번호</th>
-            <th className={style["title"]}>제목</th>
-            <th className={style["writer"]}>작성자</th>
-          </tr>
-        </thead>
-        <tbody className={style["notice-list"]}>
-          {noticeList
-            ?.slice()
-            ?.reverse()
-            ?.map((notice) => {
-              return (
-                // <Link to={notice.id} key={notice.id} state={{ notice: notice }}>
-                <tr
-                  className={style["notice-item"]}
-                  id={notice.id}
-                  onClick={moveToNoticeItem}
-                  key={notice.id}
-                >
-                  <td className={style["number"]}>{notice.id}</td>
-                  <td className={style["title"]}>{notice.title}</td>
-                  <td className={style["writer"]}>{notice.writer}</td>
-                </tr>
-                // </Link>
-              );
-            })}
-        </tbody>
-      </table> */}
+    <div id="notice-list-page">
+      <h1 className={style["page-title"]}>공지사항</h1>
       <div className={style["list-title"]}>
         <span className={style["number"]}>번호</span>
         <span className={style["title"]}>제목</span>
@@ -68,7 +38,7 @@ function NoticeListPage() {
             );
           })}
       </div>
-    </>
+    </div>
   );
 }
 

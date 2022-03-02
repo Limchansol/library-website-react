@@ -6,7 +6,7 @@ function ServiceHoursPage() {
       <h1 id={style.title}>도서관 이용 안내</h1>
       <div id={style.contents}>
         <div className={`${style.serviceUsers} ${style.container}`}>
-          <h3>이용 대상</h3>
+          <h2>이용 대상</h2>
           <ul>
             <li>자료 열람을 원하는 누구나 이용 가능합니다.</li>
             <li>
@@ -16,7 +16,7 @@ function ServiceHoursPage() {
           </ul>
         </div>
         <div className={`${style.serviceHours} ${style.container}`}>
-          <h3>이용 시간</h3>
+          <h2>이용 시간</h2>
           <p>
             이용 시간은 조금씩 변동될 수 있으며, <br /> 문의 시 협의 하에 이용
             시간 일시적으로 변동 가능합니다.
@@ -44,7 +44,7 @@ function ServiceHoursPage() {
           </table>
         </div>
         <div className={`${style.closedDay} ${style.container}`}>
-          <h3>휴관일</h3>
+          <h2>휴관일</h2>
           <ul>
             <li>매주 월요일과 일요일</li>
             <li>법정 공휴일</li>

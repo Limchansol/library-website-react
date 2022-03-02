@@ -81,51 +81,49 @@ function SearchDetailPage() {
           ㄴ인 책을 보여줍니다.
         </p>
       </div>
-      <div id="detailedSearchForm">
-        <form onSubmit={detailedSearch}>
-          <div className="container">
-            <label htmlFor="title">도서명: </label>
-            <input
-              type="text"
-              id="title"
-              onChange={handleDetailedSearchValue}
-              value={detailedSearchValue.title}
-            />
-          </div>
-          <br />
-          <div className="container">
-            <label htmlFor="writer">저자: </label>
-            <input
-              type="text"
-              id="writer"
-              onChange={handleDetailedSearchValue}
-              value={detailedSearchValue.writer}
-            />
-          </div>
-          <br />
-          <div className="container">
-            <label htmlFor="isbn">ISBN: </label>
-            <input
-              type="text"
-              id="isbn"
-              onChange={handleDetailedSearchValue}
-              value={detailedSearchValue.isbn}
-            />
-          </div>
-          <br />
-          <div className="container">
-            <label htmlFor="publisher">출판사: </label>
-            <input
-              type="text"
-              id="publisher"
-              onChange={handleDetailedSearchValue}
-              value={detailedSearchValue.publisher}
-            />
-          </div>
-          <br />
-          <button id="searchButton">검색하기</button>
-        </form>
-      </div>
+      <form id="detailedSearchForm" onSubmit={detailedSearch}>
+        <div className="container">
+          <label htmlFor="title">도서명: </label>
+          <input
+            type="text"
+            id="title"
+            onChange={handleDetailedSearchValue}
+            value={detailedSearchValue.title}
+          />
+        </div>
+        <br />
+        <div className="container">
+          <label htmlFor="writer">저자: </label>
+          <input
+            type="text"
+            id="writer"
+            onChange={handleDetailedSearchValue}
+            value={detailedSearchValue.writer}
+          />
+        </div>
+        <br />
+        <div className="container">
+          <label htmlFor="isbn">ISBN: </label>
+          <input
+            type="text"
+            id="isbn"
+            onChange={handleDetailedSearchValue}
+            value={detailedSearchValue.isbn}
+          />
+        </div>
+        <br />
+        <div className="container">
+          <label htmlFor="publisher">출판사: </label>
+          <input
+            type="text"
+            id="publisher"
+            onChange={handleDetailedSearchValue}
+            value={detailedSearchValue.publisher}
+          />
+        </div>
+        <br />
+        <button id="searchButton">검색하기</button>
+      </form>
       <div className="show-books">
         {detailedBooks.length !== 0 &&
           detailedBooks.map((book, i) => {

@@ -12,7 +12,7 @@ function LocalProgramPage() {
     localProgram === "oneDayClass" ? "is-active" : "";
 
   return (
-    <div id="local-programs">
+    <div id={style["local-programs"]}>
       <div className={style.titles}>
         <ul>
           <li className={`${style.title} ${style[oneDayClassTitleClass]}`}>

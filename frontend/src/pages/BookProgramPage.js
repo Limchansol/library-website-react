@@ -13,7 +13,7 @@ function BookProgramPage() {
   const bookStartTitleClass = bookProgram === "bookStart" ? "is-active" : "";
 
   return (
-    <div id="book-programs">
+    <div id={style["book-programs"]}>
       <div className={style.titles}>
         <ul>
           <li

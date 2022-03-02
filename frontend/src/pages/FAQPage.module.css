@@ -8,6 +8,7 @@
   margin-bottom: 50px;
 }
 .FAQSearchForm input {
+  padding: 10px;
   width: 550px;
   height: 50px;
 }

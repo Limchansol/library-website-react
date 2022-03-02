@@ -18,12 +18,20 @@
 
 * {
   box-sizing: border-box;
+  font-family: SeoulHangang, "맑은 고딕", "malgun gothic";
+}
+
+*:not(h1, h2, h3, h4, h5, h6) {
+  font-size: 18px;
 }
 
 body {
   margin: 0;
   padding: 0;
-  font-family: SeoulHangang, "맑은 고딕", "malgun gothic";
+}
+
+table {
+  border-collapse: collapse;
 }
 
 a {
@@ -48,6 +56,7 @@ button {
   border-radius: 5px;
   background-color: #a98274;
   font-family: SeoulHangang, "맑은 고딕", "malgun gothic";
+  font-size: 18px;
   color: white;
   cursor: pointer;
 }

@@ -18,7 +18,7 @@
 #titleBox input {
   width: 320px;
   height: 50px;
-  font-size: 15px;
+  font-size: 20px;
 }
 
 #inquirySort {
@@ -33,7 +33,6 @@
 
 #inquirySort label {
   margin-right: 25px;
-  font-size: 18px;
 }
 
 #inquirySort label::after {
@@ -53,7 +52,6 @@
 #inquiryForm textarea {
   padding: 10px;
   width: 750px;
-  font-size: 15px;
   border: 3px solid #dfdfdf;
   border-radius: 5px;
 }
@@ -63,7 +61,6 @@
   display: block;
   width: 200px;
   height: 50px;
-  font-size: 16px;
   font-weight: bold;
   letter-spacing: 0.4em;
 }

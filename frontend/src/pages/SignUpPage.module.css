@@ -14,6 +14,10 @@ fieldset {
   width: 380px;
 }
 
+#signup-form input {
+  font-size: 16px;
+}
+
 #signup-form button {
   border: none;
   border-radius: 5px;
@@ -30,7 +34,6 @@ fieldset {
 
 .info label {
   display: block;
-  font-size: 16px;
 }
 .info .user-info {
   display: inline-block;
@@ -72,7 +75,6 @@ fieldset {
   margin: 5px auto;
   width: 380px;
   height: 50px;
-  font-size: 16px;
   font-weight: bold;
   letter-spacing: 0.4em;
 }

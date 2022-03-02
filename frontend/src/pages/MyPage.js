@@ -54,38 +54,41 @@ function MyPage() {
             <div id={style.rentalBooks}>
               <h2>대여 도서</h2>
               <table>
-                <tr>
-                  <th>대여 날짜</th>
-                  <th>책 제목</th>
-                  <th>반납 기한</th>
-                  <th>대여 상태</th>
-                  <th>연장하기</th>
-                </tr>
-                {userData.borrowedBooks?.map?.((e) => {
-                  const returnDay = new Date(
-                    e.loanStartYYYY,
-                    e.loanStartMM - 1,
-                    e.loanStartDD + 15
-                  );
-                  const now = new Date();
-                  return (
-                    <tr>
-                      <td>
-                        {e.loanStartYYYY}-{e.loanStartMM}-{e.loanStartDD}
-                      </td>
-                      <td>{e.title}</td>
-                      <td>
-                        {returnDay.getFullYear()}-{returnDay.getMonth() + 1}-
-                        {returnDay.getDate() - 1}
-                      </td>
-                      <td>{returnDay - now > 0 ? "정상 대여중" : "연체"}</td>
-                      <td>
-                        <button>연장하기</button>
-                      </td>
-                    </tr>
-                  );
-                })}
-                <tr></tr>
+                <thead>
+                  <tr>
+                    <th>대여 날짜</th>
+                    <th>책 제목</th>
+                    <th>반납 기한</th>
+                    <th>대여 상태</th>
+                    <th>연장하기</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {userData.borrowedBooks?.map?.((e) => {
+                    const returnDay = new Date(
+                      e.loanStartYYYY,
+                      e.loanStartMM - 1,
+                      e.loanStartDD + 15
+                    );
+                    const now = new Date();
+                    return (
+                      <tr>
+                        <td>
+                          {e.loanStartYYYY}-{e.loanStartMM}-{e.loanStartDD}
+                        </td>
+                        <td>{e.title}</td>
+                        <td>
+                          {returnDay.getFullYear()}-{returnDay.getMonth() + 1}-
+                          {returnDay.getDate() - 1}
+                        </td>
+                        <td>{returnDay - now > 0 ? "정상 대여중" : "연체"}</td>
+                        <td>
+                          <button>연장하기</button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
               </table>
             </div>
             <div id={style.interestingBooks}>
