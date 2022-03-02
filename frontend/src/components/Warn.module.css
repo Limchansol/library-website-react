@@ -1,0 +1,24 @@
+#warning {
+  margin: 50px auto;
+  width: 800px;
+  text-align: center;
+}
+
+#warning div {
+  font-size: 24px;
+}
+
+button.to-login {
+  display: inline-block;
+  margin: 50px;
+  width: 200px;
+  height: 45px;
+  font-weight: bold;
+  letter-spacing: 0.4em;
+}
+button.to-login:hover {
+  background-color: #8d6e63;
+}
+button.to-login:active {
+  background-color: #a98274;
+}
