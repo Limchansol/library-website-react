@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import Book from "../components/Book";
 import LoadMoreBtn from "../components/LoadMoreBtn";
-import "./SearchDetailPage.css";
+import style from "./SearchDetailPage.module.css";
 
 function SearchDetailPage() {
   const [detailedSearchValue, setDetailedSearchValue] = useState({
@@ -71,7 +71,7 @@ function SearchDetailPage() {
 
   return (
     <>
-      <div id="detailedSearchtext">
+      <div id={style.detailedSearchText}>
         <h1>상세검색이란?</h1>
         <p>
           한 번에 여러 개의 요소를 검색할 수 있고, 그것에 <strong>모두 </strong>
@@ -81,8 +81,8 @@ function SearchDetailPage() {
           ㄴ인 책을 보여줍니다.
         </p>
       </div>
-      <form id="detailedSearchForm" onSubmit={detailedSearch}>
-        <div className="container">
+      <form id={style.detailedSearchForm} onSubmit={detailedSearch}>
+        <div className={style.container}>
           <label htmlFor="title">도서명: </label>
           <input
             type="text"
@@ -92,7 +92,7 @@ function SearchDetailPage() {
           />
         </div>
         <br />
-        <div className="container">
+        <div className={style.container}>
           <label htmlFor="writer">저자: </label>
           <input
             type="text"
@@ -102,7 +102,7 @@ function SearchDetailPage() {
           />
         </div>
         <br />
-        <div className="container">
+        <div className={style.container}>
           <label htmlFor="isbn">ISBN: </label>
           <input
             type="text"
@@ -112,7 +112,7 @@ function SearchDetailPage() {
           />
         </div>
         <br />
-        <div className="container">
+        <div className={style.container}>
           <label htmlFor="publisher">출판사: </label>
           <input
             type="text"
@@ -122,9 +122,9 @@ function SearchDetailPage() {
           />
         </div>
         <br />
-        <button id="searchButton">검색하기</button>
+        <button id={style.searchButton}>검색하기</button>
       </form>
-      <div className="show-books">
+      <div className={style.showBooks}>
         {detailedBooks.length !== 0 &&
           detailedBooks.map((book, i) => {
             return <Book book={book} key={i} />;

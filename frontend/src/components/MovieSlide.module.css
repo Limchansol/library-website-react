@@ -2,7 +2,7 @@
   margin-bottom: 100px;
 }
 
-.slide-screen {
+.slideScreen {
   margin: 10px auto;
   width: 770px;
   height: 400px;
@@ -14,7 +14,7 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-.slide-screen::-webkit-scrollbar {
+.slideScreen::-webkit-scrollbar {
   display: none;
 }
 
@@ -26,7 +26,6 @@
   position: absolute;
   top: 0;
 }
-
 .screen-helper1 {
   left: calc(50% - 400px);
   border-radius: 50% 0 0 50%;
@@ -38,7 +37,7 @@
   background-color: white;
 } */
 
-.movie-container {
+.movieContainer {
   transition: transform 0.5s;
 }
 
@@ -66,7 +65,7 @@
   opacity: 1;
 }
 
-.movie-content {
+.movieContent {
   width: 450px;
 }
 
@@ -79,14 +78,14 @@
   background-color: #be9c91;
 }
 
-.previous-btn {
+.previousBtn {
   position: absolute;
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.next-btn {
+.nextBtn {
   position: absolute;
   bottom: 20px;
   right: 50%;

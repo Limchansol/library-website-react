@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import logoImg from "../images/main_logo.png";
-import "./Search.css";
+import style from "./Search.module.css";
 
 function Search() {
   const [category, setCategory] = useState("all");
@@ -15,14 +15,17 @@ function Search() {
   };
 
   return (
-    <div id="header-middle">
-      <h1 className="logo">
+    <div id={style.headerMiddle}>
+      <h1 className={style.logo}>
         <Link to="/">
           <img src={logoImg} alt="북악하늘_작은도서관" height="80px" />
         </Link>
       </h1>
-      <form className="search-form">
-        <select className="search-criteria" onChange={handleCategoryChange}>
+      <form className={style.searchForm}>
+        <select
+          className={style.searchCriteria}
+          onChange={handleCategoryChange}
+        >
           <option value="all">통합</option>
           <option value="title">제목</option>
           <option value="writer">지은이</option>
@@ -33,7 +36,7 @@ function Search() {
           type="search"
           value={keyword}
           onChange={handleKeywordChange}
-          className="search-input"
+          className={style.searchInput}
           placeholder="원하는 도서를 검색하세요."
           required
           autoComplete="off"
@@ -42,7 +45,7 @@ function Search() {
           to={`/searched?${category}=${keyword}`}
           state={{ keyword: keyword, category: category }}
         >
-          <button className="search-btn">검색</button>
+          <button className={style.searchBtn}>검색</button>
         </Link>
       </form>
     </div>

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import "./Calender.css";
 import { useRecoilState } from "recoil";
 import { loginUserInfo } from "../Atoms/LoginAtom.js";
 import axios from "axios";
+import style from "./Calender.module.css";
 
 function Calender() {
   const [today, setToday] = useState([2022, 2, 1]);
@@ -81,7 +81,7 @@ function Calender() {
   const days = ["일", "월", "화", "수", "목", "금", "토"];
   return (
     <div>
-      <h2 className="schedule-title">도서관 일정</h2>
+      <h2 className={style.scheduleTitle}>도서관 일정</h2>
       {isAdmin ? (
         <form onSubmit={sendData}>
           <span>수정할 일정 종류 선택</span>
@@ -117,7 +117,7 @@ function Calender() {
       ) : (
         <></>
       )}
-      <table className="schedule-calender">
+      <table className={style.scheduleCalender}>
         <caption>
           red: 휴무일
           <br /> orange: 영화 상영일
@@ -154,11 +154,11 @@ function Calender() {
                         id={ele ? "today" : ""}
                         className={
                           specialDay.orangeDay.includes(ind + 1)
-                            ? "orangeDay"
+                            ? style.orangeDay
                             : specialDay.redDay.includes(ind + 1)
-                            ? "redDay"
+                            ? style.redDay
                             : specialDay.greenDay.includes(ind + 1)
-                            ? "greenDay"
+                            ? style.greenDay
                             : undefined
                         }
                         key={ind} //날짜들이 실제 들어있는 칸

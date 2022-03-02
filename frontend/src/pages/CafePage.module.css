@@ -4,7 +4,7 @@
   margin-top: 30px;
   width: 1000px;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 132px 500px 500px;
+  grid-template-rows: 132px 550px 500px;
   align-items: start;
   justify-items: stretch;
   line-height: 250%;
@@ -24,7 +24,7 @@
 
 #cafePage > div:not(#title) {
   border: 1px black solid;
-  height: 450px;
+  height: 480px;
 }
 
 #coffee {

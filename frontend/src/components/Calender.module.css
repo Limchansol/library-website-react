@@ -2,11 +2,11 @@
   width: 600px;
 }
 
-.schedule-title {
+.scheduleTitle {
   text-align: center;
 }
 
-.schedule-calender {
+.scheduleCalender {
   border: solid 1px black;
   border-collapse: collapse;
   text-align: center;
@@ -15,11 +15,11 @@
   margin: auto;
 }
 
-.schedule-calender caption {
+.scheduleCalender caption {
   font-size: 15px;
 }
 
-.schedule-calender td {
+.scheduleCalender td {
   border: solid 1px black;
   text-align: left;
   vertical-align: top;

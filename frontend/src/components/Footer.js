@@ -1,11 +1,11 @@
-import "./Footer.css";
+import style from "./Footer.module.css";
 
 function Footer() {
   return (
     <footer>
       <h4>푸터</h4>
       <div>
-        <div className="connect-number">
+        <div className={style.connectNumber}>
           <ul>
             <li>주소: 서울시 성북구</li>
             <li>연락처: 070 1234 1234</li>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import NavItem from "./NavItem";
-import "./Nav.css";
+import style from "./Nav.module.css";
 
 function Nav() {
   const [subNavBg, setSubNavBg] = useState(false);
@@ -9,12 +9,14 @@ function Nav() {
     setSubNavBg(hoverBool);
   };
 
-  const subNavBgClass = subNavBg ? "sub-nav-bg is-active" : "sub-nav-bg";
-
   return (
-    <nav id="header-bottom">
-      <ul className="nav">
-        <div className={subNavBgClass}></div>
+    <nav id={style.headerBottom}>
+      <ul className={style.nav}>
+        <div
+          className={
+            subNavBg ? `${style.subNavBg} ${style.isActive}` : style.subNavBg
+          }
+        ></div>
         <NavItem path="/introduction" handleSubNavBg={handelSubNavBg}>
           북악하늘 소개
         </NavItem>

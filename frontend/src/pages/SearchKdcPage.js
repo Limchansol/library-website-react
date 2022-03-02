@@ -12,7 +12,7 @@ import 역사 from "../images/역사.png";
 import 예술 from "../images/예술.png";
 import 자연과학 from "../images/자연과학.png";
 import 종교 from "../images/종교.png";
-import "./SearchKdcPage.css";
+import style from "./SearchKdcPage.module.css";
 
 function SearchKdcPage() {
   const subject = [
@@ -86,7 +86,7 @@ function SearchKdcPage() {
 
   return (
     <>
-      <div id="titleText">
+      <div id={style.titleText}>
         <h1>주제별 검색</h1>
         <p>
           당신이 흥미를 느끼는 주제의 더 많은 책을 검색하세요!
@@ -94,17 +94,17 @@ function SearchKdcPage() {
         </p>
       </div>
 
-      <div id="subjectButton">
+      <div id={style.subjectButton}>
         {subject.map((e, i) => {
           return (
-            <div id={e} className="btn" onClick={handleKdcChange} key={i}>
+            <div id={e} className={style.btn} onClick={handleKdcChange} key={i}>
               <img src={subjectImg[i]} height="100px" width="100px" />
-              <span className="btnName">{e}</span>
+              <span className={style.btnName}>{e}</span>
             </div>
           );
         })}
       </div>
-      <div className="searched-books">
+      <div className={style.searchedBooks}>
         {kdcBooks.length !== 0 &&
           kdcBooks.map((book, i) => {
             return <Book book={book} key={i} />;

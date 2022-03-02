@@ -1,7 +1,6 @@
-import Util from './Util';
-import Search from './Search';
-import Nav from './Nav';
-import './Header.css';
+import Util from "./Util";
+import Search from "./Search";
+import Nav from "./Nav";
 
 function Header() {
   return (
@@ -10,7 +9,7 @@ function Header() {
       <Search />
       <Nav />
     </header>
-  )
+  );
 }
 
 export default Header;

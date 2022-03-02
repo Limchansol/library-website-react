@@ -11,27 +11,6 @@ function SearchedPage() {
   const [cursor, setCursor] = useState();
   const LIMIT = 7;
 
-  // 서버에서 find 처리하면 이 함수는 필요없을듯
-  function filterByKeyword(category, keyword, items) {
-    const lowered = keyword.toLowerCase();
-    let filteredItems;
-    if (category === "all") {
-      filteredItems = items.filter(
-        (item) =>
-          item.title.toLowerCase().includes(lowered) ||
-          item.writer.toLowerCase().includes(lowered) ||
-          item.publisher.toLowerCase().includes(lowered) ||
-          item.ISBN.toLowerCase().includes(lowered) ||
-          item.keyword.toLowerCase().includes(lowered)
-      );
-    } else {
-      filteredItems = items.filter((item) =>
-        item[category].toLowerCase().includes(lowered)
-      );
-    }
-    return filteredItems;
-  }
-
   const fetchData = async (cursor) => {
     const booksRes = await axios.get(
       `api/books?${category}=${encodeURIComponent(

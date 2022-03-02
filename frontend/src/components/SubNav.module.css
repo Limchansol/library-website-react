@@ -1,4 +1,4 @@
-.sub-nav {
+.subNav {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,15 +11,15 @@
   visibility: hidden;
 }
 
-.sub-nav-item {
+.subNavItem {
   margin: 0 15px;
   float: left;
   color: white;
   cursor: pointer;
 }
-.sub-nav-item:hover {
+.subNavItem:hover {
   color: #3e2723;
 }
-.sub-nav.is-active {
+.subNav.isActive {
   visibility: visible;
 }

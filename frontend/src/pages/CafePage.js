@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import "./CafePage.css";
+import style from "./CafePage.module.css";
 
 function CafePage() {
   const [cafeMenu, setCafeMenu] = useState([]);
@@ -12,10 +12,10 @@ function CafePage() {
     fetchData();
   }, []);
   return (
-    <div id="cafePage">
-      <div id="title">CAFE MENU</div>
-      <div id="coffee">
-        <div className="menuHead">coffee</div>
+    <div id={style.cafePage}>
+      <div id={style.title}>CAFE MENU</div>
+      <div id={style.coffee}>
+        <div className={style.menuHead}>coffee</div>
         <ul>
           {cafeMenu.map((e) => {
             if (e.type !== "coffee") return undefined;
@@ -27,8 +27,8 @@ function CafePage() {
           })}
         </ul>
       </div>
-      <div id="tea">
-        <div className="menuHead">tea</div>
+      <div id={style.tea}>
+        <div className={style.menuHead}>tea</div>
         <ul>
           {cafeMenu.map((e) => {
             if (e.type !== "tea") return undefined;
@@ -40,8 +40,8 @@ function CafePage() {
           })}
         </ul>
       </div>
-      <div id="beverage">
-        <div className="menuHead">beverage</div>
+      <div id={style.beverage}>
+        <div className={style.menuHead}>beverage</div>
         <ul>
           {cafeMenu.map((e) => {
             if (e.type !== "beverage") return undefined;
@@ -53,8 +53,8 @@ function CafePage() {
           })}
         </ul>
       </div>
-      <div id="snack">
-        <div className="menuHead">snack</div>
+      <div id={style.snack}>
+        <div className={style.menuHead}>snack</div>
         <ul>
           {cafeMenu.map((e) => {
             if (e.type !== "snack") return undefined;

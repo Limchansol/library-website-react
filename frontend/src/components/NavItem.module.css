@@ -1,4 +1,4 @@
-.nav-item {
+.navItem {
   margin: 0;
   padding: 15px 30px;
   height: 50px;
@@ -8,6 +8,6 @@
   cursor: default;
   font-size: 18px;
 }
-.nav-item:hover {
+.navItem:hover {
   border-bottom: 5px solid #795548;
 }
