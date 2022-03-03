@@ -9,6 +9,7 @@ const FAQRouter = require("./routers/FAQRouter.js");
 const noticeRouter = require("./routers/noticeRouter.js");
 const inquiryRouter = require("./routers/inquiryRouter.js");
 const calenderRouter = require("./routers/calenderRouter.js");
+const bookOfTheMonthRouter = require("./routers/bookOfTheMonthRouter.js");
 
 dotenv.config();
 const app = express();
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
   res.send("Server is ready");
 });
 
+app.use("/api/bookOfTheMonth", bookOfTheMonthRouter);
 app.use("/api/books", bookRouter);
 app.use("/api/users", userRouter);
 app.use("/api/cafeMenu", cafeMenuRouter);

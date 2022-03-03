@@ -1,0 +1,17 @@
+#BookOfTheMonth {
+  width: 600px;
+  text-overflow: hidden;
+}
+
+#BookOfTheMonth img {
+  float: left;
+}
+
+p:last-child {
+  overflow: hidden;
+  display: -webkit-box;
+  white-space: pre-line; /* html에서 줄바꿈 \n을 인식하지 못하는 것을 인식하도록 만들어 줌 */
+  -webkit-line-clamp: 8; /* 최대 줄 길이 설정*/
+  -webkit-box-orient: vertical; /* 어떤 식으로 정렬될 지 설정*/
+  text-overflow: ellipsis;
+}
