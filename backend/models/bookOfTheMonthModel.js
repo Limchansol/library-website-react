@@ -6,6 +6,7 @@ const bookOfTheMonthSchema = new mongoose.Schema(
     title: { type: String },
     writer: { type: String },
     paragraph: { type: String },
+    bookImg: { data: Buffer, contentType: String },
   },
   {
     timestamps: true,

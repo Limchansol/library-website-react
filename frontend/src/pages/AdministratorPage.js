@@ -1,7 +1,8 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { loginUserInfo } from "../Atoms/LoginAtom";
+import BookOfTheMonth from "../components/BookOfTheMonth";
 import style from "./AdministratorPage.module.css";
 
 function AdministratorPage() {
@@ -11,18 +12,18 @@ function AdministratorPage() {
   const [inquiryAnswer, setInquiryAnswer] = useState({
     content: [],
   });
-  const [bookOfTheMonthRecord, setBookOfTheMonthRecord] = useState({
-    month: 0,
-    title: "",
-    writer: "",
-    paragraph: "",
+  const [bomSearch, setBomSearch] = useState({
+    searchTargetMonth: 1,
+    isSearched: false,
   });
   const [newBookOfTheMonth, setNewBookOfTheMonth] = useState({
     month: 0,
     title: "",
     writer: "",
     paragraph: "",
+    bookImg: null,
   });
+  const fileRef = useRef();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,37 +53,106 @@ function AdministratorPage() {
   }
 
   function handlebookOfTheMonth(e) {
-    const { value, name } = e.target;
+    const { value, name, files } = e.target;
+    if (name === "bookImg") URL.revokeObjectURL(newBookOfTheMonth.bookImg);
     setNewBookOfTheMonth((prev) => ({
       ...prev,
-      [name]: name === "month" ? Number(value) : value,
+      [name]:
+        name === "month"
+          ? Number(value)
+          : name === "bookImg"
+          ? files[0]
+          : value,
+    })); //만약 input타입이 파일이면, e.target.files에서 리턴하는 유사배열(파일들)로 처리를 해야 한다! 주의할 것.
+  }
+
+  function imgClear(e) {
+    const inputNode = fileRef.current;
+    if (!inputNode) return;
+    inputNode.value = "";
+    setNewBookOfTheMonth((prev) => ({
+      ...prev,
+      bookImg: null,
+    }));
+  }
+
+  function handleSelect(e) {
+    setBomSearch((prev) => ({
+      ...prev,
+      searchTargetMonth: e.target.value,
+    }));
+  }
+
+  function handleSearchBOM(e) {
+    setBomSearch((prev) => ({
+      ...prev,
+      isSearched: true,
+    }));
+  }
+
+  function isSearchedToFalse(e) {
+    setBomSearch((prev) => ({
+      ...prev,
+      isSearched: false,
     }));
   }
 
   async function handleInqSubmit(e) {
     e.preventDefault();
     const index = e.target.parentNode.dataset.ind;
-    console.log(inquiry, index);
     await axios.put("/api/inquiries/answerInquiry", {
       _id: inquiry[index]._id,
       answer: inquiryAnswer.content[index],
     });
+    alert("문의에 대한 답이 등록되었습니다.");
+    window.location.reload();
   }
 
   async function handleBOMSubmit(e) {
     e.preventDefault();
-    await axios.put(`/api/bookOfTheMonth/update/${newBookOfTheMonth.month}`, {
-      targetBook: newBookOfTheMonth,
-    });
+    const BOM = new FormData();
+    BOM.append("bookImg", newBookOfTheMonth.bookImg);
+    BOM.append("month", newBookOfTheMonth.month);
+    BOM.append("title", newBookOfTheMonth.title);
+    BOM.append("writer", newBookOfTheMonth.writer);
+    BOM.append("paragraph", newBookOfTheMonth.paragraph);
+    await axios.put(
+      `/api/bookOfTheMonth/update/${newBookOfTheMonth.month}`,
+      BOM,
+      { headers: { "Content-Type": "multipart/form-data" } }
+    );
+    alert("이달의 책이 등록되었습니다.");
+    window.location.reload();
   }
 
   return (
     <>
       <div id={style.bookOfTheMonthUpdate}>
-        <h2 className={style.title}>이달의 책 업데이트</h2>
-        <h3>저장된 이달의 책 내역(모든 내역은 이번 년도 기준입니다)</h3>
-        {/* 추후에 db에 저장된 이달의 책 내역 달 입력하면 볼 수 있도록 코드 추가 */}
+        <div id={style.bomSearch}>
+          <h2 className={style.title}>이달의 책 업데이트</h2>
+          <h3>저장된 이달의 책 내역(모든 내역은 이번 년도 기준입니다)</h3>
+          <select
+            name="bookOfTheMonthList"
+            onChange={handleSelect}
+            onClick={isSearchedToFalse}
+          >
+            {Array(12)
+              .fill()
+              .map((e, i) => {
+                return (
+                  <option value={`${i + 1}`} key={i}>
+                    {i + 1} 월
+                  </option>
+                );
+              })}
+          </select>
+          <button onClick={handleSearchBOM}>조회</button>
+          {bomSearch.isSearched && (
+            <BookOfTheMonth month={Number(bomSearch.searchTargetMonth)} />
+          )}
+        </div>
         <form id={style.bookOfTheMonthForm} onSubmit={handleBOMSubmit}>
+          <h3>이달의 책 수정</h3>
           <label htmlFor="month">달</label>
           <input
             type="text"
@@ -92,6 +162,29 @@ function AdministratorPage() {
             onChange={handlebookOfTheMonth}
             placeholder="수정하고자 하는 달을 적어주세요."
           />
+          <label htmlFor="bookImg">추가할 이미지</label>
+          {newBookOfTheMonth.bookImg && (
+            <img
+              src={URL.createObjectURL(newBookOfTheMonth.bookImg)}
+              alt="이미지 미리보기"
+              style={{
+                maxHeight: "250px",
+                maxWidth: "200px",
+                width: "auto",
+                height: "auto",
+              }}
+            />
+          )}
+          <input
+            type="file"
+            name="bookImg"
+            id="bookImg"
+            accept="image/*"
+            onChange={handlebookOfTheMonth}
+            ref={fileRef}
+          />
+          {newBookOfTheMonth.bookImg && <button onClick={imgClear}>X</button>}
+          {/* 이미지 파일은 비동기적으로 처리해야 한다. 따라서 value를 설정해주지 않았다. */}
           <label htmlFor="title">제목</label>
           <input
             type="text"
@@ -113,7 +206,7 @@ function AdministratorPage() {
           <textarea
             name="paragraph"
             id="paragraph"
-            cols="80"
+            cols="105"
             rows="30"
             value={newBookOfTheMonth.paragraph}
             onChange={handlebookOfTheMonth}

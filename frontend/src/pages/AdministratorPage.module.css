@@ -1,3 +1,42 @@
+#bookOfTheMonthUpdate {
+  width: 900px;
+  margin: auto;
+}
+
+#bookOfTheMonthUpdate h3 {
+  text-align: center;
+  margin-top: 50px;
+}
+
+#bomSearch select {
+  display: block;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+#bomSearch button {
+  display: block;
+  margin: auto;
+}
+
+#bookOfTheMonthForm input {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#bookOfTheMonthForm label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#bookOfTheMonthForm button {
+  display: block;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 #inquiryCheck {
   width: 900px;
   margin: auto;
