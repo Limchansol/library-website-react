@@ -1,0 +1,22 @@
+#bookRecommendation {
+  margin: 50px auto;
+  width: 70%;
+  line-height: 150%;
+}
+
+.mainTitle {
+  margin: 50px;
+  text-align: center;
+}
+
+.mainContents::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+
+.bookImg {
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}

@@ -116,6 +116,15 @@ function InquiryPage() {
               <input
                 type="radio"
                 name="sort"
+                id="bookApply"
+                value="bookApply"
+                checked={inquiryInfo.sort === "bookApply"}
+                onChange={handleInquiryInfo}
+              />
+              <label htmlFor="bookApply">도서 신청</label>
+              <input
+                type="radio"
+                name="sort"
                 id="etc"
                 value="etc"
                 checked={inquiryInfo.sort === "etc"}

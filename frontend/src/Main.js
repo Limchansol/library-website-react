@@ -16,6 +16,7 @@ import CheckOutAndReturnPage from "./pages/CheckOutAndReturnPage";
 import CafePage from "./pages/CafePage";
 import SearchDetailPage from "./pages/SearchDetailPage";
 import SearchKdcPage from "./pages/SearchKdcPage";
+import BookOfThisMonthPage from "./pages/BookOfThisMonthPage.js";
 import BookApplicationPage from "./pages/BookApplicationPage";
 import MovieProgramPage from "./pages/MovieProgramPage";
 import BookProgramPage from "./pages/BookProgramPage";
@@ -63,7 +64,10 @@ function Main() {
           <Route path="/materials">
             <Route path="search-detail" element={<SearchDetailPage />} />
             <Route path="search-kdc" element={<SearchKdcPage />} />
-            <Route path="book-application" element={<BookApplicationPage />} />
+            <Route
+              path="book-recommendation"
+              element={<BookOfThisMonthPage />}
+            />
           </Route>
           <Route path="/programs">
             <Route path="movie-program" element={<MovieProgramPage />} />

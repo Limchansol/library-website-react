@@ -11,7 +11,7 @@ const navItemsData = {
   "도서관 자료": [
     { title: "상세검색", address: "/search-detail" },
     { title: "주제별 검색", address: "/search-kdc" },
-    { title: "희망 도서 신청", address: "/book-application" },
+    { title: "이달의 추천 도서", address: "/book-recommendation" },
   ],
   "도서관 활동": [
     { title: "영화로 세상 읽기", address: "/movie-program" },

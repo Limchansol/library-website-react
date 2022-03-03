@@ -2,9 +2,9 @@ import style from "./BookStudy.module.css";
 
 function BookStudy() {
   return (
-    <>
+    <div id={style.bookStudy}>
       <h1 className={style.title}>북스터디</h1>
-      <div id={style.bookStudy}>
+      <div className={style.mainContents}>
         <p>
           <span>북스터디</span>는 청소년과 성인을 위한{" "}
           <span>북악하늘 작은도서관</span>의 상시 프로그램 중 하나입니다.
@@ -37,7 +37,7 @@ function BookStudy() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

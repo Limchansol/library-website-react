@@ -5,8 +5,9 @@ import Book from "../components/Book";
 import LoadMoreBtn from "../components/LoadMoreBtn";
 
 function SearchedPage() {
-  const category = useLocation().state.category;
-  const keyword = useLocation().state.keyword;
+  // const category = useLocation().state.category;
+  // const keyword = useLocation().state.keyword;
+  const { category, keyword } = useLocation().state;
   const [selectedBooks, setSelectedBooks] = useState([]);
   const [cursor, setCursor] = useState();
   const LIMIT = 7;

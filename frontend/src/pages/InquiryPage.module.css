@@ -33,6 +33,7 @@
 
 #inquirySort label {
   margin-right: 25px;
+  cursor: pointer;
 }
 
 #inquirySort label::after {

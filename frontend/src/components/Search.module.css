@@ -16,7 +16,7 @@
   margin: 0 20px;
   padding: 0 5px;
   width: 600px;
-  height: 60px;
+  height: 55px;
   border: 3px solid #dfdfdf;
   border-radius: 50px;
   background-color: #fff;
@@ -24,7 +24,7 @@
 
 .searchCriteria {
   width: 80px;
-  height: 43px;
+  height: 40px;
   border: none;
   border-radius: 50px 0 0 50px;
   background-color: #efebe9;
@@ -36,14 +36,14 @@
   margin: 0 7px;
   padding: 10px;
   width: 415px;
-  height: 43px;
+  height: 40px;
   border: none;
   background-color: #fff;
 }
 
 .searchBtn {
   width: 80px;
-  height: 43px;
+  height: 40px;
   border: none;
   border-radius: 0 50px 50px 0;
   background-color: #efebe9;

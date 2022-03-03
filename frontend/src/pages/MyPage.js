@@ -93,6 +93,7 @@ function MyPage() {
       console.log("회원탈퇴 오류", error);
     }
   };
+
   return (
     <>
       {loginInfo ? (
@@ -127,26 +128,10 @@ function MyPage() {
                   </button>
                 </div>
               ) : (
-                // 회원정보 수정 화면 (input)
+                // 회원정보 수정 화면 (이름과 아이디는 수정 불가)
                 <div>
-                  <p>
-                    이름:{" "}
-                    <input
-                      type="text"
-                      name="name"
-                      value={changedInfo.name}
-                      onChange={inputUserInfoChange}
-                    />
-                  </p>
-                  <p>
-                    아이디:{" "}
-                    <input
-                      type="text"
-                      name="id"
-                      value={changedInfo.id}
-                      onChange={inputUserInfoChange}
-                    />
-                  </p>
+                  <p>이름: {userData.name}</p>
+                  <p>아이디: {userData.id}</p>
                   <p>
                     휴대전화:{" "}
                     <input
