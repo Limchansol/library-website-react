@@ -21,6 +21,18 @@
   margin: 70px 0px;
 }
 
+#userInfo button {
+  margin-right: 10px;
+  width: 120px;
+  height: 30px;
+  font-size: 16px;
+}
+
+#userInfo input.birthdate {
+  margin-right: 10px;
+  width: 100px;
+}
+
 #rentalBooks table {
   margin: 0 auto;
 }

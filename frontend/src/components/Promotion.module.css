@@ -1,0 +1,64 @@
+#promotionScreen {
+  margin: 20px;
+  width: 300px;
+  height: 300px;
+  position: relative;
+  border: 5px solid #dfdfdf;
+  border-radius: 5px;
+  /* overflow: overlay; */
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+#promotion::-webkit-scrollbar {
+  display: none;
+}
+
+.imgContainer {
+  width: 1740px;
+  text-align: center;
+}
+
+.promotionImg {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+button.previous,
+button.next {
+  position: absolute;
+  bottom: 50%;
+  width: 25px;
+  height: 40px;
+  border: none;
+  opacity: 0.5;
+  background-color: #cfcfcf;
+}
+button.previous:hover,
+button.next:hover {
+  opacity: 0.8;
+}
+button.previous {
+  left: 0;
+}
+button.next {
+  right: 0;
+}
+
+.indexMarkContainer {
+  position: absolute;
+  bottom: 0;
+}
+
+.indexMark {
+  display: inline-block;
+  margin: 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #40241a;
+  opacity: 0.5;
+}
+.indexMark.active {
+  opacity: 1;
+}

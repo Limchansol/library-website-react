@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { loginBool, loginUserInfo } from "../Atoms/LoginAtom.js";
+import { loginUserInfo } from "../Atoms/LoginAtom.js";
 import axios from "axios";
 import Warn from "../components/Warn.js";
 import style from "./MyPage.module.css";
@@ -10,7 +10,10 @@ function MyPage() {
   const [userData, setUserData] = useState({});
   const [interestingBooks, setInterestingBooks] = useState([]);
   const [inquiries, setInquiries] = useState([]);
+  const [changeMode, setChangeMode] = useState(false);
+  const [changedInfo, setChangedInfo] = useState(userData);
   let alreadyFetched = false;
+  console.log(userData);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,6 +23,7 @@ function MyPage() {
           headers: { token: loginInfo.token },
         });
         setUserData(loginRes.data);
+        setChangedInfo(loginRes.data);
         const bookRes = await axios.get("/api/books/searchID", {
           headers: {
             idarray: JSON.stringify(loginRes?.data?.interestingBooks),
@@ -38,6 +42,57 @@ function MyPage() {
     fetchData();
   }, [loginInfo]);
 
+  // 올바른 형식인지 확인하는 함수 따로 필요
+  // 인풋값 동기화
+  const inputUserInfoChange = (e) => {
+    const { name, value } = e.target;
+    setChangedInfo((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // 수정 완료
+  const completetUserInfoChange = async () => {
+    try {
+      await axios.put("/api/users/userUpdate", {
+        token: loginInfo.token,
+        ...changedInfo,
+      });
+      alert("회원정보 수정이 완료되었습니다.");
+    } catch (error) {
+      console.log("마이페이지 정보 수정 에러", error);
+    } finally {
+      setChangeMode(false);
+      window.location.reload();
+    }
+  };
+
+  // 수정 취소
+  const cancelUserInfoChage = () => {
+    const confirmCancel = window.confirm("수정을 취소하시겠습니까?");
+    if (!confirmCancel) return;
+    setChangedInfo(userData);
+    setChangeMode(false);
+  };
+
+  // 회원 탈퇴
+  const secedeMembership = async () => {
+    const confirmSecession = window.confirm("정말 탈퇴하시겠습니까?");
+    if (!confirmSecession) return;
+    let confirmAgain = prompt("사용자 아이디를 정확히 입력해주세요.");
+    while (confirmAgain !== userData.id) {
+      if (!confirmAgain) return;
+      confirmAgain = prompt(
+        "사용자 아이디가 일치하지 않습니다.\n회원정보에 기재된 아이디를 정확히 입력해 주세요."
+      );
+    }
+    try {
+      await axios.delete(`/api/users/secession/${userData._id}`);
+    } catch (error) {
+      console.log("회원탈퇴 오류", error);
+    }
+  };
   return (
     <>
       {loginInfo ? (
@@ -48,13 +103,109 @@ function MyPage() {
           <div id={style.container}>
             <div id={style.userInfo}>
               <h2>회원정보</h2>
-              <p>이름: {userData.name}</p>
-              <p>아이디: {userData.id}</p>
-              <p>휴대전화: {userData.phone}</p>
-              <p>이메일: {userData.email}</p>
-              <p>
-                생년월일: {userData.yyyy}-{userData.mm}-{userData.dd}
-              </p>
+              {!changeMode ? (
+                // 정보수정 X, 일반 화면
+                <div>
+                  <p>이름: {userData.name}</p>
+                  <p>아이디: {userData.id}</p>
+                  <p>휴대전화: {userData.phone}</p>
+                  <p>이메일: {userData.email}</p>
+                  <p>
+                    생년월일: {userData.yyyy}-{userData.mm}-{userData.dd}
+                  </p>
+                  <button
+                    className={style.changeInfoBtn}
+                    onClick={() => setChangeMode(true)}
+                  >
+                    회원정보 수정
+                  </button>
+                  <button
+                    className={style.secessionBtn}
+                    onClick={secedeMembership}
+                  >
+                    회원 탈퇴
+                  </button>
+                </div>
+              ) : (
+                // 회원정보 수정 화면 (input)
+                <div>
+                  <p>
+                    이름:{" "}
+                    <input
+                      type="text"
+                      name="name"
+                      value={changedInfo.name}
+                      onChange={inputUserInfoChange}
+                    />
+                  </p>
+                  <p>
+                    아이디:{" "}
+                    <input
+                      type="text"
+                      name="id"
+                      value={changedInfo.id}
+                      onChange={inputUserInfoChange}
+                    />
+                  </p>
+                  <p>
+                    휴대전화:{" "}
+                    <input
+                      type="text"
+                      name="phone"
+                      value={changedInfo.phone}
+                      onChange={inputUserInfoChange}
+                    />
+                  </p>
+                  <p>
+                    이메일:{" "}
+                    <input
+                      type="text"
+                      name="email"
+                      value={changedInfo.email}
+                      onChange={inputUserInfoChange}
+                    />
+                  </p>
+                  <p>
+                    생년월일:{" "}
+                    <input
+                      type="text"
+                      name="yyyy"
+                      value={changedInfo.yyyy}
+                      className={style.birthdate}
+                      onChange={inputUserInfoChange}
+                      placeholder="년 (4자리)"
+                    />
+                    <input
+                      type="text"
+                      name="mm"
+                      value={changedInfo.mm}
+                      className={style.birthdate}
+                      onChange={inputUserInfoChange}
+                      placeholder="월 (2자리)"
+                    />
+                    <input
+                      type="text"
+                      name="dd"
+                      value={changedInfo.dd}
+                      className={style.birthdate}
+                      onChange={inputUserInfoChange}
+                      placeholder="일 (2자리)"
+                    />
+                  </p>
+                  <button
+                    className={style.completeBtn}
+                    onClick={completetUserInfoChange}
+                  >
+                    수정 완료
+                  </button>
+                  <button
+                    className={style.cancelBtn}
+                    onClick={cancelUserInfoChage}
+                  >
+                    수정 취소
+                  </button>
+                </div>
+              )}
             </div>
             <div id={style.rentalBooks}>
               <h2>대여 도서</h2>

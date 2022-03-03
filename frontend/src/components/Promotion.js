@@ -1,52 +1,45 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import img1 from "../images/img1.png";
 import img2 from "../images/img2.png";
 import img3 from "../images/img3.png";
 import img4 from "../images/img4.png";
-import "./Promotion.css";
+import style from "./Promotion.module.css";
 
 function Promotion() {
   const imgCnt = 4;
   const [intervalID, setIntervalID] = useState(0);
-  const [index, setIndex] = useState({
-    prevIndex: imgCnt,
-    currIndex: 1,
-    nextIndex: 2,
-  });
+  const [currIndex, setCurrIndex] = useState(1);
+  const $screen = useRef();
+  let real = true;
+
+  const slideStyle = {
+    transform: `translateX(-${290 * currIndex}px)`,
+    transition: real ? "transform 0.5s" : "none",
+  };
 
   const changePromotionImage = () => {
-    setIndex((prev) => {
-      return {
-        ...prev,
-        prevIndex: prev.currIndex,
-        currIndex: prev.nextIndex,
-        nextIndex: prev.nextIndex !== imgCnt ? prev.nextIndex + 1 : 1,
-      };
-    });
+    setCurrIndex((prev) => prev + 1);
+    if (currIndex === imgCnt) {
+      real = false;
+      setCurrIndex(1);
+    }
+    real = true;
   };
 
   const toPreviousIMG = () => {
-    setIndex((prev) => {
-      return {
-        ...prev,
-        nextIndex: prev.currIndex,
-        currIndex: prev.prevIndex,
-        prevIndex: prev.prevIndex !== 1 ? prev.prevIndex - 1 : imgCnt,
-      };
+    setCurrIndex((prev) => {
+      if (prev === 1) return imgCnt;
+      return prev - 1;
     });
     const interval = setInterval(changePromotionImage, 2500);
     setIntervalID(interval);
   };
 
   const toNextIMG = () => {
-    setIndex((prev) => {
-      return {
-        ...prev,
-        prevIndex: prev.currIndex,
-        currIndex: prev.nextIndex,
-        nextIndex: prev.nextIndex !== imgCnt ? prev.nextIndex + 1 : 1,
-      };
+    setCurrIndex((prev) => {
+      if (prev === imgCnt) return 1;
+      return prev + 1;
     });
     const interval = setInterval(changePromotionImage, 2500);
     setIntervalID(interval);
@@ -72,50 +65,70 @@ function Promotion() {
   ];
 
   return (
-    <>
-      <div id="promotion">
+    <div id={style.promotionScreen} ref={$screen}>
+      <div className={style.imgContainer} style={slideStyle}>
+        {/* 무한 슬라이드 만들기 위해 맨앞에 마지막 이미지 덧붙임 */}
+        <div className={style.promotionImg} key={`img${imgCnt}`}>
+          <Link to={arrForImg[imgCnt - 1][1]}>
+            <img
+              id={`img${imgCnt}`}
+              src={arrForImg[imgCnt - 1][0]}
+              alt={`img${imgCnt}`}
+              width="270"
+              height="270"
+            />
+          </Link>
+        </div>
         {arrForImg.map((property, i) => {
           return (
-            <Link to={property[1]} key={`img${i + 1}`}>
-              <img
-                id={`img${i + 1}`}
-                className={
-                  index.currIndex === i + 1
-                    ? "promotion-img is-active"
-                    : "promotion-img"
-                }
-                src={property[0]}
-                alt={`img${i + 1}`}
-                width="270"
-                height="270"
-              />
-            </Link>
+            // 컴포넌트로 바꿀 것
+            <div className={style.promotionImg} key={`img${i + 1}`}>
+              <Link to={property[1]}>
+                <img
+                  id={`img${i + 1}`}
+                  src={property[0]}
+                  alt={`img${i + 1}`}
+                  width="270"
+                  height="270"
+                />
+              </Link>
+            </div>
           );
         })}
-        <button className="previous" onClick={toPreviousIMG}>
-          &lt;
-        </button>
-        <button className="next" onClick={toNextIMG}>
-          &gt;
-        </button>
-        <div className="index-mark-container">
-          {Array(imgCnt)
-            .fill()
-            .map((v, i) => {
-              return (
-                <span
-                  className={
-                    index.currIndex === i + 1
-                      ? "index-mark is-active"
-                      : "index-mark"
-                  }
-                  key={`mark${i + 1}`}
-                ></span>
-              );
-            })}
+        {/* 무한 슬라이드 만들기 위해 맨 뒤에 첫번째 이미지 덧붙임 */}
+        <div className={style.promotionImg} key="img1">
+          <Link to={arrForImg[0][1]}>
+            <img
+              id="img1"
+              src={arrForImg[0][0]}
+              alt="img1"
+              width="270"
+              height="270"
+            />
+          </Link>
         </div>
       </div>
-    </>
+      <button className={style.previous} onClick={toPreviousIMG}>
+        &lt;
+      </button>
+      <button className={style.next} onClick={toNextIMG}>
+        &gt;
+      </button>
+      <div className={style.indexMarkContainer}>
+        {Array(imgCnt)
+          .fill()
+          .map((v, i) => {
+            return (
+              <span
+                className={`${style.indexMark} ${
+                  currIndex === i ? "active" : ""
+                }`}
+                key={`mark${i + 1}`}
+              ></span>
+            );
+          })}
+      </div>
+    </div>
   );
 }
 
