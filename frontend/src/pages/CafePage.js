@@ -21,7 +21,7 @@ function CafePage() {
             if (e.type !== "coffee") return undefined;
             return (
               <li key={e._id}>
-                {e.name} \{e.price}
+                {e.name} &#8361;{e.price}
               </li>
             );
           })}
@@ -34,7 +34,7 @@ function CafePage() {
             if (e.type !== "tea") return undefined;
             return (
               <li key={e._id}>
-                {e.name} \{e.price}
+                {e.name} &#8361;{e.price}
               </li>
             );
           })}
@@ -47,7 +47,7 @@ function CafePage() {
             if (e.type !== "beverage") return undefined;
             return (
               <li key={e._id}>
-                {e.name} \{e.price}
+                {e.name} &#8361;{e.price}
               </li>
             );
           })}
@@ -60,7 +60,7 @@ function CafePage() {
             if (e.type !== "snack") return undefined;
             return (
               <li key={e._id}>
-                {e.name} \{e.price}
+                {e.name} &#8361;{e.price}
               </li>
             );
           })}
