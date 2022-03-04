@@ -23,7 +23,14 @@ function AdministratorPage() {
     paragraph: "",
     bookImg: null,
   });
-  const fileRef = useRef();
+  const bookFileRef = useRef();
+
+  const [newPromotion, setNewPromotion] = useState({
+    order: 0,
+    ad: null,
+    link: "",
+  });
+  const promotionFileRef = useRef();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,13 +68,32 @@ function AdministratorPage() {
     })); //만약 input타입이 파일이면, e.target.files에서 리턴하는 유사배열(파일들)로 처리를 해야 한다! 주의할 것.
   }
 
-  function imgClear(e) {
-    const inputNode = fileRef.current;
+  function handlePromotion(e) {
+    const { value, name, files } = e.target;
+    if (name === "ad") URL.revokeObjectURL(newPromotion.ad);
+    setNewPromotion((prev) => ({
+      ...prev,
+      [name]: name === "ad" ? files[0] : value,
+    }));
+  }
+
+  function BOMImgClear(e) {
+    const inputNode = bookFileRef.current;
     if (!inputNode) return;
     inputNode.value = "";
     setNewBookOfTheMonth((prev) => ({
       ...prev,
       bookImg: null,
+    }));
+  }
+
+  function promotionImgClear(e) {
+    const inputNode = promotionFileRef.current;
+    if (!inputNode) return;
+    inputNode.value = "";
+    setNewPromotion((prev) => ({
+      ...prev,
+      ad: null,
     }));
   }
 
@@ -120,8 +146,90 @@ function AdministratorPage() {
     window.location.reload();
   }
 
+  async function handlePromotionSubmit(e) {
+    e.preventDefault();
+    const promotion = new FormData();
+    promotion.append("ad", newPromotion.ad);
+    promotion.append("order", newPromotion.order);
+    promotion.append("link", newPromotion.link);
+
+    await axios.put(`/api/promotions/update/${newPromotion.order}`, promotion, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    alert("배너 광고가 수정되었습니다.");
+    window.location.reload();
+  }
+
+  async function handlePromotionDel(e) {
+    await axios.delete(`/api/promotions/remove/${newPromotion.order}`);
+    alert("배너 광고가 삭제되었습니다.");
+    window.location.reload();
+    return;
+  }
+
   return (
     <>
+      <div id={style.promotion}>
+        <form id={style.promotionForm} onSubmit={handlePromotionSubmit}>
+          <h3>홈 배너 광고 수정 및 삭제(배너 광고는 최소 2개이상 넣으세요!)</h3>
+          <label htmlFor="order">번호</label>
+          <input
+            type="number"
+            name="order"
+            id="order"
+            value={newPromotion.order}
+            onChange={handlePromotion}
+            placeholder="수정하거나 삭제할 광고 번호를 적어주세요."
+          />
+          <label htmlFor="link">연결될 링크(추가설명 쓰기)</label>
+          <input
+            type="text"
+            name="link"
+            id="link"
+            value={newPromotion.link}
+            onChange={handlePromotion}
+            placeholder="연결될 링크를 적어주세요."
+          />
+          <label htmlFor="bookImg">추가할 이미지</label>
+          {newPromotion.ad && (
+            <img
+              src={URL.createObjectURL(newPromotion.ad)}
+              alt="이미지 미리보기"
+              style={{
+                maxHeight: "270px",
+                maxWidth: "270px",
+                width: "auto",
+                height: "auto",
+              }}
+            />
+          )}
+          <input
+            type="file"
+            name="ad"
+            id="ad"
+            accept="image/*"
+            onChange={handlePromotion}
+            ref={promotionFileRef}
+          />
+          {newPromotion.ad && <button onClick={promotionImgClear}>X</button>}
+          {/* 이미지 파일은 비동기적으로 처리해야 한다. 따라서 value를 설정해주지 않았다. */}
+          <button
+            type="submit"
+            name="update"
+            className={style.promotionUpdateBtn}
+          >
+            업데이트
+          </button>
+          <button
+            type="submit"
+            name="del"
+            className={style.promotionDeleteBtn}
+            onClick={handlePromotionDel}
+          >
+            삭제
+          </button>
+        </form>
+      </div>
       <div id={style.bookOfTheMonthUpdate}>
         <div id={style.bomSearch}>
           <h2 className={style.title}>이달의 책 업데이트</h2>
@@ -176,9 +284,11 @@ function AdministratorPage() {
             id="bookImg"
             accept="image/*"
             onChange={handlebookOfTheMonth}
-            ref={fileRef}
+            ref={bookFileRef}
           />
-          {newBookOfTheMonth.bookImg && <button onClick={imgClear}>X</button>}
+          {newBookOfTheMonth.bookImg && (
+            <button onClick={BOMImgClear}>X</button>
+          )}
           {/* 이미지 파일은 비동기적으로 처리해야 한다. 따라서 value를 설정해주지 않았다. */}
           <label htmlFor="title">제목</label>
           <input
