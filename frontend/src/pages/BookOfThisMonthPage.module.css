@@ -9,6 +9,10 @@
   text-align: center;
 }
 
+.mainContents {
+  white-space: pre-line;
+}
+
 .mainContents::after {
   display: block;
   content: "";
