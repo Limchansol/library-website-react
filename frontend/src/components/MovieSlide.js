@@ -1,10 +1,5 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import movie1Poster from "../images/img1.png";
-import movie2Poster from "../images/img2.png";
-import movie3Poster from "../images/img3.png";
-import movie4Poster from "../images/img4.png";
-import movie5Poster from "../images/img5.png";
 import style from "./MovieSlide.module.css";
 
 function MovieSlide({ movies, handleMovieArr, isAdmin, handleMoviePosters }) {
