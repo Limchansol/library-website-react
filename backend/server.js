@@ -11,6 +11,8 @@ const inquiryRouter = require("./routers/inquiryRouter.js");
 const calenderRouter = require("./routers/calenderRouter.js");
 const bookOfTheMonthRouter = require("./routers/bookOfTheMonthRouter.js");
 const promotionRouter = require("./routers/promotionRouter.js");
+const moviePosterRouter = require("./routers/moviePosterRouter.js");
+const utilRouter = require("./routers/utilRouter.js");
 
 dotenv.config();
 const app = express();
@@ -25,7 +27,9 @@ app.get("/", (req, res) => {
   res.send("Server is ready");
 });
 
+app.use("/api/utils", utilRouter);
 app.use("/api/promotions", promotionRouter);
+app.use("/api/moviePosters", moviePosterRouter);
 app.use("/api/bookOfTheMonth", bookOfTheMonthRouter);
 app.use("/api/books", bookRouter);
 app.use("/api/users", userRouter);

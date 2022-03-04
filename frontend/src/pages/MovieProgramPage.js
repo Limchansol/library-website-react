@@ -2,6 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import MovieSlide from "../components/MovieSlide";
 import style from "./MovieProgramPage.module.css";
+import { useRecoilState } from "recoil";
+import { loginUserInfo } from "../Atoms/LoginAtom";
 
 function MovieProgramPage() {
   const [programInfo, setProgramInfo] = useState({
@@ -19,31 +21,186 @@ function MovieProgramPage() {
       },
     ],
   });
+  const [moviePosters, setMoviePosters] = useState([]);
+  const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [season, setSeason] = useState(1);
+
   useEffect(() => {
     const fetchData = async () => {
-      const tempMovieInfo = await axios.get("/api/movies");
+      const nowYear = new Date().getFullYear();
+      const season = await axios.get("/api/utils/movieSeason");
+      const tempMovieInfo = await axios.get(
+        `/api/movies/${nowYear}/${season.data.movieSeason}`
+      );
       console.log(tempMovieInfo);
-      setProgramInfo(tempMovieInfo.data[0]); //받아온 데이터의 첫번째에 시즌에 관한 정보가 들어있다. 추후 수정하기
+      setProgramInfo(tempMovieInfo.data);
+      const temp = await axios.get("/api/users/checkLogIn", {
+        headers: { token: loginInfo.token },
+      });
+      setIsAdmin(temp.data.isAdmin);
     };
     fetchData();
   }, []);
+
+  function handleInput(e) {
+    const { name, value } = e.target;
+    setProgramInfo((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  }
+
+  function handleMovieArr(ind, name, value) {
+    console.log(ind, name, value);
+    const tempMovie = [...programInfo.movies];
+    const tempMovieObj = { ...tempMovie[ind], [name]: value };
+    tempMovie[ind] = tempMovieObj;
+    setProgramInfo((prev) => ({
+      ...prev,
+      movies: tempMovie,
+    }));
+    console.log(programInfo);
+  }
+
+  function handleMoviePosters(posters) {
+    console.log(posters);
+    setMoviePosters(posters);
+  }
+
+  function handleSeasonInput(e) {
+    setSeason(e.target.value);
+  }
+
+  async function handleSubmit(e) {
+    const posters = new FormData();
+    moviePosters.forEach((e) => {
+      posters.append("moviePosters", e);
+    });
+    await axios.put(
+      `/api/moviePosters/update/${programInfo.year}/${programInfo.season}`,
+      posters,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
+
+    await axios.put(
+      `/api/movies/update/${programInfo.year}/${programInfo.season}`,
+      programInfo
+    );
+
+    alert("영화 정보가 수정되었습니다.");
+    window.location.reload();
+    return;
+  }
+
+  async function handleSeasonSubmit(e) {
+    await axios.put("/api/utils/updateMovieSeason", {
+      movieSeason: season,
+    });
+    alert("영화 시즌이 변경되었습니다.");
+    window.location.reload();
+    return;
+  }
+
   return (
-    <div className={style.pageContainer}>
-      <div className={style.programContainer}>
-        <h1 className={style.programTitle}>
-          {programInfo.year}년 북악하늘 {"<"}영화로 세상 읽기{">"} 시즌
-          {programInfo.season}
-        </h1>
-        <p className={style.programInfo}>
-          "영화로 세상 읽기" 프로그램 설명 쓰는 자리입니다.
-        </p>
-      </div>
-      <div className={style.seasonContainer}>
-        <h2 className={style.seasonTheme}>"{programInfo.theme}"</h2>
-        <p className={style.seasonInfo}>{programInfo.intro}</p>
-        <MovieSlide movies={programInfo.movies} />
-      </div>
-    </div>
+    <>
+      {isAdmin ? (
+        <div className={style.pageContainer}>
+          <div className={style.programContainer}>
+            <h1 className={style.programTitle}>
+              {
+                <input
+                  type="number"
+                  name="year"
+                  value={programInfo.year}
+                  onChange={handleInput}
+                  placeholder="년도"
+                />
+              }
+              년 북악하늘 {"<"}영화로 세상 읽기{">"} 시즌
+              {
+                <input
+                  type="number"
+                  name="season"
+                  value={programInfo.season}
+                  onChange={handleInput}
+                  placeholder="시즌"
+                />
+              }
+            </h1>
+            <p className={style.programInfo}>
+              "영화로 세상 읽기" 프로그램 설명 쓰는 자리입니다.
+              <br />
+              관리자가 업데이트할 때에는, 반드시 영화 이미지를 '한번에'
+              넣어주세요. 그렇지 않으면 문제가 발생할 확률이 높습니다.
+            </p>
+          </div>
+          <div className={style.seasonContainer}>
+            <h2 className={style.seasonTheme}>
+              "
+              {
+                <input
+                  type="text"
+                  name="theme"
+                  value={programInfo.theme}
+                  onChange={handleInput}
+                  placeholder="테마"
+                />
+              }
+              "
+            </h2>
+            <p className={style.seasonInfo}>
+              {
+                <textarea
+                  cols="90"
+                  rows="4"
+                  type="text"
+                  name="intro"
+                  value={programInfo.intro}
+                  onChange={handleInput}
+                  placeholder="인트로"
+                />
+              }
+            </p>
+            <MovieSlide
+              movies={programInfo.movies}
+              handleMovieArr={handleMovieArr}
+              isAdmin={isAdmin}
+              handleMoviePosters={handleMoviePosters}
+            />
+          </div>
+          <button onClick={handleSubmit}>수정/ 추가하기</button>
+          <input
+            type="number"
+            value={season}
+            id="movieSeason"
+            placeholder="현재 시즌"
+            onChange={handleSeasonInput}
+          />
+          <label htmlFor="movieSeason">현재 시즌을 입력하세요</label>
+          <button onClick={handleSeasonSubmit}>시즌 변경하기</button>
+        </div>
+      ) : (
+        <div className={style.pageContainer}>
+          <div className={style.programContainer}>
+            <h1 className={style.programTitle}>
+              {programInfo.year}년 북악하늘 {"<"}영화로 세상 읽기{">"} 시즌
+              {programInfo.season}
+            </h1>
+            <p className={style.programInfo}>
+              "영화로 세상 읽기" 프로그램 설명 쓰는 자리입니다.
+            </p>
+          </div>
+          <div className={style.seasonContainer}>
+            <h2 className={style.seasonTheme}>"{programInfo.theme}"</h2>
+            <p className={style.seasonInfo}>{programInfo.intro}</p>
+            <MovieSlide movies={programInfo.movies} isAdmin={false} />
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
