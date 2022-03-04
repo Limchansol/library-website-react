@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import style from "./BookOfTheMonth.module.css";
 
 function BookOfTheMonth({ month }) {
-  const now = month ? month : new Date();
+  const now = new Date();
   const nowMonth = month ? month : now.getMonth() + 1;
   const [targetBook, setTragetBook] = useState({
     month: nowMonth,

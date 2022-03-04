@@ -57,12 +57,7 @@ function AdministratorPage() {
     if (name === "bookImg") URL.revokeObjectURL(newBookOfTheMonth.bookImg);
     setNewBookOfTheMonth((prev) => ({
       ...prev,
-      [name]:
-        name === "month"
-          ? Number(value)
-          : name === "bookImg"
-          ? files[0]
-          : value,
+      [name]: name === "bookImg" ? files[0] : value,
     })); //만약 input타입이 파일이면, e.target.files에서 리턴하는 유사배열(파일들)로 처리를 해야 한다! 주의할 것.
   }
 
@@ -155,7 +150,7 @@ function AdministratorPage() {
           <h3>이달의 책 수정</h3>
           <label htmlFor="month">달</label>
           <input
-            type="text"
+            type="number"
             name="month"
             id="month"
             value={newBookOfTheMonth.month}
