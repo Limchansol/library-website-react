@@ -127,7 +127,7 @@ function SearchDetailPage() {
       <div className={style.showBooks}>
         {detailedBooks.length !== 0 &&
           detailedBooks.map((book, i) => {
-            return <Book book={book} key={i} />;
+            return <Book book={book} key={i} index={i + 1} />;
           })}
         {cursor && <LoadMoreBtn handleLoadMore={handleLoadMore} />}
       </div>

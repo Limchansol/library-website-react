@@ -42,3 +42,7 @@
 #detailedSearchForm button:active {
   background-color: #a98274;
 }
+
+.showBooks {
+  margin: 50px auto;
+}

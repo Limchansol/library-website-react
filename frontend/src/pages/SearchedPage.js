@@ -5,8 +5,6 @@ import Book from "../components/Book";
 import LoadMoreBtn from "../components/LoadMoreBtn";
 
 function SearchedPage() {
-  // const category = useLocation().state.category;
-  // const keyword = useLocation().state.keyword;
   const { category, keyword } = useLocation().state;
   const [selectedBooks, setSelectedBooks] = useState([]);
   const [cursor, setCursor] = useState();
@@ -52,7 +50,7 @@ function SearchedPage() {
     <div className="searched-books">
       {selectedBooks.length !== 0 &&
         selectedBooks.map((book, i) => {
-          return <Book book={book} key={i} />;
+          return <Book book={book} key={i} index={i + 1} />;
         })}
       {cursor && <LoadMoreBtn handleLoadMore={handleLoadMore} />}
     </div>

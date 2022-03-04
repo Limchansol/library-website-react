@@ -89,6 +89,10 @@ function MyPage() {
     }
     try {
       await axios.delete(`/api/users/secession/${userData._id}`);
+      // 회원 탈퇴 후 로그아웃하고 새로고침
+      setLoginInfo("");
+      sessionStorage.clear();
+      window.location.reload();
     } catch (error) {
       console.log("회원탈퇴 오류", error);
     }

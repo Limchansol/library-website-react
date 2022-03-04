@@ -18,7 +18,7 @@ function LocalProgramPage() {
           <li className={`${style.title} ${style[oneDayClassTitleClass]}`}>
             원데이 클래스
           </li>
-          <li className={`${style.title}`}></li>
+          <li className={`${style.title}`}>계획중</li>
         </ul>
       </div>
       {localProgram === "oneDayClass" && <OneDayClass />}

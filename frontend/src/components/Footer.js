@@ -1,18 +1,18 @@
 import style from "./Footer.module.css";
+import logo from "../images/main_logo.png";
 
 function Footer() {
   return (
     <footer>
-      <h4>푸터</h4>
-      <div>
-        <div className={style.connectNumber}>
-          <ul>
-            <li>주소: 서울시 성북구</li>
-            <li>연락처: 070 1234 1234</li>
-            <li>관장: </li>
-            <li>이메일: email@naver.com</li>
-            <li>후원계좌: KB국민은행</li>
-          </ul>
+      <div className={style.footerContents}>
+        <div className={style.logo}>
+          <img src={logo} alt="북악하늘_작은도서관_로고" width="130px" />
+        </div>
+        <div className={style.contact}>
+          <span>서울시 성북구</span>
+          <span>연락처: 070 1234 1234</span>
+          <span>이메일: email@naver.com</span>
+          <span>후원계좌: KB국민은행</span>
         </div>
       </div>
     </footer>

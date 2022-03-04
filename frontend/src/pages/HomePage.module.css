@@ -1,0 +1,36 @@
+#homePageContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  justify-items: center;
+  align-items: center;
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.item:nth-child(3) {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+/* width: 300 height:300 */
+.promotion {
+  width: 300px;
+  height: 300px;
+}
+
+/* width: 600 height:290 */
+.bookOfTheMonth {
+  border: 1px solid black;
+  width: 600px;
+  height: 350px;
+}
+
+/* width: 600 */
+.calender {
+  border: 1px solid orange;
+  width: 600px;
+  margin: 0 auto;
+}

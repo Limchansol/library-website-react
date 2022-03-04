@@ -1,3 +1,22 @@
 footer {
   background-color: #eee;
+  padding: 20px;
+}
+
+.footerContents {
+  display: grid;
+  grid-template-columns: 0.5fr 2fr;
+  width: 630px;
+  margin: 0 auto;
+}
+
+.contact {
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  grid-template-rows: 1fr 1fr;
+  width: 500px;
+}
+
+.contact span {
+  font-size: 14px;
 }

@@ -1,0 +1,73 @@
+.book {
+  margin: 0 auto;
+  padding: 40px 10px;
+  width: 800px;
+  border-bottom: 1px solid black;
+}
+
+.titleText {
+  display: flex;
+  align-items: center;
+}
+
+.titleText span {
+  font-size: 20px;
+}
+
+.titleText .type {
+  margin: 0 10px;
+  width: 40px;
+  padding: 5px;
+  border: 1px solid black;
+  font-size: 16px;
+  font-weight: normal;
+  background-color: #efebe9;
+}
+
+.titleText .title {
+  word-wrap: normal;
+}
+
+.info {
+  margin: 30px 0;
+  line-height: 150%;
+}
+
+.info span {
+  margin: 0 15px;
+}
+
+.bookState {
+  padding: 5px;
+  background-color: #efebe9;
+}
+
+.bookState.none {
+  color: #795548;
+}
+
+.bookState.rental {
+  color: coral;
+}
+
+.bookState.reservation {
+  color: tomato;
+}
+
+.btnContainer {
+  margin-bottom: 20px;
+}
+
+.btnContainer button {
+  margin: 0 5px;
+  width: 130px;
+  height: 35px;
+}
+
+.btnContainer button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.btnContainer button:disabled:hover {
+  background-color: #a98274;
+}

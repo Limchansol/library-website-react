@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { loginUserInfo } from "../Atoms/LoginAtom.js";
+import style from "./Book.module.css";
 
 function checkLogin(loginInfo, navigate) {
   if (!loginInfo) {
@@ -23,7 +24,7 @@ function moveToMyPage(message, navigate) {
   return navigate("/myPage");
 }
 
-function Book({ book }) {
+function Book({ book, index }) {
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
   const [bookState, setBookstate] = useState("대여 가능");
   const navigate = useNavigate();
@@ -34,9 +35,9 @@ function Book({ book }) {
     if (book.state === "none") {
       setBookstate("대여 가능");
     } else if (book.state === "rental") {
-      setBookstate("대여 중");
+      setBookstate("대여 중 / 예약 가능");
     } else if (book.state === "reservation") {
-      setBookstate("예약 중");
+      setBookstate("대여 중 / 예약 중");
     } else {
       setBookstate(book.state);
     }
@@ -75,20 +76,32 @@ function Book({ book }) {
     moveToMyPage(`『${book.title}』을 관심 도서에 담았습니다.`, navigate);
   };
 
-  console.log(bookState);
-
+  // titleText 정렬이 잘 안됨. 제목이 길어져서 두 줄을 넘기게 되면 '도서' 글자가 두 줄이 되어버림. 이유를 못 찾았음.
   return (
-    <div className="book">
-      <h3>책 제목: {book.title}</h3>
-      <p>글쓴이: {book.writer}</p>
-      <p>출판사: {book.publisher}</p>
-      <p>
-        대여 상태: <span>{bookState}</span>
-        <button disabled={bookState !== "대여 중"} onClick={onClickReservation}>
+    <div className={style.book}>
+      <h3 className={style.titleText}>
+        <span className={style.index}>{index}.</span>
+        <span className={style.type}>도서</span>
+        <span className={style.title}>{book.title}</span>
+      </h3>
+      <p className={style.info}>
+        <span>{book.writer}</span>
+        <b>|</b>
+        <span>「{book.publisher}」</span>
+        <b>|</b>
+        <span className={`${style.bookState} ${style[book.state]}`}>
+          {bookState}
+        </span>
+      </p>
+      <div className={style.btnContainer}>
+        <button
+          // disabled={!bookState.includes("예약 가능")}  // 어떤 경우에 예약할 수 있는지 확실하게 정한 후 disabled 활성화할 것.
+          onClick={onClickReservation}
+        >
           대여 예약하기
         </button>
         <button onClick={onClickSaveInterest}>관심 도서 담기</button>
-      </p>
+      </div>
     </div>
   );
 }

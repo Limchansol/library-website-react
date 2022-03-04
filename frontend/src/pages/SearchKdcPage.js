@@ -63,15 +63,9 @@ function SearchKdcPage() {
     setCursor(nextCursor);
   };
 
-  // const findSubjectNumber = (kdc, cursor) => {
-  //   const subnum = subject.findIndex((a) => a === kdc);
-  //   fetchBookForSubj(subnum, cursor, LIMIT);
-  // };
-
   // 더보기
   const handleLoadMore = () => {
     fetchBookForSubj(LIMIT, cursor);
-    // findSubjectNumber(kdc, cursor);
   };
 
   // 주제별 버튼 누르면 kdc state 바꿈
@@ -93,8 +87,7 @@ function SearchKdcPage() {
           <br />책 속을 주제와 함께 여행해 봅시다.
         </p>
       </div>
-
-      <div id={style.subjectButton}>
+      <div id={style.subjectButtons}>
         {subject.map((e, i) => {
           return (
             <div id={e} className={style.btn} onClick={handleKdcChange} key={i}>
@@ -105,10 +98,13 @@ function SearchKdcPage() {
         })}
       </div>
       <div className={style.searchedBooks}>
-        {kdcBooks.length !== 0 &&
-          kdcBooks.map((book, i) => {
-            return <Book book={book} key={i} />;
-          })}
+        {kdc && <h2>{kdc} 도서</h2>}
+        <div className={style.bookList}>
+          {kdcBooks.length !== 0 &&
+            kdcBooks.map((book, i) => {
+              return <Book book={book} key={i} index={i + 1} />;
+            })}
+        </div>
         {cursor && <LoadMoreBtn handleLoadMore={handleLoadMore} />}
       </div>
     </>
