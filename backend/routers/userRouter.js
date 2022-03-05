@@ -107,6 +107,7 @@ userRouter.put(
       { _id: token._id },
       { $pullAll: { interestingBooks: bookId } }
     );
+    if (!user) res.status(404).send({ message: "not found" });
     res.send(user);
   })
 );

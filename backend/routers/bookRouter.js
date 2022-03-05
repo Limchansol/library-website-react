@@ -222,6 +222,26 @@ bookRouter.get(
   })
 );
 
+bookRouter.get(
+  "/forgraph",
+  expressAsyncHandler(async (req, res) => {
+    const len = await Book.countDocuments({});
+    const kdcLenArr = await Promise.all(
+      Array(10)
+        .fill()
+        .map((e, i) => {
+          return Book.countDocuments({
+            kdc: {
+              $gte: Number(i) * 100,
+              $lt: (Number(i) + 1) * 100,
+            },
+          });
+        })
+    );
+    res.send({ len: len, kdcLenArr: kdcLenArr });
+  })
+);
+
 bookRouter.put(
   "/reservedBookUpdate",
   expressAsyncHandler(async (req, res) => {

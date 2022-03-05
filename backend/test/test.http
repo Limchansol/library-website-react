@@ -63,3 +63,5 @@ Content-Type: application/json
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjFhNmM5OTIyZTFiMDgwMzg5NTU1NDUiLCJuYW1lIjoid29ud29vIiwiZW1haWwiOiJqd3cwNDE4QG5hdmVyLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0NjI0NDg5MywiZXhwIjoxNjQ2NTA0MDkzfQ.Mbfk8x8B0afbKFcU8gD2-sWcYU7pxsz02EJQawWfk6s",
   "yyyy": "2001"
 }
+###
+GET http://localhost:5000/api/books/forgraph
