@@ -13,10 +13,6 @@
   position: relative;
 }
 
-.indBook.zoom {
-  transform: scale(2, 2);
-}
-
 .indBook:nth-child(1) {
   grid-column: 1/ 2;
   grid-row: 1/2;
@@ -47,34 +43,9 @@
   grid-row: 2/3;
 }
 
-.indBookPreview {
+.indBookTitle {
   margin: 20px 0;
   vertical-align: bottom;
   line-height: 150%;
   text-align: center;
-}
-
-.indBookTitle {
-  margin: 0;
-  text-align: center;
-}
-
-.indBook span {
-  font-size: xx-small;
-}
-
-.indBook .bar {
-  margin: 0 5px;
-}
-
-button.remove {
-  padding: 0;
-  position: absolute;
-  top: 2px;
-  right: 0;
-  width: 15px;
-  height: 15px;
-  font-size: xx-small;
-  text-align: center;
-  line-height: 17px;
 }

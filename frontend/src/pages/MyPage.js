@@ -5,6 +5,7 @@ import axios from "axios";
 import IndBook from "../components/IndBook.js";
 import Warn from "../components/Warn.js";
 import style from "./MyPage.module.css";
+import BookShelf from "../components/BookShelf.js";
 
 function MyPage() {
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
@@ -13,6 +14,7 @@ function MyPage() {
   const [inquiries, setInquiries] = useState([]);
   const [changeMode, setChangeMode] = useState(false);
   const [changedInfo, setChangedInfo] = useState(userData);
+  // const [zoomBook, setZoomBook] = useState({});
   let alreadyFetched = false;
 
   useEffect(() => {
@@ -61,7 +63,7 @@ function MyPage() {
       });
       alert("회원정보 수정이 완료되었습니다.");
     } catch (error) {
-      console.log("마이페이지 정보 수정 에러", error);
+      console.log("마이페이지 정보 수정 오류", error);
     } finally {
       setChangeMode(false);
       window.location.reload();
@@ -244,18 +246,43 @@ function MyPage() {
                 당신이 좋아하는 책, 관심 있는 책, 푹 빠져버린 책을 책장에 꽂아
                 장식하세요!
               </p>
-              <div id={style.bookShelf}>
+              <BookShelf interestingBooks={interestingBooks} />
+              {/* <div id={style.bookShelf}>
                 {interestingBooks?.map?.((e) => {
                   return (
-                    <>
-                      <IndBook book={e} key={e?._id} />
-                      {/* <div key={e?._id} className={style.indBooks}>
-                        <span className={style.indBooksText}>{e?.title}</span>
-                      </div> */}
-                    </>
+                    <IndBook book={e} key={e?._id} setZoomBook={setZoomBook} />
                   );
                 })}
-              </div>
+                {Object.keys(zoomBook).length ? (
+                  <>
+                    <div
+                      className={style.zoomedIndBook}
+                      onClick={() => setZoomBook({})}
+                    >
+                      <h2 className={style.title}>{zoomBook?.title}</h2>
+                      <div className={style.infoText}>
+                        <span>
+                          <b>지은이:</b> {zoomBook?.writer}
+                        </span>
+                        <span>
+                          <b>출판사:</b> 「{zoomBook?.publisher}」
+                        </span>
+                        <span>
+                          <b>나만의 한줄평:</b> 한줄평은 어떻게 하지?
+                        </span>
+                        <button
+                          className={style.remove}
+                          onClick={removeIndBook}
+                        >
+                          관심도서 삭제
+                        </button>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </div> */}
             </div>
             <div id={style.inquiries}>
               <h2>내가 한 문의</h2>
