@@ -11,6 +11,15 @@ utilRouter.get(
   })
 );
 
+utilRouter.get(
+  "/movieSeason/seed",
+  expressAsyncHandler(async (req, res) => {
+    const util = new Util({ movieSeason: 1 });
+    util.save();
+    res.send(util);
+  })
+);
+
 utilRouter.put(
   "/updateMovieSeason",
   expressAsyncHandler(async (req, res) => {

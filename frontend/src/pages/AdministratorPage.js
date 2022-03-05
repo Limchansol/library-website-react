@@ -171,7 +171,16 @@ function AdministratorPage() {
     <>
       <div id={style.promotion}>
         <form id={style.promotionForm} onSubmit={handlePromotionSubmit}>
-          <h3>홈 배너 광고 수정 및 삭제(배너 광고는 최소 2개이상 넣으세요!)</h3>
+          <h2>홈 배너 광고 수정 및 삭제(배너 광고는 최소 2개이상 넣으세요!)</h2>
+          <p>
+            ※삭제 시에는 번호만 입력하면 삭제됩니다.
+            <br />
+            <br />
+            ※연결될 링크에는, 홈페이지의 링크 중에서 /이후부터 입력하세요.
+            <br />
+            예시: 홈페이지 링크가 https:/minilib.com/moviePage라면 /moviePage만
+            입력
+          </p>
           <label htmlFor="order">번호</label>
           <input
             type="number"
@@ -181,7 +190,7 @@ function AdministratorPage() {
             onChange={handlePromotion}
             placeholder="수정하거나 삭제할 광고 번호를 적어주세요."
           />
-          <label htmlFor="link">연결될 링크(추가설명 쓰기)</label>
+          <label htmlFor="link">연결될 링크</label>
           <input
             type="text"
             name="link"

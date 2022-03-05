@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import style from "./MovieSlide.module.css";
 
 function MovieSlide({ movies, handleMovieArr, isAdmin, handleMoviePosters }) {
-  const movieCnt = movies.length;
+  const movieCnt = movies?.length;
   const [currIndex, setCurrIndex] = useState(1);
   const screen = useRef();
   const [newPoster, setNewPoster] = useState(Array(5).fill(null));
@@ -81,7 +81,7 @@ function MovieSlide({ movies, handleMovieArr, isAdmin, handleMoviePosters }) {
           >
             <div className={style.movieContainer}>
               <div className={`${style.movie} ${style.start}`}></div>
-              {movies.map((movie, i) => {
+              {movies?.map?.((movie, i) => {
                 return (
                   <div
                     className={

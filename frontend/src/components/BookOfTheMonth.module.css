@@ -13,7 +13,7 @@
   margin-right: 20px;
 }
 
-p:last-child {
+#BookOfTheMonth p:last-child {
   overflow: hidden;
   display: -webkit-box;
   white-space: pre-line; /* html에서 줄바꿈 \n을 인식하지 못하는 것을 인식하도록 만들어 줌 */

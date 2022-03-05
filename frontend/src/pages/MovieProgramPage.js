@@ -133,8 +133,23 @@ function MovieProgramPage() {
             <p className={style.programInfo}>
               "영화로 세상 읽기" 프로그램 설명 쓰는 자리입니다.
               <br />
-              관리자가 업데이트할 때에는, 반드시 영화 이미지를 '한번에'
+              <br />
+              ※현재 관리자로 접속하셨습니다. 영화페이지 수정 탭으로 자동접속
+              되었습니다.
+              <br />
+              <br />
+              ※일반적인 영화로 세상읽기 페이지를 보시려면 로그아웃 후 다시
+              들어와 주세요.
+              <br />
+              <br />
+              ※ 주의사항 ※<br />
+              <br />
+              1. 반드시 <b>'모든'</b> 영화 이미지를 <b>'한번에' </b>
               넣어주세요. 그렇지 않으면 문제가 발생할 확률이 높습니다.
+              <br />
+              <br />
+              2. 수정할 수 있는 내용을 입력창으로 만들었습니다. 추가하거나
+              수정하고자 할때, 연도나 시즌을 반드시 확인하고 제출하여 주세요.
             </p>
           </div>
           <div className={style.seasonContainer}>
@@ -171,16 +186,20 @@ function MovieProgramPage() {
               handleMoviePosters={handleMoviePosters}
             />
           </div>
-          <button onClick={handleSubmit}>수정/ 추가하기</button>
-          <input
-            type="number"
-            value={season}
-            id="movieSeason"
-            placeholder="현재 시즌"
-            onChange={handleSeasonInput}
-          />
-          <label htmlFor="movieSeason">현재 시즌을 입력하세요</label>
-          <button onClick={handleSeasonSubmit}>시즌 변경하기</button>
+          <div className={style.submitBtns}>
+            <button onClick={handleSubmit}>수정/ 추가하기</button>
+            <div className={style.changeInput}>
+              <label htmlFor="movieSeason">현재 시즌을 입력하세요</label>
+              <input
+                type="number"
+                value={season}
+                id="movieSeason"
+                placeholder="현재 시즌"
+                onChange={handleSeasonInput}
+              />
+            </div>
+            <button onClick={handleSeasonSubmit}>시즌 변경하기</button>
+          </div>
         </div>
       ) : (
         <div className={style.pageContainer}>

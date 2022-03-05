@@ -1,3 +1,23 @@
+.pageContainer {
+  width: 1000px;
+  margin: auto;
+}
+.submitBtns button {
+  display: block;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.submitBtns .changeInput {
+  display: block;
+  margin: 30px auto;
+  text-align: center;
+}
+
+.submitBtns .changeInput label {
+  margin-right: 20px;
+}
+
 .programContainer {
   text-align: center;
   margin-top: 50px;

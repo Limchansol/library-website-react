@@ -99,6 +99,19 @@ userRouter.put(
 );
 
 userRouter.put(
+  "/interestingBookDelete",
+  expressAsyncHandler(async (req, res) => {
+    const token = checkValidToken(req.body.token);
+    const { bookId } = req.body;
+    const user = await User.updateOne(
+      { _id: token._id },
+      { $pullAll: { interestingBooks: bookId } }
+    );
+    res.send(user);
+  })
+);
+
+userRouter.put(
   "/reservedBookUpdate",
   expressAsyncHandler(async (req, res) => {
     const token = checkValidToken(req.body.token);
