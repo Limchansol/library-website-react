@@ -1,0 +1,80 @@
+.indBook {
+  padding: 20px;
+  width: 200px;
+  height: 120px;
+  background-image: url("../images/book.png");
+  background-size: cover;
+  z-index: 2;
+  overflow: hidden;
+  line-clamp: 2;
+  line-height: normal;
+  transition: 0.5s ease-in-out;
+  cursor: zoom-in;
+  position: relative;
+}
+
+.indBook.zoom {
+  transform: scale(2, 2);
+}
+
+.indBook:nth-child(1) {
+  grid-column: 1/ 2;
+  grid-row: 1/2;
+}
+
+.indBook:nth-child(2) {
+  grid-column: 2/ 3;
+  grid-row: 1/2;
+}
+
+.indBook:nth-child(3) {
+  grid-column: 3/ 4;
+  grid-row: 1/2;
+}
+
+.indBook:nth-child(4) {
+  grid-column: 1/ 2;
+  grid-row: 2/3;
+}
+
+.indBook:nth-child(5) {
+  grid-column: 2/ 3;
+  grid-row: 2/3;
+}
+
+.indBook:nth-child(6) {
+  grid-column: 3/ 4;
+  grid-row: 2/3;
+}
+
+.indBookPreview {
+  margin: 20px 0;
+  vertical-align: bottom;
+  line-height: 150%;
+  text-align: center;
+}
+
+.indBookTitle {
+  margin: 0;
+  text-align: center;
+}
+
+.indBook span {
+  font-size: xx-small;
+}
+
+.indBook .bar {
+  margin: 0 5px;
+}
+
+button.remove {
+  padding: 0;
+  position: absolute;
+  top: 2px;
+  right: 0;
+  width: 15px;
+  height: 15px;
+  font-size: xx-small;
+  text-align: center;
+  line-height: 17px;
+}

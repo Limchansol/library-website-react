@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { loginUserInfo } from "../Atoms/LoginAtom.js";
 import axios from "axios";
+import IndBook from "../components/IndBook.js";
 import Warn from "../components/Warn.js";
 import style from "./MyPage.module.css";
 
@@ -13,7 +14,6 @@ function MyPage() {
   const [changeMode, setChangeMode] = useState(false);
   const [changedInfo, setChangedInfo] = useState(userData);
   let alreadyFetched = false;
-  console.log(userData);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -247,9 +247,12 @@ function MyPage() {
               <div id={style.bookShelf}>
                 {interestingBooks?.map?.((e) => {
                   return (
-                    <div key={e?._id} className={style.indBooks}>
-                      <span className={style.indBooksText}>{e?.title}</span>
-                    </div>
+                    <>
+                      <IndBook book={e} key={e?._id} />
+                      {/* <div key={e?._id} className={style.indBooks}>
+                        <span className={style.indBooksText}>{e?.title}</span>
+                      </div> */}
+                    </>
                   );
                 })}
               </div>
