@@ -101,7 +101,7 @@ userRouter.put(
 userRouter.put(
   "/interestingBookDelete",
   expressAsyncHandler(async (req, res) => {
-    const token = checkValidToken(req.body.token);
+    const token = checkValidToken(req.headers.token);
     const { bookId } = req.body;
     const user = await User.updateOne(
       { _id: token._id },

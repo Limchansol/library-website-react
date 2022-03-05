@@ -1,23 +1,40 @@
 import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { loginUserInfo } from "../Atoms/LoginAtom.js";
+import axios from "axios";
 import IndBook from "./IndBook";
 import style from "./BookShelf.module.css";
 
 function BookShelf({ interestingBooks }) {
+  const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
   const [zoomBook, setZoomBook] = useState({});
+  console.log(zoomBook);
+  console.log(zoomBook._id, "아이디");
 
   // 관심도서 삭제
-  const removeIndBook = () => {
+  const removeIndBook = async () => {
     const confirmRemove = window.confirm(
       `『${zoomBook?.title}』을(를) 관심도서에서 삭제하시겠습니까?`
     );
     if (!confirmRemove) return;
     try {
       // 여기에 관심도서 삭제 요청 코드 작성 (zoomBook이 확대된 책 정보를 담고 있음)
+      await axios.put(
+        "/api/users/interestingBookDelete",
+        {
+          bookId: zoomBook._id,
+        },
+        {
+          headers: { token: loginInfo.token },
+        }
+      );
 
       alert(`『${zoomBook?.title}』이(가) 관심도서에서 삭제되었습니다.`);
     } catch (error) {
       console.log("관심도서 삭제 오류", error);
       alert("오류가 발생했습니다. 다시 시도해주세요.");
+    } finally {
+      console.log(zoomBook._id, "아아디ㅣ");
     }
   };
 
