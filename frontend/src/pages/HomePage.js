@@ -1,3 +1,4 @@
+import BookChart from "../components/BookChart";
 import BookOfTheMonth from "../components/BookOfTheMonth";
 import Calender from "../components/Calender";
 import Promotion from "../components/Promotion";
@@ -14,6 +15,9 @@ function HomePage() {
       </div>
       <div className={style.item}>
         <Calender />
+      </div>
+      <div className={style.item}>
+        <BookChart />
       </div>
     </div>
   );
