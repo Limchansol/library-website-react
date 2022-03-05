@@ -105,7 +105,7 @@ userRouter.put(
     const { bookId } = req.body;
     const user = await User.updateOne(
       { _id: token._id },
-      { $pullAll: { interestingBooks: bookId } }
+      { $pullAll: { interestingBooks: [bookId] } }
     );
     if (!user) res.status(404).send({ message: "not found" });
     res.send(user);

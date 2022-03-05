@@ -65,3 +65,10 @@ Content-Type: application/json
 }
 ###
 GET http://localhost:5000/api/books/forgraph
+###
+PUT http://localhost:5000/api/users/interestingBookDelete
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjFhNmM5OTIyZTFiMDgwMzg5NTU1NDUiLCJuYW1lIjoid29ud29vIiwiZW1haWwiOiJqd3cwNDE4QG5hdmVyLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0NjUwMTM2NywiZXhwIjoxNjQ2NzYwNTY3fQ.-izr6YsPXgCTs3lNNppEgbmxw_0MXJ4WdFWqbzuilns
+
+{
+  "bookId": "621bb06abfb0e5014984eb38"
+}
