@@ -2,6 +2,7 @@ const express = require("express");
 const expressAsyncHandler = require("express-async-handler");
 const BookOfTheMonth = require("../models/bookOfTheMonthModel");
 const bookOfTheMonthRouter = express.Router();
+const sharp = require("sharp");
 const multer = require("multer");
 const upload = multer();
 
@@ -29,6 +30,9 @@ bookOfTheMonthRouter.put(
   upload.single("bookImg"),
   expressAsyncHandler(async (req, res) => {
     const { month } = req.params;
+    const resizedImg = await sharp(req.file.buffer)
+      .resize({ height: 250 })
+      .toBuffer();
     const targetBook = await BookOfTheMonth.updateOne(
       { month: month },
       {
@@ -36,12 +40,12 @@ bookOfTheMonthRouter.put(
         title: req.body.title,
         writer: req.body.writer,
         paragraph: req.body.paragraph,
-        bookImg: { data: req.file.buffer, contentType: req.file.mimetype },
+        bookImg: { data: resizedImg, contentType: req.file.mimetype },
       },
       { upsert: true }
     );
     res.send(targetBook);
   })
 );
-//지금 사실 이달의 책 데이터베이스의 용량이 무지막지하다...sharp 이용해서 줄이자.
+
 module.exports = bookOfTheMonthRouter;

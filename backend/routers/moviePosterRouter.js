@@ -1,9 +1,10 @@
 const express = require("express");
 const expressAsyncHandler = require("express-async-handler");
 const moviePosterRouter = express.Router();
+const sharp = require("sharp");
 const multer = require("multer");
-const MoviePoster = require("../models/moviePosterModel");
 const upload = multer();
+const MoviePoster = require("../models/moviePosterModel");
 
 moviePosterRouter.get(
   "/:year/:season",
@@ -27,9 +28,13 @@ moviePosterRouter.put(
   upload.array("moviePosters"),
   expressAsyncHandler(async (req, res) => {
     const { year, season } = req.params;
-    const tempArr = req.files.map((e) => {
-      return { data: e.buffer, contentType: e.mimetype };
-    });
+    const tempArr = [];
+    for (const e of req.files) {
+      const resizedImg = await sharp(e.buffer)
+        .resize({ width: 200 })
+        .toBuffer();
+      tempArr.push({ data: resizedImg, contentType: e.mimetype });
+    }
     const moviePosters = await MoviePoster.updateOne(
       { $and: [{ year: Number(year), season: Number(season) }] },
       {

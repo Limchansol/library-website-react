@@ -2,6 +2,7 @@ const express = require("express");
 const expressAsyncHandler = require("express-async-handler");
 const promotionRouter = express.Router();
 const multer = require("multer");
+const sharp = require("sharp");
 const Promotion = require("../models/promotionModel");
 const upload = multer();
 
@@ -26,13 +27,13 @@ promotionRouter.put(
   "/update/:order",
   upload.single("ad"),
   expressAsyncHandler(async (req, res) => {
-    console.log(req.file, req.body);
+    const resizedImg = await sharp(req.file.buffer).resize(270, 270).toBuffer();
     const { order } = req.params;
     const promotions = await Promotion.updateOne(
       { order: Number(order) },
       {
         ad: {
-          data: req.file.buffer,
+          data: resizedImg,
           contentType: req.file.mimetype,
           link: req.body.link,
         },
