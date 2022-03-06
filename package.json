@@ -6,7 +6,8 @@
   "scripts": {
     "client": "cd frontend && npm run start",
     "server": "nodemon --watch backend --exec node backend/server.js",
-    "start": "concurrently \"npm run server \" \"npm run client\""
+    "start": "concurrently \"npm run server \" \"npm run client\"",
+    "seed": "node backend/insertSeed.js"
   },
   "keywords": [],
   "author": "",
