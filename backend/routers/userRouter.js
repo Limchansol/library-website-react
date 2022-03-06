@@ -115,7 +115,7 @@ userRouter.put(
 userRouter.put(
   "/reservedBookUpdate",
   expressAsyncHandler(async (req, res) => {
-    const token = checkValidToken(req.body.token);
+    const token = checkValidToken(req.headers.token);
     const user = await User.updateOne(
       { _id: token._id },
       { $push: { reservedBooks: req.body.reservedBooks } }
@@ -125,9 +125,49 @@ userRouter.put(
 );
 
 userRouter.put(
+  "/reservedBookDelete",
+  expressAsyncHandler(async (req, res) => {
+    const token = checkValidToken(req.headers.token);
+    const { bookId } = req.body;
+    const user = await User.updateOne(
+      { _id: token._id },
+      { $pullAll: { reservedBooks: [bookId] } }
+    );
+    if (!user) res.status(404).send({ message: "not found" });
+    res.send(user);
+  })
+);
+
+userRouter.put(
+  "/borrowedBookUpdate",
+  expressAsyncHandler(async (req, res) => {
+    const token = checkValidToken(req.headers.token);
+    const user = await User.updateOne(
+      { _id: token._id },
+      { $push: { borrowedBooks: req.body.borrowedBooks } }
+    );
+    res.send(user);
+  })
+);
+
+userRouter.put(
+  "/borrowedBookDelete",
+  expressAsyncHandler(async (req, res) => {
+    const token = checkValidToken(req.headers.token);
+    const { bookId } = req.body;
+    const user = await User.updateOne(
+      { _id: token._id },
+      { $pullAll: { borrowedBooks: [bookId] } }
+    );
+    if (!user) res.status(404).send({ message: "not found" });
+    res.send(user);
+  })
+);
+
+userRouter.put(
   "/userUpdate",
   expressAsyncHandler(async (req, res) => {
-    const token = checkValidToken(req.body.token);
+    const token = checkValidToken(req.headers.token);
     const user = await User.updateOne({ _id: token._id }, req.body);
     res.send(user);
   })

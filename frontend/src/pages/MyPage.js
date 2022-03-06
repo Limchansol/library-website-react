@@ -57,10 +57,15 @@ function MyPage() {
   // 수정 완료
   const completetUserInfoChange = async () => {
     try {
-      await axios.put("/api/users/userUpdate", {
-        token: loginInfo.token,
-        ...changedInfo,
-      });
+      await axios.put(
+        "/api/users/userUpdate",
+        {
+          ...changedInfo,
+        },
+        {
+          headers: { token: loginInfo.token },
+        }
+      );
       alert("회원정보 수정이 완료되었습니다.");
     } catch (error) {
       console.log("마이페이지 정보 수정 오류", error);

@@ -54,10 +54,15 @@ function Book({ book, index }) {
 
     // 이곳에 예약 코드 작성
     try {
-      await axios.put("/api/users/reservedBookUpdate", {
-        token: loginInfo.token,
-        reservedBooks: book._id,
-      });
+      await axios.put(
+        "/api/users/reservedBookUpdate",
+        {
+          reservedBooks: book._id,
+        },
+        {
+          headers: { token: loginInfo.token },
+        }
+      );
       await axios.put("/api/books/reservedBookUpdate", {
         _id: book._id,
         changeTo: "reservation",
