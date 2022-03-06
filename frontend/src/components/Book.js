@@ -1,8 +1,8 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { loginUserInfo } from "../Atoms/LoginAtom.js";
+import axios from "axios";
 import style from "./Book.module.css";
 
 function checkLogin(loginInfo, navigate) {
@@ -40,6 +40,7 @@ function Book({ book, index }) {
       setBookstate("대여 중 / 예약 중");
     } else {
       setBookstate(book.state);
+      console.log("도서 상태가 정상적으로 처리되지 않았습니다.");
     }
   }, []);
 
@@ -52,28 +53,36 @@ function Book({ book, index }) {
     if (!confirmReservation) return;
 
     // 이곳에 예약 코드 작성
-    await axios.put("/api/users/reservedBookUpdate", {
-      token: loginInfo.token,
-      reservedBooks: book._id,
-    });
-    await axios.put("/api/books/reservedBookUpdate", {
-      _id: book._id,
-      changeTo: "reservation",
-    });
-
-    moveToMyPage(`『${book.title}』 예약이 완료되었습니다.`, navigate);
+    try {
+      await axios.put("/api/users/reservedBookUpdate", {
+        token: loginInfo.token,
+        reservedBooks: book._id,
+      });
+      await axios.put("/api/books/reservedBookUpdate", {
+        _id: book._id,
+        changeTo: "reservation",
+      });
+      moveToMyPage(`『${book.title}』 예약이 완료되었습니다.`, navigate);
+    } catch (error) {
+      console.log("도서 예약 오류", error);
+      alert("오류가 발생했습니다. 다시 시도해주세요.");
+    }
   };
 
   const onClickSaveInterest = async () => {
     if (!checkLogin(loginInfo, navigate)) return;
 
     // 이곳에 관심 도서 담기 코드 작성
-    await axios.put("/api/users/interestingBookUpdate", {
-      token: loginInfo.token,
-      interestingBooks: book._id,
-    });
-
-    moveToMyPage(`『${book.title}』을 관심 도서에 담았습니다.`, navigate);
+    try {
+      await axios.put("/api/users/interestingBookUpdate", {
+        token: loginInfo.token,
+        interestingBooks: book._id,
+      });
+      moveToMyPage(`『${book.title}』을 관심 도서에 담았습니다.`, navigate);
+    } catch (error) {
+      console.log("관심도서 담기 오류", error);
+      alert("오류가 발생했습니다. 다시 시도해주세요.");
+    }
   };
 
   // titleText 정렬이 잘 안됨. 제목이 길어져서 두 줄을 넘기게 되면 '도서' 글자가 두 줄이 되어버림. 이유를 못 찾았음.
@@ -95,7 +104,7 @@ function Book({ book, index }) {
       </p>
       <div className={style.btnContainer}>
         <button
-          // disabled={!bookState.includes("예약 가능")}  // 어떤 경우에 예약할 수 있는지 확실하게 정한 후 disabled 활성화할 것.
+          disabled={!bookState.includes("예약 가능")}
           onClick={onClickReservation}
         >
           대여 예약하기
