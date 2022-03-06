@@ -2,19 +2,19 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { loginUserInfo } from "../Atoms/LoginAtom.js";
 import axios from "axios";
-import IndBook from "../components/IndBook.js";
+import ReservedBookItem from "../components/ReservedBookItem.js";
+import BookShelf from "../components/BookShelf.js";
 import Warn from "../components/Warn.js";
 import style from "./MyPage.module.css";
-import BookShelf from "../components/BookShelf.js";
 
 function MyPage() {
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
   const [userData, setUserData] = useState({});
   const [interestingBooks, setInterestingBooks] = useState([]);
+  const [reservedBooks, setReservedBooks] = useState([]);
   const [inquiries, setInquiries] = useState([]);
   const [changeMode, setChangeMode] = useState(false);
   const [changedInfo, setChangedInfo] = useState(userData);
-  // const [zoomBook, setZoomBook] = useState({});
   let alreadyFetched = false;
 
   useEffect(() => {
@@ -32,6 +32,13 @@ function MyPage() {
           },
         });
         setInterestingBooks(bookRes.data);
+        const reservedBookRes = await axios.get("/api/books/searchID", {
+          headers: {
+            idarray: JSON.stringify(loginRes?.data?.reservedBooks),
+          },
+        });
+        setReservedBooks(reservedBookRes.data);
+        console.log(reservedBookRes.data, "디에ㅔ");
         const inquiryRes = await axios.get(
           `/api/inquiries/${loginRes?.data?._id}`
         );
@@ -54,8 +61,8 @@ function MyPage() {
     }));
   };
 
-  // 수정 완료
-  const completetUserInfoChange = async () => {
+  // 회원 정보 수정 완료
+  const completeUserInfoChange = async () => {
     try {
       await axios.put(
         "/api/users/userUpdate",
@@ -75,7 +82,7 @@ function MyPage() {
     }
   };
 
-  // 수정 취소
+  // 회원 정보 수정 취소
   const cancelUserInfoChage = () => {
     const confirmCancel = window.confirm("수정을 취소하시겠습니까?");
     if (!confirmCancel) return;
@@ -104,6 +111,8 @@ function MyPage() {
       console.log("회원탈퇴 오류", error);
     }
   };
+
+  console.log(userData);
 
   return (
     <>
@@ -190,7 +199,7 @@ function MyPage() {
                   </p>
                   <button
                     className={style.completeBtn}
-                    onClick={completetUserInfoChange}
+                    onClick={completeUserInfoChange}
                   >
                     수정 완료
                   </button>
@@ -212,7 +221,7 @@ function MyPage() {
                     <th>책 제목</th>
                     <th>반납 기한</th>
                     <th>대여 상태</th>
-                    <th>연장하기</th>
+                    <th>대여 연장</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -243,6 +252,33 @@ function MyPage() {
                 </tbody>
               </table>
             </div>
+            <div id={style.reservedBooks}>
+              <h2>예약 도서</h2>
+              {userData.reservedBooks?.length ? (
+                <table>
+                  <thead>
+                    <tr>
+                      <th>책 제목</th>
+                      <th>예약 상태</th>
+                      <th>예약 취소</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {reservedBooks?.map?.((e, i) => {
+                      return (
+                        <ReservedBookItem
+                          loginInfo={loginInfo}
+                          book={e}
+                          key={i}
+                        />
+                      );
+                    })}
+                  </tbody>
+                </table>
+              ) : (
+                <h3>예약한 도서가 없습니다.</h3>
+              )}
+            </div>
             <div id={style.interestingBooks}>
               <h2>관심 도서</h2>
               <p>
@@ -252,42 +288,6 @@ function MyPage() {
                 장식하세요!
               </p>
               <BookShelf interestingBooks={interestingBooks} />
-              {/* <div id={style.bookShelf}>
-                {interestingBooks?.map?.((e) => {
-                  return (
-                    <IndBook book={e} key={e?._id} setZoomBook={setZoomBook} />
-                  );
-                })}
-                {Object.keys(zoomBook).length ? (
-                  <>
-                    <div
-                      className={style.zoomedIndBook}
-                      onClick={() => setZoomBook({})}
-                    >
-                      <h2 className={style.title}>{zoomBook?.title}</h2>
-                      <div className={style.infoText}>
-                        <span>
-                          <b>지은이:</b> {zoomBook?.writer}
-                        </span>
-                        <span>
-                          <b>출판사:</b> 「{zoomBook?.publisher}」
-                        </span>
-                        <span>
-                          <b>나만의 한줄평:</b> 한줄평은 어떻게 하지?
-                        </span>
-                        <button
-                          className={style.remove}
-                          onClick={removeIndBook}
-                        >
-                          관심도서 삭제
-                        </button>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <></>
-                )}
-              </div> */}
             </div>
             <div id={style.inquiries}>
               <h2>내가 한 문의</h2>

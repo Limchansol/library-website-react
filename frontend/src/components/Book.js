@@ -38,6 +38,8 @@ function Book({ book, index }) {
       setBookstate("대여 중 / 예약 가능");
     } else if (book.state === "reservation") {
       setBookstate("대여 중 / 예약 중");
+    } else if (book.state === "ready") {
+      setBookstate("예약 중");
     } else {
       setBookstate(book.state);
       console.log("도서 상태가 정상적으로 처리되지 않았습니다.");
@@ -108,10 +110,7 @@ function Book({ book, index }) {
         </span>
       </p>
       <div className={style.btnContainer}>
-        <button
-          disabled={!bookState.includes("예약 가능")}
-          onClick={onClickReservation}
-        >
+        <button disabled={book.state !== "rental"} onClick={onClickReservation}>
           대여 예약하기
         </button>
         <button onClick={onClickSaveInterest}>관심 도서 담기</button>
