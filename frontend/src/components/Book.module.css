@@ -54,6 +54,10 @@
   color: tomato;
 }
 
+.bookState.ready {
+  color: rgb(240, 182, 128);
+}
+
 .btnContainer {
   margin-bottom: 20px;
 }

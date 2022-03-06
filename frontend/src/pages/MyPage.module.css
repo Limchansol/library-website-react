@@ -17,6 +17,7 @@
 
 #userInfo,
 #rentalBooks,
+#reservedBooks,
 #interestingBooks {
   margin: 70px 0px;
 }
@@ -33,87 +34,34 @@
   width: 100px;
 }
 
-#rentalBooks table {
+#rentalBooks table,
+#reservedBooks table {
   margin: 0 auto;
 }
 
-#rentalBooks td {
+#rentalBooks td,
+#reservedBooks td {
   padding: 20px;
   border: 1px black solid;
 }
 
-#rentalBooks button {
+#rentalBooks button,
+#reservedBooks button {
   height: 40px;
   width: 90px;
   letter-spacing: 0.1em;
+}
+
+#rentalBooks h3,
+#reservedBooks h3 {
+  text-align: center;
+  font-weight: normal;
 }
 
 #interestingBooks p {
   text-align: center;
   margin: 30px;
 }
-/* 
-#bookShelf {
-  margin: auto;
-  width: 900px;
-  height: 480px;
-  background-image: url("../images/bookShelf.png");
-  background-size: cover;
-  background-position: top center;
-  background-repeat: no-repeat;
-  display: grid;
-  grid-template-columns: 340px 220px 340px;
-  grid-template-rows: 240px 240px;
-  align-items: center;
-  justify-items: center;
-  z-index: 1;
-  position: relative;
-}
-
-#bookShelf .zoomedIndBook {
-  padding: 20px;
-  width: 550px;
-  height: 350px;
-  background-image: url("../images/book.png");
-  background-size: cover;
-  overflow: hidden;
-  line-height: 150%;
-  transform: translateY(-50%);
-  transition: 0.5s ease-in-out;
-  position: absolute;
-  top: 50%;
-  z-index: 10;
-  cursor: zoom-out;
-}
-
-.zoomedIndBook .title {
-  text-align: center;
-}
-
-.zoomedIndBook .infoText {
-  margin: 0 auto;
-  width: 450px;
-}
-
-.infoText span {
-  display: block;
-  margin-bottom: 15px;
-}
-
-#bookShelf button.remove {
-  display: block;
-  margin: 0 auto;
-  padding: 0;
-  width: 120px;
-  height: 35px;
-  position: absolute;
-  bottom: 10px;
-  right: 45px;
-  text-align: center;
-  font-size: 16px;
-  line-height: 17px;
-  letter-spacing: 0.1em;
-} */
 
 .inqContent {
   margin-top: 40px;
