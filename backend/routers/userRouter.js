@@ -37,13 +37,16 @@ userRouter.post(
           name: user.name,
           email: user.email,
           isAdmin: user.isAdmin,
-          token: generateToken(user),
+          token: {
+            access: generateToken(user, "access"),
+            refresh: generateToken(user, "refresh"),
+          },
         });
         return;
       }
-      res.status(401).send({ message: "there are no user like this" });
+      res.status(404).send({ message: "there are no user like this password" });
     } else {
-      res.status(401).send({ message: "there are no user like this" });
+      res.status(404).send({ message: "there are no user like this id" });
     }
   })
 );
@@ -89,7 +92,7 @@ userRouter.post(
 userRouter.put(
   "/interestingBookUpdate",
   expressAsyncHandler(async (req, res) => {
-    const token = checkValidToken(req.body.token);
+    const token = checkValidToken(req.headers.token);
     const user = await User.updateOne(
       { _id: token._id },
       { $push: { interestingBooks: req.body.interestingBooks } }

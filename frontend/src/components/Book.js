@@ -81,10 +81,17 @@ function Book({ book, index }) {
 
     // 이곳에 관심 도서 담기 코드 작성
     try {
-      await axios.put("/api/users/interestingBookUpdate", {
-        token: loginInfo.token,
-        interestingBooks: book._id,
-      });
+      await axios.put(
+        "/api/users/interestingBookUpdate",
+        {
+          interestingBooks: book._id,
+        },
+        {
+          headers: {
+            token: loginInfo.token,
+          },
+        }
+      );
       moveToMyPage(`『${book.title}』을 관심 도서에 담았습니다.`, navigate);
     } catch (error) {
       console.log("관심도서 담기 오류", error);
