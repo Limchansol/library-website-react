@@ -85,6 +85,7 @@ function Book({ book, index }) {
         changeTo: "reservation",
       });
       moveToMyPage(`『${book.title}』 예약이 완료되었습니다.`, navigate);
+      window.location.reload();
     } catch (error) {
       console.log("도서 예약 오류", error);
       alert("오류가 발생했습니다. 다시 시도해주세요.");

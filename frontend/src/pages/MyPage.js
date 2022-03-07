@@ -6,6 +6,7 @@ import ReservedBookItem from "../components/ReservedBookItem.js";
 import BookShelf from "../components/BookShelf.js";
 import Warn from "../components/Warn.js";
 import style from "./MyPage.module.css";
+import { useNavigate } from "react-router-dom";
 
 function MyPage() {
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
@@ -15,6 +16,7 @@ function MyPage() {
   const [inquiries, setInquiries] = useState([]);
   const [changeMode, setChangeMode] = useState(false);
   const [changedInfo, setChangedInfo] = useState(userData);
+  const navigate = useNavigate();
   let alreadyFetched = false;
 
   useEffect(() => {
@@ -54,7 +56,14 @@ function MyPage() {
         setInquiries(inquiryRes.data);
         alreadyFetched = true;
       } catch (error) {
-        console.log(error);
+        if (error.response.status === 401) {
+          console.log(error.response, "에러");
+          setLoginInfo("");
+          sessionStorage.clear();
+          alert("로그인이 만료되었습니다. 로그인 페이지로 이동합니다.");
+          navigate("/logIn");
+        }
+        console.log(error, "마이페이지 에러");
       }
     };
     fetchData();
@@ -135,8 +144,6 @@ function MyPage() {
       console.log("회원탈퇴 오류", error);
     }
   };
-
-  console.log(userData);
 
   return (
     <>
