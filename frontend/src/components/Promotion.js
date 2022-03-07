@@ -26,7 +26,6 @@ function Promotion() {
     // 컴포넌트가 새로 랜더링되든 말든 setInterval은 clear하지 않는 이상 처음에 받은 값 가지고 자기 할일 함
     // setInterval로 일정 시간마다 state를 업데이트해주고 싶으면 setState 콜백 써서 최신값 받아야 함
     setCurrIndex((prev) => {
-      console.log(imgCnt, "이미지 ");
       if (prev === imgCnt) {
         setTimeout(() => {
           setAnimated(false);
@@ -85,8 +84,6 @@ function Promotion() {
   }, []);
 
   useEffect(() => {
-    console.log(intervalID, "인터벌");
-
     let interval;
     if (!intervalID) {
       interval = setInterval(changePromotionImage, 2500);

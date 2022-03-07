@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { loginUserInfo } from "../Atoms/LoginAtom";
 import BookOfTheMonth from "../components/BookOfTheMonth";
@@ -24,7 +25,7 @@ function AdministratorPage() {
     bookImg: null,
   });
   const bookFileRef = useRef();
-
+  const navigate = useNavigate();
   const [newPromotion, setNewPromotion] = useState({
     order: 0,
     ad: null,
@@ -34,25 +35,34 @@ function AdministratorPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      let temp = await axios.get("/api/users/checkLogIn", {
-        headers: { token: loginInfo.token?.access },
-      });
-      if (temp.data.message === "jwt expired") {
-        const refreshData = await axios.get("/api/users/checkrefreshjwt", {
-          headers: { token: loginInfo.token?.refresh },
+      try {
+        let temp = await axios.get("/api/users/checkLogIn", {
+          headers: { token: loginInfo.token?.access },
         });
-        setLoginInfo(refreshData.data);
-        temp = await axios.get("/api/users/checkLogIn", {
-          headers: { token: refreshData.data.token?.access },
-        });
+        if (temp.data.message === "jwt expired") {
+          const refreshData = await axios.get("/api/users/checkrefreshjwt", {
+            headers: { token: loginInfo.token?.refresh },
+          });
+          setLoginInfo(refreshData.data);
+          temp = await axios.get("/api/users/checkLogIn", {
+            headers: { token: refreshData.data.token?.access },
+          });
+        }
+        const tempInq = await axios.get("/api/inquiries");
+        setUserInfo(temp.data);
+        setInquiry(tempInq.data);
+        setInquiryAnswer((prev) => ({
+          ...prev,
+          content: Array(inquiry ? inquiry.length : 0).fill(""),
+        }));
+      } catch (error) {
+        if (error.response.status === 401) {
+          setLoginInfo("");
+          sessionStorage.clear();
+          alert("로그인이 만료되었습니다. 로그인 페이지로 이동합니다.");
+          navigate("/logIn");
+        }
       }
-      const tempInq = await axios.get("/api/inquiries");
-      setUserInfo(temp.data);
-      setInquiry(tempInq.data);
-      setInquiryAnswer((prev) => ({
-        ...prev,
-        content: Array(inquiry ? inquiry.length : 0).fill(""),
-      }));
     };
     fetchData();
   }, []);

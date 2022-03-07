@@ -50,7 +50,6 @@ function Calender() {
       classList,
       dataset: { typeofday },
     } = e.currentTarget;
-    console.log(specialDay, typeofday);
     const changedDayArr = typeofday
       ? [...specialDay[typeofday]].filter((e) => e !== Number(textContent)) //스프레드로 딥카피
       : [...specialDay[`${changedDayType}Day`]];

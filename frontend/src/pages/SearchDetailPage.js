@@ -61,7 +61,6 @@ function SearchDetailPage() {
     e.preventDefault();
     const { title, writer, isbn, publisher } = detailedSearchValue;
     const books = fetchDetailedBook(title, writer, isbn, publisher);
-    console.log(books);
   };
 
   const handleLoadMore = () => {

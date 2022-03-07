@@ -4,6 +4,7 @@ import MovieSlide from "../components/MovieSlide";
 import style from "./MovieProgramPage.module.css";
 import { useRecoilState } from "recoil";
 import { loginUserInfo } from "../Atoms/LoginAtom";
+import { useNavigate } from "react-router-dom";
 
 function MovieProgramPage() {
   const [programInfo, setProgramInfo] = useState({
@@ -25,6 +26,7 @@ function MovieProgramPage() {
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
   const [isAdmin, setIsAdmin] = useState(false);
   const [season, setSeason] = useState(1);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,21 +35,29 @@ function MovieProgramPage() {
       const tempMovieInfo = await axios.get(
         `/api/movies/${nowYear}/${season.data.movieSeason}`
       );
-      console.log(tempMovieInfo);
       setProgramInfo(tempMovieInfo.data);
-      let temp = await axios.get("/api/users/checkLogIn", {
-        headers: { token: loginInfo.token?.access },
-      });
-      if (temp.data.message === "jwt expired") {
-        const refreshData = await axios.get("/api/users/checkrefreshjwt", {
-          headers: { token: loginInfo.token?.refresh },
+      try {
+        let temp = await axios.get("/api/users/checkLogIn", {
+          headers: { token: loginInfo.token?.access },
         });
-        setLoginInfo(refreshData.data);
-        temp = await axios.get("/api/users/checkLogIn", {
-          headers: { token: refreshData.data.token?.access },
-        });
+        if (temp.data.message === "jwt expired") {
+          const refreshData = await axios.get("/api/users/checkrefreshjwt", {
+            headers: { token: loginInfo.token?.refresh },
+          });
+          setLoginInfo(refreshData.data);
+          temp = await axios.get("/api/users/checkLogIn", {
+            headers: { token: refreshData.data.token?.access },
+          });
+        }
+        setIsAdmin(temp.data.isAdmin);
+      } catch (error) {
+        if (error.response.status === 401) {
+          setLoginInfo("");
+          sessionStorage.clear();
+          alert("로그인이 만료되었습니다. 로그인 페이지로 이동합니다.");
+          navigate("/logIn");
+        }
       }
-      setIsAdmin(temp.data.isAdmin);
     };
     fetchData();
   }, []);
@@ -61,7 +71,6 @@ function MovieProgramPage() {
   }
 
   function handleMovieArr(ind, name, value) {
-    console.log(ind, name, value);
     const tempMovie = [...programInfo.movies];
     const tempMovieObj = { ...tempMovie[ind], [name]: value };
     tempMovie[ind] = tempMovieObj;
@@ -69,11 +78,9 @@ function MovieProgramPage() {
       ...prev,
       movies: tempMovie,
     }));
-    console.log(programInfo);
   }
 
   function handleMoviePosters(posters) {
-    console.log(posters);
     setMoviePosters(posters);
   }
 

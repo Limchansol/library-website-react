@@ -86,12 +86,10 @@ bookRouter.get(
             }
           : {},
       ],
-    });
-    const books = afterCursorBooks.filter((e, i) => {
-      return i < limit;
-    });
+    }).limit(Number(limit) + 1);
     let nextCursor = afterCursorBooks[limit]?._id;
     if (nextCursor === undefined) nextCursor = null;
+    const books = afterCursorBooks.slice(0, 7);
     res.send({
       books,
       paging: {
@@ -120,12 +118,10 @@ bookRouter.get(
             }
           : {}, //cursor에 값 없으면 무조건 true리턴하도록 해야 함.(처음 요청에는 cursor쿼리가 없을 수도 있음)
       ],
-    });
-    const books = afterCursorBooks.filter((e, i) => {
-      return i < limit;
-    });
+    }).limit(Number(limit) + 1);
     let nextCursor = afterCursorBooks[limit]?._id;
     if (nextCursor === undefined) nextCursor = null;
+    const books = afterCursorBooks.slice(0, 7);
     res.send({
       books,
       paging: {
@@ -184,13 +180,10 @@ bookRouter.get(
             }
           : {},
       ],
-    }); //큰 버그가 존재한다! 검색시 특수기호를 포함한 쿼리가 있으면 그것을 인코딩하고 보내야 한다! 반드시 수정할 것.
-    //또한 isbn같은 경우, 정확한 검색일 때에만 검색할 수 있도록 만들어 줘야 할 것이다!
-    const books = afterCursorBooks.filter((e, i) => {
-      return i < limit;
-    });
+    }).limit(Number(limit) + 1);
     let nextCursor = afterCursorBooks[limit]?._id;
     if (nextCursor === undefined) nextCursor = null;
+    const books = afterCursorBooks.slice(0, 7);
     res.send({
       books,
       paging: {
