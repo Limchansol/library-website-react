@@ -86,11 +86,7 @@ function Book({ book, index }) {
         {
           interestingBooks: book._id,
         },
-        {
-          headers: {
-            token: loginInfo.token,
-          },
-        }
+        { headers: { token: loginInfo.token } }
       );
       moveToMyPage(`『${book.title}』을 관심 도서에 담았습니다.`, navigate);
     } catch (error) {

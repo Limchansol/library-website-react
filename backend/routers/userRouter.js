@@ -20,6 +20,7 @@ userRouter.get(
 userRouter.get(
   "/checkLogIn",
   expressAsyncHandler(async (req, res) => {
+    console.log(req.body);
     const token = checkValidToken(req.headers.token);
     const user = await User.findOne({ _id: token._id });
     res.send(user);
@@ -37,16 +38,13 @@ userRouter.post(
           name: user.name,
           email: user.email,
           isAdmin: user.isAdmin,
-          token: {
-            access: generateToken(user, "access"),
-            refresh: generateToken(user, "refresh"),
-          },
+          token: generateToken(user),
         });
         return;
       }
-      res.status(404).send({ message: "there are no user like this password" });
+      res.status(401).send({ message: "there are no user like this" });
     } else {
-      res.status(404).send({ message: "there are no user like this id" });
+      res.status(401).send({ message: "there are no user like this" });
     }
   })
 );
