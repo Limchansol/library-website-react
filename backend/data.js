@@ -8,7 +8,7 @@ const data = {
       id: "jww0418",
       password: bcrypt.hashSync("123", 10),
       isAdmin: true,
-      phone: "010-6738-1518",
+      phone: "01067381518",
       gender: "male",
       yyyy: "2001",
       mm: "04",

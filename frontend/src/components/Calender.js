@@ -36,17 +36,22 @@ function Calender() {
 
   function changeSchedule(e) {
     if (!isAdmin) return;
-    const { className, textContent, classList } = e.currentTarget;
-    const changedDayArr = className
-      ? [...specialDay[className]].filter((e) => e !== Number(textContent)) //스프레드로 딥카피
+    const {
+      textContent,
+      classList,
+      dataset: { typeofday },
+    } = e.currentTarget;
+    console.log(specialDay, typeofday);
+    const changedDayArr = typeofday
+      ? [...specialDay[typeofday]].filter((e) => e !== Number(textContent)) //스프레드로 딥카피
       : [...specialDay[`${changedDayType}Day`]];
-    if (className) {
+    if (typeofday) {
       //기존 클래스를 없애는 상황
       setSpecialDay((prev) => ({
         ...prev,
-        [className]: changedDayArr,
+        [typeofday]: changedDayArr,
       }));
-      classList.toggle(`${className}`);
+      classList.toggle(`${typeofday}`);
       return;
     }
     //없던 클래스를 추가하는 상황
@@ -159,6 +164,16 @@ function Calender() {
                             ? style.redDay
                             : specialDay.greenDay.includes(ind + 1)
                             ? style.greenDay
+                            : undefined
+                        }
+                        data-typeofday={
+                          // 비표준 속성의 이름은 무조건 소문자로 지어야 한다!(대문자는 소문자로 변환됌, 혼동 방지)
+                          specialDay.orangeDay.includes(ind + 1)
+                            ? "orangeDay"
+                            : specialDay.redDay.includes(ind + 1)
+                            ? "redDay"
+                            : specialDay.greenDay.includes(ind + 1)
+                            ? "greenDay"
                             : undefined
                         }
                         key={ind} //날짜들이 실제 들어있는 칸
