@@ -31,14 +31,18 @@ userRouter.get(
 );
 
 userRouter.get(
-  "/checkrefreshjwt",
+  "/checkrefreshjwt", //refresh토큰 보내서 access토큰 재발급
   expressAsyncHandler(async (req, res) => {
     const token = checkValidToken(req.headers.token, "refresh");
     if (!token._id) {
-      res.send({ message: token });
-      return;
+      res.status(401).send({ message: token });
+      return; //refresh토큰이 만료되거나 오류가 있는 경우
     }
     const user = await User.findOne({ _id: token._id });
+    if (user.refresh !== req.headers.token) {
+      res.status(401).send({ message: "refresh token invalid" }); //refresh토큰이 db에 저장된 것과 다를 경우
+      return;
+    }
     res.send({
       _id: user._id,
       name: user.name,
@@ -46,7 +50,7 @@ userRouter.get(
       isAdmin: user.isAdmin,
       token: {
         access: generateToken(user, "access"),
-        refresh: generateToken(user, "refresh"),
+        refresh: user.refresh,
       },
     });
   })
@@ -58,6 +62,8 @@ userRouter.post(
     const user = await User.findOne({ id: req.body.id });
     if (user) {
       if (bcrypt.compareSync(req.body.password, user.password)) {
+        const refTkn = generateToken(user, "refresh");
+        await User.updateOne({ id: req.body.id }, { refresh: refTkn });
         res.send({
           _id: user._id,
           name: user.name,
@@ -65,7 +71,7 @@ userRouter.post(
           isAdmin: user.isAdmin,
           token: {
             access: generateToken(user, "access"),
-            refresh: generateToken(user, "refresh"),
+            refresh: refTkn,
           },
         });
         return;

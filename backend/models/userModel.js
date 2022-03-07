@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema(
     borrowedBooks: { type: Array },
     interestingBooks: { type: Array },
     reservedBooks: { type: Array },
+    refresh: { type: String },
   },
   {
     timestamps: true,
