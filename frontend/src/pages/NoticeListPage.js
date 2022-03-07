@@ -31,11 +31,20 @@ function NoticeListPage() {
   useEffect(() => {
     const fetchData = async () => {
       const notices = await axios.get("/api/notices");
-      setNoticeList(notices.data);
-      const loginRes = await axios.get("/api/users/checkLogIn", {
-        headers: { token: loginInfo.token },
+      setNoticeList(notices.data, loginInfo);
+      let loginRes = await axios.get("/api/users/checkLogIn", {
+        headers: { token: loginInfo.token?.access },
       });
-      console.log(loginRes.data.isAdmin, "어드민ㄴㄹ");
+      console.log(loginRes.data);
+      if (loginRes.data.message === "jwt expired") {
+        const refreshData = await axios.get("/api/users/checkrefreshjwt", {
+          headers: { token: loginInfo.token?.refresh },
+        });
+        setLoginInfo(refreshData.data);
+        loginRes = await axios.get("/api/users/checkLogIn", {
+          headers: { token: refreshData.data.token?.access },
+        });
+      }
       setIsAdmin(loginRes?.data?.isAdmin);
       setNewNotice((prev) => ({
         ...prev,

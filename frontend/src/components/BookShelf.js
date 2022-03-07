@@ -17,16 +17,30 @@ function BookShelf({ interestingBooks }) {
     if (!confirmRemove) return;
     try {
       // 여기에 관심도서 삭제 요청 코드 작성 (zoomBook이 확대된 책 정보를 담고 있음)
-      await axios.put(
+      let loginRes = await axios.put(
         "/api/users/interestingBookDelete",
         {
           bookId: zoomBook._id,
         },
         {
-          headers: { token: loginInfo.token },
+          headers: { token: loginInfo.token?.access },
         }
       );
-
+      if (loginRes.data.message === "jwt expired") {
+        const refreshData = await axios.get("/api/users/checkrefreshjwt", {
+          headers: { token: loginInfo.token?.refresh },
+        });
+        setLoginInfo(refreshData.data);
+        await axios.put(
+          "/api/users/interestingBookDelete",
+          {
+            bookId: zoomBook._id,
+          },
+          {
+            headers: { token: refreshData.data.token?.access },
+          }
+        );
+      }
       alert(`『${zoomBook?.title}』이(가) 관심도서에서 삭제되었습니다.`);
     } catch (error) {
       console.log("관심도서 삭제 오류", error);

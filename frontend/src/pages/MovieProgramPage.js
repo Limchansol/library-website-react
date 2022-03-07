@@ -35,9 +35,18 @@ function MovieProgramPage() {
       );
       console.log(tempMovieInfo);
       setProgramInfo(tempMovieInfo.data);
-      const temp = await axios.get("/api/users/checkLogIn", {
-        headers: { token: loginInfo.token },
+      let temp = await axios.get("/api/users/checkLogIn", {
+        headers: { token: loginInfo.token?.access },
       });
+      if (temp.data.message === "jwt expired") {
+        const refreshData = await axios.get("/api/users/checkrefreshjwt", {
+          headers: { token: loginInfo.token?.refresh },
+        });
+        setLoginInfo(refreshData.data);
+        temp = await axios.get("/api/users/checkLogIn", {
+          headers: { token: refreshData.data.token?.access },
+        });
+      }
       setIsAdmin(temp.data.isAdmin);
     };
     fetchData();

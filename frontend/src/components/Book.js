@@ -56,15 +56,30 @@ function Book({ book, index }) {
 
     // 이곳에 예약 코드 작성
     try {
-      await axios.put(
+      let loginRes = await axios.put(
         "/api/users/reservedBookUpdate",
         {
           reservedBooks: book._id,
         },
         {
-          headers: { token: loginInfo.token },
+          headers: { token: loginInfo.token?.access },
         }
       );
+      if (loginRes.data.message === "jwt expired") {
+        const refreshData = await axios.get("/api/users/checkrefreshjwt", {
+          headers: { token: loginInfo.token?.refresh },
+        });
+        setLoginInfo(refreshData.data);
+        await axios.put(
+          "/api/users/reservedBookUpdate",
+          {
+            reservedBooks: book._id,
+          },
+          {
+            headers: { token: refreshData.data.token?.access },
+          }
+        );
+      }
       await axios.put("/api/books/reservedBookUpdate", {
         _id: book._id,
         changeTo: "reservation",
@@ -81,13 +96,26 @@ function Book({ book, index }) {
 
     // 이곳에 관심 도서 담기 코드 작성
     try {
-      await axios.put(
+      let loginRes = await axios.put(
         "/api/users/interestingBookUpdate",
         {
           interestingBooks: book._id,
         },
-        { headers: { token: loginInfo.token } }
+        { headers: { token: loginInfo.token?.access } }
       );
+      if (loginRes.data.message === "jwt expired") {
+        const refreshData = await axios.get("/api/users/checkrefreshjwt", {
+          headers: { token: loginInfo.token?.refresh },
+        });
+        setLoginInfo(refreshData.data);
+        await axios.put(
+          "/api/users/interestingBookUpdate",
+          {
+            interestingBooks: book._id,
+          },
+          { headers: { token: refreshData.data.token?.access } }
+        );
+      }
       moveToMyPage(`『${book.title}』을 관심 도서에 담았습니다.`, navigate);
     } catch (error) {
       console.log("관심도서 담기 오류", error);

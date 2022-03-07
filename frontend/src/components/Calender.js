@@ -20,9 +20,18 @@ function Calender() {
     setToday([now.getFullYear(), now.getMonth(), now.getDate()]);
     const fetchData = async () => {
       try {
-        const temp = await axios.get("/api/users/checkLogIn", {
-          headers: { token: loginToken.token },
+        let temp = await axios.get("/api/users/checkLogIn", {
+          headers: { token: loginToken.token?.access },
         });
+        if (temp.data.message === "jwt expired") {
+          const refreshData = await axios.get("/api/users/checkrefreshjwt", {
+            headers: { token: loginToken.token?.refresh },
+          });
+          setLoginToken(refreshData.data);
+          temp = await axios.get("/api/users/checkLogIn", {
+            headers: { token: refreshData.data.token?.access },
+          });
+        }
         setIsAdmin(temp.data.isAdmin);
       } catch (err) {
         console.log(err);

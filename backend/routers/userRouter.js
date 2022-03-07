@@ -20,10 +20,35 @@ userRouter.get(
 userRouter.get(
   "/checkLogIn",
   expressAsyncHandler(async (req, res) => {
-    console.log(req.body);
     const token = checkValidToken(req.headers.token);
+    if (!token._id) {
+      res.send({ message: token });
+      return;
+    }
     const user = await User.findOne({ _id: token._id });
     res.send(user);
+  })
+);
+
+userRouter.get(
+  "/checkrefreshjwt",
+  expressAsyncHandler(async (req, res) => {
+    const token = checkValidToken(req.headers.token, "refresh");
+    if (!token._id) {
+      res.send({ message: token });
+      return;
+    }
+    const user = await User.findOne({ _id: token._id });
+    res.send({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      token: {
+        access: generateToken(user, "access"),
+        refresh: generateToken(user, "refresh"),
+      },
+    });
   })
 );
 
@@ -38,7 +63,10 @@ userRouter.post(
           name: user.name,
           email: user.email,
           isAdmin: user.isAdmin,
-          token: generateToken(user),
+          token: {
+            access: generateToken(user, "access"),
+            refresh: generateToken(user, "refresh"),
+          },
         });
         return;
       }
@@ -91,6 +119,10 @@ userRouter.put(
   "/interestingBookUpdate",
   expressAsyncHandler(async (req, res) => {
     const token = checkValidToken(req.headers.token);
+    if (!token._id) {
+      res.send({ message: token });
+      return;
+    }
     const user = await User.updateOne(
       { _id: token._id },
       { $push: { interestingBooks: req.body.interestingBooks } }
@@ -103,6 +135,10 @@ userRouter.put(
   "/interestingBookDelete",
   expressAsyncHandler(async (req, res) => {
     const token = checkValidToken(req.headers.token);
+    if (!token._id) {
+      res.send({ message: token });
+      return;
+    }
     const { bookId } = req.body;
     const user = await User.updateOne(
       { _id: token._id },
@@ -117,6 +153,10 @@ userRouter.put(
   "/reservedBookUpdate",
   expressAsyncHandler(async (req, res) => {
     const token = checkValidToken(req.headers.token);
+    if (!token._id) {
+      res.send({ message: token });
+      return;
+    }
     const user = await User.updateOne(
       { _id: token._id },
       { $push: { reservedBooks: req.body.reservedBooks } }
@@ -129,6 +169,10 @@ userRouter.put(
   "/reservedBookDelete",
   expressAsyncHandler(async (req, res) => {
     const token = checkValidToken(req.headers.token);
+    if (!token._id) {
+      res.send({ message: token });
+      return;
+    }
     const { bookId } = req.body;
     const user = await User.updateOne(
       { _id: token._id },
@@ -143,6 +187,10 @@ userRouter.put(
   "/borrowedBookUpdate",
   expressAsyncHandler(async (req, res) => {
     const token = checkValidToken(req.headers.token);
+    if (!token._id) {
+      res.send({ message: token });
+      return;
+    }
     const user = await User.updateOne(
       { _id: token._id },
       { $push: { borrowedBooks: req.body.borrowedBooks } }
@@ -155,6 +203,10 @@ userRouter.put(
   "/borrowedBookDelete",
   expressAsyncHandler(async (req, res) => {
     const token = checkValidToken(req.headers.token);
+    if (!token._id) {
+      res.send({ message: token });
+      return;
+    }
     const { bookId } = req.body;
     const user = await User.updateOne(
       { _id: token._id },
@@ -169,6 +221,10 @@ userRouter.put(
   "/userUpdate",
   expressAsyncHandler(async (req, res) => {
     const token = checkValidToken(req.headers.token);
+    if (!token._id) {
+      res.send({ message: token });
+      return;
+    }
     const user = await User.updateOne({ _id: token._id }, req.body);
     res.send(user);
   })

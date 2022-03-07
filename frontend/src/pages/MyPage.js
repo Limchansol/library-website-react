@@ -21,9 +21,18 @@ function MyPage() {
     const fetchData = async () => {
       try {
         if (alreadyFetched) return;
-        const loginRes = await axios.get("/api/users/checkLogIn", {
-          headers: { token: loginInfo.token },
+        let loginRes = await axios.get("/api/users/checkLogIn", {
+          headers: { token: loginInfo.token?.access },
         });
+        if (loginRes.data.message === "jwt expired") {
+          const refreshData = await axios.get("/api/users/checkrefreshjwt", {
+            headers: { token: loginInfo.token?.refresh },
+          });
+          setLoginInfo(refreshData.data);
+          loginRes = await axios.get("/api/users/checkLogIn", {
+            headers: { token: refreshData.data.token?.access },
+          });
+        }
         setUserData(loginRes.data);
         setChangedInfo(loginRes.data);
         const bookRes = await axios.get("/api/books/searchID", {
@@ -64,15 +73,30 @@ function MyPage() {
   // 회원 정보 수정 완료
   const completeUserInfoChange = async () => {
     try {
-      await axios.put(
+      let loginRes = await axios.put(
         "/api/users/userUpdate",
         {
           ...changedInfo,
         },
         {
-          headers: { token: loginInfo.token },
+          headers: { token: loginInfo.token?.access },
         }
       );
+      if (loginRes.data.message === "jwt expired") {
+        const refreshData = await axios.get("/api/users/checkrefreshjwt", {
+          headers: { token: loginInfo.token?.refresh },
+        });
+        setLoginInfo(refreshData.data);
+        await axios.put(
+          "/api/users/userUpdate",
+          {
+            ...changedInfo,
+          },
+          {
+            headers: { token: refreshData.data.token?.access },
+          }
+        );
+      }
       alert("회원정보 수정이 완료되었습니다.");
     } catch (error) {
       console.log("마이페이지 정보 수정 오류", error);

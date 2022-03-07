@@ -20,9 +20,18 @@ function InquiryPage() {
   useEffect(() => {
     const logInFetch = async () => {
       try {
-        const loginRes = await axios.get("/api/users/checkLogIn", {
-          headers: { token: loginInfo.token },
+        let loginRes = await axios.get("/api/users/checkLogIn", {
+          headers: { token: loginInfo.token?.access },
         });
+        if (loginRes.data.message === "jwt expired") {
+          const refreshData = await axios.get("/api/users/checkrefreshjwt", {
+            headers: { token: loginInfo.token?.refresh },
+          });
+          setLoginInfo(refreshData.data);
+          loginRes = await axios.get("/api/users/checkLogIn", {
+            headers: { token: refreshData.data.token?.access },
+          });
+        }
         console.log(loginRes.data._id);
         setInquiryInfo((prev) => ({
           ...prev,

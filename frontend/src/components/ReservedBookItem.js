@@ -15,7 +15,7 @@ function ReservedBookItem({ loginInfo, book }) {
           bookId: book._id,
         },
         {
-          headers: { token: loginInfo.token },
+          headers: { token: loginInfo.token?.access },
         }
       );
       if (book.state === "reservation") {
