@@ -19,12 +19,12 @@ function ReservedBookItem({ loginInfo, book }) {
         }
       );
       if (book.state === "reservation") {
-        await axios.put("/api/books/reservedBookUpdate", {
+        await axios.put("/api/books/bookstateUpdate", {
           _id: book._id,
           changeTo: "rental",
         });
       } else if (book.state === "ready") {
-        await axios.put("/api/books/reservedBookUpdate", {
+        await axios.put("/api/books/bookstateUpdate", {
           _id: book._id,
           changeTo: "none",
         });

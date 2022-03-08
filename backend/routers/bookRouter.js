@@ -236,7 +236,7 @@ bookRouter.get(
 );
 
 bookRouter.put(
-  "/reservedBookUpdate",
+  "/bookstateUpdate",
   expressAsyncHandler(async (req, res) => {
     const book = await Book.updateOne(
       { _id: req.body._id },

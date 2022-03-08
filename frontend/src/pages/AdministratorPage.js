@@ -210,14 +210,67 @@ function AdministratorPage() {
     }
   }
 
+  async function bookStateChange(e) {
+    const { username, userphone } = e.target.dataset;
+    const now = new Date();
+    const rentalFlag = ["none", "ready"].includes(
+      location.state?.rentalBook?.state
+    );
+    if (rentalFlag) {
+      await axios.put("/api/users/borrowedBookUpdate", {
+        name: username,
+        phone: userphone,
+        borrowedBooks: {
+          title: location.state?.rentalBook?.title,
+          loanStartYYYY: now.getFullYear(),
+          loanStartMM: now.getMonth() + 1,
+          loanStartDD: now.getDate(),
+        },
+      });
+      await axios.put("/api/books/bookstateUpdate", {
+        _id: location.state?.rentalBook?._id,
+        changeTo: "rental",
+      });
+      alert("대출 처리가 완료되었습니다");
+      return;
+    }
+    await axios.put("/api/users/borrowedBookDelete", {
+      name: username,
+      phone: userphone,
+      title: location.state?.rentalBook?.title,
+    });
+    await axios.put("/api/books/bookstateUpdate", {
+      _id: location.state?.rentalBook?._id,
+      changeTo:
+        location.state?.rentalBook?.state === "rental" ? "none" : "ready",
+    });
+    alert("반납 처리가 완료되었습니다");
+    return; //반납과 연체 로직은 추후에 추가 처리!
+  }
+
   return (
     <>
       {location.state?.rentalBook && (
         <div id={style.rental}>
-          <h2>도서 대출 </h2>
-          <h3>대출/ 반납 대상 책: {location.state?.rentalBook?.title}</h3>
+          <h2>
+            도서{" "}
+            {["none", "ready"].includes(location.state?.rentalBook?.state)
+              ? "대출"
+              : "반납"}{" "}
+          </h2>
+          <h3>
+            {["none", "ready"].includes(location.state?.rentalBook?.state)
+              ? "대출"
+              : "반납"}{" "}
+            대상 책: {location.state?.rentalBook?.title}
+          </h3>
           <form id={style.rentalForm} onSubmit={handleRentalSubmit}>
-            <h3>대출/ 반납하는 유저</h3>
+            <h3>
+              {["none", "ready"].includes(location.state?.rentalBook?.state)
+                ? "대출"
+                : "반납"}
+              하는 유저
+            </h3>
             <label htmlFor="userSearch">이름:</label>
             <input
               type="text"
@@ -235,7 +288,14 @@ function AdministratorPage() {
                 <tr>
                   <th>이름</th>
                   <th>전화번호</th>
-                  <th>대출/ 반납하기</th>
+                  <th>
+                    {["none", "ready"].includes(
+                      location.state?.rentalBook?.state
+                    )
+                      ? "대출"
+                      : "반납"}
+                    하기
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -245,7 +305,17 @@ function AdministratorPage() {
                       <td>{e.name}</td>
                       <td>{e.phone}</td>
                       <td>
-                        <button>대출/반납</button>
+                        <button
+                          onClick={bookStateChange}
+                          data-username={e.name}
+                          data-userphone={e.phone}
+                        >
+                          {["none", "ready"].includes(
+                            location.state?.rentalBook?.state
+                          )
+                            ? "대출"
+                            : "반납"}
+                        </button>
                       </td>
                     </tr>
                   );

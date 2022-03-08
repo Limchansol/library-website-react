@@ -208,13 +208,8 @@ userRouter.put(
 userRouter.put(
   "/borrowedBookUpdate",
   expressAsyncHandler(async (req, res) => {
-    const token = checkValidToken(req.headers.token);
-    if (!token._id) {
-      res.send({ message: token });
-      return;
-    }
     const user = await User.updateOne(
-      { _id: token._id },
+      { $and: [{ name: req.body.name }, { phone: req.body.phone }] },
       { $push: { borrowedBooks: req.body.borrowedBooks } }
     );
     res.send(user);
@@ -224,15 +219,10 @@ userRouter.put(
 userRouter.put(
   "/borrowedBookDelete",
   expressAsyncHandler(async (req, res) => {
-    const token = checkValidToken(req.headers.token);
-    if (!token._id) {
-      res.send({ message: token });
-      return;
-    }
-    const { bookId } = req.body;
+    const { title } = req.body;
     const user = await User.updateOne(
-      { _id: token._id },
-      { $pullAll: { borrowedBooks: [bookId] } }
+      { $and: [{ name: req.body.name }, { phone: req.body.phone }] },
+      { $pull: { borrowedBooks: { title: title } } }
     );
     if (!user) res.status(404).send({ message: "not found" });
     res.send(user);

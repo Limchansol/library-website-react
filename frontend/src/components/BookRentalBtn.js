@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { loginUserInfo } from "../Atoms/LoginAtom";
 
-function BookRentalBtn({ bookStateControl }) {
+function BookRentalBtn({ bookStateControl, bookRentalState }) {
   const [isAdmin, setIsAdmin] = useState(false);
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
   const navigate = useNavigate();
@@ -40,7 +40,10 @@ function BookRentalBtn({ bookStateControl }) {
   return (
     <>
       {isAdmin && (
-        <button onClick={bookStateControl}>도서 대출/반납(관리자)</button>
+        <button onClick={bookStateControl}>
+          {["none", "ready"].includes(bookRentalState) ? "대출" : "반납"}
+          (관리자용)
+        </button>
       )}
     </>
   );

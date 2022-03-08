@@ -45,7 +45,7 @@ function Book({ book, index }) {
       setBookstate(book.state);
       console.log("도서 상태가 정상적으로 처리되지 않았습니다.");
     }
-  }, []);
+  }, [book.state]);
 
   const onClickReservation = async () => {
     if (!checkLogin(loginInfo, navigate)) return;
@@ -58,7 +58,7 @@ function Book({ book, index }) {
     // 이곳에 예약 코드 작성
     try {
       let loginRes = await axios.put(
-        "/api/users/reservedBookUpdate",
+        "/api/users/bookstateUpdate",
         {
           reservedBooks: book._id,
         },
@@ -72,7 +72,7 @@ function Book({ book, index }) {
         });
         setLoginInfo(refreshData.data);
         await axios.put(
-          "/api/users/reservedBookUpdate",
+          "/api/users/bookstateUpdate",
           {
             reservedBooks: book._id,
           },
@@ -81,7 +81,7 @@ function Book({ book, index }) {
           }
         );
       }
-      await axios.put("/api/books/reservedBookUpdate", {
+      await axios.put("/api/books/bookstateUpdate", {
         _id: book._id,
         changeTo: "reservation",
       });
@@ -149,7 +149,10 @@ function Book({ book, index }) {
           대여 예약하기
         </button>
         <button onClick={onClickSaveInterest}>관심 도서 담기</button>
-        <BookRentalBtn bookStateControl={bookStateControl} />
+        <BookRentalBtn
+          bookStateControl={bookStateControl}
+          bookRentalState={book.state}
+        />
       </div>
     </div>
   );
