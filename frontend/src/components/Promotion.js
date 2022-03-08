@@ -1,21 +1,19 @@
-import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import PromotionSlide from "./PromotionSlide";
 import style from "./Promotion.module.css";
 
 function Promotion() {
   const [intervalID, setIntervalID] = useState(0);
   const [currIndex, setCurrIndex] = useState(1);
   const [animated, setAnimated] = useState(true);
-  const $screen = useRef();
   const [arrForImg, setArrForImg] = useState([]);
+  const screenRef = useRef();
   let imgCnt = arrForImg.length;
-  const imgWidth = 270;
-  const margin = 10;
-  const slideWidth = imgWidth + margin * 2;
-  const slideStyle = {
+  const slideWidth = 290;
+  const slideContainerStyle = {
+    width: `${slideWidth * (imgCnt + 2)}px`,
     left: `${-slideWidth * currIndex}px`,
-    transform: "none",
   };
 
   /* 애니메이션을 넣었다 뺐다 하는 일종의 속임수 사용해서 무한 슬라이드 구현
@@ -85,8 +83,6 @@ function Promotion() {
   }, []);
 
   useEffect(() => {
-    console.log(intervalID, "인터벌");
-
     let interval;
     if (!intervalID) {
       interval = setInterval(changePromotionImage, 2500);
@@ -99,57 +95,22 @@ function Promotion() {
   }, [intervalID]);
 
   return (
-    <div id={style.promotionScreen} ref={$screen}>
+    <div id={style.promotionScreen} ref={screenRef}>
       {arrForImg.length === 0 ? undefined : (
         <>
           <div
             className={`${style.slideContainer} ${
               animated ? style.animated : ""
             }`}
-            style={slideStyle}
+            style={slideContainerStyle}
           >
             {/* 무한 슬라이드 만들기 위해 맨앞에 마지막 이미지 덧붙임 */}
-            <div className={style.promotionSlide}>
-              <Link to={arrForImg[imgCnt - 1][1]}>
-                <img
-                  id={`img${imgCnt}`}
-                  src={`data:${arrForImg[imgCnt - 1][2]};base64, ${
-                    arrForImg[imgCnt - 1][0]
-                  }`}
-                  alt={`img${imgCnt}`}
-                  width="270"
-                  height="270"
-                />
-              </Link>
-            </div>
-            {arrForImg.map((property, i) => {
-              return (
-                // 컴포넌트로 바꿀 것
-                <div className={style.promotionSlide} key={`img${i + 1}`}>
-                  <Link to={property[1]}>
-                    <img
-                      id={`img${i + 1}`}
-                      src={`data:${property[2]};base64, ${property[0]}`}
-                      alt={`img${i + 1}`}
-                      width="270"
-                      height="270"
-                    />
-                  </Link>
-                </div>
-              );
+            <PromotionSlide imgInfo={arrForImg[imgCnt - 1]} index={imgCnt} />
+            {arrForImg.map((e, i) => {
+              return <PromotionSlide imgInfo={e} index={i} key={i} />;
             })}
             {/* 무한 슬라이드 만들기 위해 맨 뒤에 첫번째 이미지 덧붙임 */}
-            <div className={style.promotionSlide}>
-              <Link to={arrForImg[0][1]}>
-                <img
-                  id="img1"
-                  src={`data:${arrForImg[0][2]};base64, ${arrForImg[0][0]}`}
-                  alt="img1"
-                  width="270"
-                  height="270"
-                />
-              </Link>
-            </div>
+            <PromotionSlide imgInfo={arrForImg[0]} index={1} />
           </div>
           <button className={style.previous} onClick={toPreviousIMG}>
             &lt;

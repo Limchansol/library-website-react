@@ -14,10 +14,10 @@
 }
 
 .slideContainer {
-  width: 1740px;
+  width: 580px;
   position: absolute;
   left: -290px;
-  top: 0;
+  top: 0px;
   text-align: center;
 }
 .slideContainer.animated {
@@ -26,7 +26,6 @@
 
 .promotionSlide {
   display: inline-block;
-  margin: 0 10px;
 }
 
 button.previous,

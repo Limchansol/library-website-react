@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import style from "./MovieSlide.module.css";
+import style from "./MovieSlides.module.css";
 
-function MovieSlide({ movies, handleMovieArr, isAdmin, handleMoviePosters }) {
+function MovieSlides({ movies, handleMovieArr, isAdmin, handleMoviePosters }) {
   const movieCnt = movies?.length;
   const [currIndex, setCurrIndex] = useState(1);
   const screen = useRef();
@@ -232,4 +232,4 @@ function MovieSlide({ movies, handleMovieArr, isAdmin, handleMoviePosters }) {
   );
 }
 
-export default MovieSlide;
+export default MovieSlides;

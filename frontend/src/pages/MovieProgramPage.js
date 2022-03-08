@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import MovieSlide from "../components/MovieSlide";
+import MovieSlide from "../components/MovieSlides";
 import style from "./MovieProgramPage.module.css";
 import { useRecoilState } from "recoil";
 import { loginUserInfo } from "../Atoms/LoginAtom";
