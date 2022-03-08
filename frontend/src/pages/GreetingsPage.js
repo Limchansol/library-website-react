@@ -25,7 +25,7 @@ function GreetingsPage() {
         </thead>
         <tbody>
           <tr>
-            <td className={style.category}>북(Book)</td>
+            <td className={style.category}>북()</td>
             <td>악(樂, ark)</td>
           </tr>
           <tr>

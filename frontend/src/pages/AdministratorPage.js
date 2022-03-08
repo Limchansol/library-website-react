@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { loginUserInfo } from "../Atoms/LoginAtom";
 import BookOfTheMonth from "../components/BookOfTheMonth";
@@ -24,6 +24,8 @@ function AdministratorPage() {
     paragraph: "",
     bookImg: null,
   });
+  const [rentalUserName, setRentalUserName] = useState("");
+  const [searchedRentalUser, setSearchedRentalUser] = useState([]);
   const bookFileRef = useRef();
   const navigate = useNavigate();
   const [newPromotion, setNewPromotion] = useState({
@@ -32,6 +34,7 @@ function AdministratorPage() {
     link: "",
   });
   const promotionFileRef = useRef();
+  const location = useLocation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -94,6 +97,11 @@ function AdministratorPage() {
       ...prev,
       [name]: name === "ad" ? files[0] : value,
     }));
+  }
+
+  function handleRentalUser(e) {
+    const { value } = e.target;
+    setRentalUserName(value);
   }
 
   function BOMImgClear(e) {
@@ -186,8 +194,67 @@ function AdministratorPage() {
     return;
   }
 
+  async function handleRentalSubmit(e) {
+    try {
+      e.preventDefault();
+      const searchedUser = await axios.get(
+        `/api/users/rentalusersearch/${rentalUserName}`
+      );
+      setSearchedRentalUser(searchedUser.data);
+    } catch (error) {
+      if (error.response.status === 404) {
+        setSearchedRentalUser([
+          { name: "익명", phone: "회원이 아닌 유저에게 대출/반납" },
+        ]);
+      }
+    }
+  }
+
   return (
     <>
+      {location.state?.rentalBook && (
+        <div id={style.rental}>
+          <h2>도서 대출 </h2>
+          <h3>대출/ 반납 대상 책: {location.state?.rentalBook?.title}</h3>
+          <form id={style.rentalForm} onSubmit={handleRentalSubmit}>
+            <h3>대출/ 반납하는 유저</h3>
+            <label htmlFor="userSearch">이름:</label>
+            <input
+              type="text"
+              name="userSearch"
+              id="userSearch"
+              value={rentalUserName}
+              placeholder="이름을 검색하세요"
+              onChange={handleRentalUser}
+            />
+            <button type="submit">유저 검색</button>
+          </form>
+          {searchedRentalUser.length !== 0 && (
+            <table>
+              <thead>
+                <tr>
+                  <th>이름</th>
+                  <th>전화번호</th>
+                  <th>대출/ 반납하기</th>
+                </tr>
+              </thead>
+              <tbody>
+                {searchedRentalUser?.map?.((e) => {
+                  return (
+                    <tr key={e.phone}>
+                      <td>{e.name}</td>
+                      <td>{e.phone}</td>
+                      <td>
+                        <button>대출/반납</button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          )}
+        </div>
+      )}
       <div id={style.promotion}>
         <form id={style.promotionForm} onSubmit={handlePromotionSubmit}>
           <h2>홈 배너 광고 수정 및 삭제(배너 광고는 최소 2개이상 넣으세요!)</h2>

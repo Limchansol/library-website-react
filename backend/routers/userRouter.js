@@ -83,6 +83,22 @@ userRouter.post(
   })
 );
 
+userRouter.get(
+  "/rentalusersearch/:name",
+  expressAsyncHandler(async (req, res) => {
+    const { name } = req.params;
+    const rentalUser = await User.find({ name: name });
+    if (rentalUser.length === 0) {
+      res.status(404).send({ message: "unchecked user" });
+      return;
+    }
+    const zippedUserInfo = rentalUser.map((e) => {
+      return { name: e.name, phone: e.phone };
+    });
+    res.send(zippedUserInfo);
+  })
+);
+
 userRouter.post(
   "/signUpChecker",
   expressAsyncHandler(async (req, res) => {

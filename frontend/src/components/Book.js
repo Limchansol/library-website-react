@@ -4,6 +4,7 @@ import { useRecoilState } from "recoil";
 import { loginUserInfo } from "../Atoms/LoginAtom.js";
 import axios from "axios";
 import style from "./Book.module.css";
+import BookRentalBtn from "./BookRentalBtn.js";
 
 function checkLogin(loginInfo, navigate) {
   if (!loginInfo) {
@@ -122,6 +123,10 @@ function Book({ book, index }) {
     }
   };
 
+  const bookStateControl = () => {
+    navigate("/administrator", { state: { rentalBook: book } });
+  };
+
   // titleText 정렬이 잘 안됨. 제목이 길어져서 두 줄을 넘기게 되면 '도서' 글자가 두 줄이 되어버림. 이유를 못 찾았음.
   return (
     <div className={style.book}>
@@ -144,6 +149,7 @@ function Book({ book, index }) {
           대여 예약하기
         </button>
         <button onClick={onClickSaveInterest}>관심 도서 담기</button>
+        <BookRentalBtn bookStateControl={bookStateControl} />
       </div>
     </div>
   );
