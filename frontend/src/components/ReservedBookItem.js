@@ -33,7 +33,6 @@ function ReservedBookItem({ loginInfo, book }) {
       alert(`『${book.title}』 도서 예약이 취소되었습니다.`);
       window.location.reload();
     } catch (error) {
-      console.log("도서 예약 삭제 오류", error);
       alert("오류가 발생했습니다. 다시 시도해주세요.");
     }
   };

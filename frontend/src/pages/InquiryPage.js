@@ -4,6 +4,7 @@ import { loginUserInfo } from "../Atoms/LoginAtom";
 import axios from "axios";
 import Warn from "../components/Warn";
 import style from "./InquiryPage.module.css";
+import { useNavigate } from "react-router-dom";
 
 function InquiryPage() {
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
@@ -15,7 +16,7 @@ function InquiryPage() {
     userName: loginInfo.name,
     createdAt: "",
   });
-  console.log(loginInfo, "로그인인포");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const logInFetch = async () => {
@@ -32,13 +33,17 @@ function InquiryPage() {
             headers: { token: refreshData.data.token?.access },
           });
         }
-        console.log(loginRes.data._id);
         setInquiryInfo((prev) => ({
           ...prev,
           id: loginRes.data._id,
         }));
       } catch (error) {
-        console.log(error);
+        if (error.response.status === 401) {
+          setLoginInfo("");
+          sessionStorage.clear();
+          alert("로그인이 만료되었습니다. 로그인 페이지로 이동합니다.");
+          navigate("/logIn");
+        }
       }
     };
     logInFetch();
@@ -63,7 +68,6 @@ function InquiryPage() {
       "/api/inquiries/sendInquiry",
       inquiryInfo
     );
-    console.log(fetchedData);
     alert("문의 등록이 완료되었습니다.");
   };
 

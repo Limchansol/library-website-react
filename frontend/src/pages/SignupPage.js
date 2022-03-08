@@ -77,12 +77,10 @@ function SignUpPage() {
         validity = fetchedData.data.valid;
         message = fetchedData.data.message;
         color = "#795548";
-        console.log(fetchedData, "아이디 확인용");
       } catch (error) {
         validity = false;
         message = "사용할 수 없는 아이디입니다.";
         color = "tomato";
-        console.log(error);
       } finally {
         setInfoValidity((prev) => ({
           ...prev,
@@ -91,7 +89,7 @@ function SignUpPage() {
       }
     };
     idCheckRequest();
-    return console.log(signupInfo.id, "컨펌 아이디 함수 끝");
+    return;
   };
 
   // 비밀번호 확인 함수도 같이 넣어야 함
@@ -364,16 +362,14 @@ function SignUpPage() {
     const fetchData = async () => {
       try {
         const fetchedData = await axios.post("/api/users/signUp", signupInfo);
-        console.log(fetchedData);
         alert("회원가입이 완료되었습니다. 홈으로 이동합니다.");
         navigate("/", { replace: true });
       } catch (error) {
-        console.log(error);
         alert("예기치 못한 오류가 발생했습니다. 회원가입을 다시 시도해주세요.");
       }
     };
     fetchData();
-    return console.log(signupInfo);
+    return;
   };
 
   return (

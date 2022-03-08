@@ -4,10 +4,12 @@ import { loginUserInfo } from "../Atoms/LoginAtom.js";
 import axios from "axios";
 import IndBook from "./IndBook";
 import style from "./BookShelf.module.css";
+import { useNavigate } from "react-router-dom";
 
 function BookShelf({ interestingBooks }) {
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
   const [zoomBook, setZoomBook] = useState({});
+  const navigate = useNavigate();
 
   // 관심도서 삭제
   const removeIndBook = async () => {
@@ -43,8 +45,12 @@ function BookShelf({ interestingBooks }) {
       }
       alert(`『${zoomBook?.title}』이(가) 관심도서에서 삭제되었습니다.`);
     } catch (error) {
-      console.log("관심도서 삭제 오류", error);
-      alert("오류가 발생했습니다. 다시 시도해주세요.");
+      if (error.response.status === 401) {
+        setLoginInfo("");
+        sessionStorage.clear();
+        alert("로그인이 만료되었습니다. 로그인 페이지로 이동합니다.");
+        navigate("/logIn");
+      }
     } finally {
       window.location.reload();
     }

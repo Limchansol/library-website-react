@@ -19,14 +19,12 @@ function BookOfThisMonthPage() {
 
   useEffect(() => {
     if (sentBook) {
-      console.log(sentBook);
       setBook(sentBook);
       return;
     } //이달의 책 링크 타고 넘어왔을 경우
     const fetchBook = async () => {
       const bookRes = await axios.get(`/api/bookOfTheMonth/${thisMonth}`);
       setBook(bookRes.data);
-      console.log(bookRes.data, "책");
     };
     fetchBook();
   }, []);

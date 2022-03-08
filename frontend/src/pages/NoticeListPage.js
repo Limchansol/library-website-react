@@ -30,26 +30,34 @@ function NoticeListPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const notices = await axios.get("/api/notices");
-      setNoticeList(notices.data, loginInfo);
-      let loginRes = await axios.get("/api/users/checkLogIn", {
-        headers: { token: loginInfo.token?.access },
-      });
-      console.log(loginRes.data);
-      if (loginRes.data.message === "jwt expired") {
-        const refreshData = await axios.get("/api/users/checkrefreshjwt", {
-          headers: { token: loginInfo.token?.refresh },
+      try {
+        const notices = await axios.get("/api/notices");
+        setNoticeList(notices.data, loginInfo);
+        let loginRes = await axios.get("/api/users/checkLogIn", {
+          headers: { token: loginInfo.token?.access },
         });
-        setLoginInfo(refreshData.data);
-        loginRes = await axios.get("/api/users/checkLogIn", {
-          headers: { token: refreshData.data.token?.access },
-        });
+        if (loginRes.data.message === "jwt expired") {
+          const refreshData = await axios.get("/api/users/checkrefreshjwt", {
+            headers: { token: loginInfo.token?.refresh },
+          });
+          setLoginInfo(refreshData.data);
+          loginRes = await axios.get("/api/users/checkLogIn", {
+            headers: { token: refreshData.data.token?.access },
+          });
+        }
+        setIsAdmin(loginRes?.data?.isAdmin);
+        setNewNotice((prev) => ({
+          ...prev,
+          writer: loginRes?.data?.name,
+        }));
+      } catch (error) {
+        if (error.response.status === 401) {
+          setLoginInfo("");
+          sessionStorage.clear();
+          alert("로그인이 만료되었습니다. 로그인 페이지로 이동합니다.");
+          navigate("/logIn");
+        }
       }
-      setIsAdmin(loginRes?.data?.isAdmin);
-      setNewNotice((prev) => ({
-        ...prev,
-        writer: loginRes?.data?.name,
-      }));
     };
     fetchData();
   }, []);

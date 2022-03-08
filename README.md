@@ -233,7 +233,8 @@ login요청은 post로 하던데, 왜 그럴까? 또 해싱이라는 것은 무�
 
 **기술:**
 
-{paging: “cursor= , count=”, books: “”}형태로 응답을 보낸다. 쿼리로 limit와 커서를 받는다.
+{paging: “cursor= , count=”, books: “”}형태로 응답을 보낸다. 쿼리로 limit와 커서를 받는다.   
+몽구스에서 .limit메소드를 이용하면 limit기능을 쉽게 구현할 수 있다.
 
 [2022. 2. 28]
 

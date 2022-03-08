@@ -49,7 +49,6 @@ function MyPage() {
           },
         });
         setReservedBooks(reservedBookRes.data);
-        console.log(reservedBookRes.data, "디에ㅔ");
         const inquiryRes = await axios.get(
           `/api/inquiries/${loginRes?.data?._id}`
         );
@@ -57,13 +56,11 @@ function MyPage() {
         alreadyFetched = true;
       } catch (error) {
         if (error.response.status === 401) {
-          console.log(error.response, "에러");
           setLoginInfo("");
           sessionStorage.clear();
           alert("로그인이 만료되었습니다. 로그인 페이지로 이동합니다.");
           navigate("/logIn");
         }
-        console.log(error, "마이페이지 에러");
       }
     };
     fetchData();
@@ -108,7 +105,12 @@ function MyPage() {
       }
       alert("회원정보 수정이 완료되었습니다.");
     } catch (error) {
-      console.log("마이페이지 정보 수정 오류", error);
+      if (error.response.status === 401) {
+        setLoginInfo("");
+        sessionStorage.clear();
+        alert("로그인이 만료되었습니다. 로그인 페이지로 이동합니다.");
+        navigate("/logIn");
+      }
     } finally {
       setChangeMode(false);
       window.location.reload();

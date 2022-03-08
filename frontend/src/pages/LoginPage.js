@@ -44,13 +44,10 @@ function LogInPage() {
           password: "",
         }));
         $password.current.focus();
-        console.log(error);
-      } finally {
-        console.log("로그인 요청 axios finally문");
       }
     };
     fetchData();
-    return console.log(userInfo);
+    return;
   };
 
   return (

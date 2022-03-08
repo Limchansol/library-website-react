@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { loginUserInfo } from "../Atoms/LoginAtom.js";
 import axios from "axios";
@@ -13,6 +13,7 @@ function getLinkStyle({ isActive }) {
 
 function Util() {
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
+  const navigate = useNavigate();
 
   // useEffect(() => {
   //   const logInFetch = async () => {
@@ -30,11 +31,15 @@ function Util() {
   //   });
   // }
   //     } catch (error) {
-  //       console.log(error);
+  //       if (error.response.status === 401) {
+  //   setLoginInfo("");
+  //   sessionStorage.clear();
+  //   alert("로그인이 만료되었습니다. 로그인 페이지로 이동합니다.");
+  //   navigate("/logIn");
+  // }
   //     }
   //   };
   //   logInFetch();
-  //   console.log(loginInfo, "로그인인포");
   // }, [loginInfo]);
 
   const logOut = () => {

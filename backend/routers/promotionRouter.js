@@ -9,7 +9,7 @@ const upload = multer();
 promotionRouter.get(
   "/",
   expressAsyncHandler(async (req, res) => {
-    const temp = await Promotion.find({});
+    const temp = await Promotion.find({}).sort({ order: "1" });
     const promotions = temp.map((e, i) => {
       return {
         ad: {
