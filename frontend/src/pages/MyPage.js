@@ -20,6 +20,7 @@ function MyPage() {
   let alreadyFetched = false;
 
   useEffect(() => {
+    const source = axios.CancelToken.source();
     const fetchData = async () => {
       try {
         if (alreadyFetched) return;
@@ -41,16 +42,19 @@ function MyPage() {
           headers: {
             idarray: JSON.stringify(loginRes?.data?.interestingBooks),
           },
+          cancelToken: source.token,
         });
         setInterestingBooks(bookRes.data);
         const reservedBookRes = await axios.get("/api/books/searchID", {
           headers: {
             idarray: JSON.stringify(loginRes?.data?.reservedBooks),
           },
+          cancelToken: source.token,
         });
         setReservedBooks(reservedBookRes.data);
         const inquiryRes = await axios.get(
-          `/api/inquiries/${loginRes?.data?._id}`
+          `/api/inquiries/${loginRes?.data?._id}`,
+          { cancelToken: source.token }
         );
         setInquiries(inquiryRes.data);
         alreadyFetched = true;
@@ -64,6 +68,7 @@ function MyPage() {
       }
     };
     fetchData();
+    return () => source.cancel("페이지 이동으로 api요청이 취소되었습니다.");
   }, [loginInfo]);
 
   // 올바른 형식인지 확인하는 함수 따로 필요
@@ -254,7 +259,11 @@ function MyPage() {
                     <th>책 제목</th>
                     <th>반납 기한</th>
                     <th>대여 상태</th>
-                    <th>대여 연장</th>
+                    <th>
+                      대여 연장
+                      <br />
+                      (추후 업데이트)
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -277,7 +286,7 @@ function MyPage() {
                         </td>
                         <td>{returnDay - now > 0 ? "정상 대여중" : "연체"}</td>
                         <td>
-                          <button>연장하기</button>
+                          <button disabled>연장하기</button>
                         </td>
                       </tr>
                     );

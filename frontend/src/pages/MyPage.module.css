@@ -37,6 +37,7 @@
 #rentalBooks table,
 #reservedBooks table {
   margin: 0 auto;
+  line-height: 150%;
 }
 
 #rentalBooks td,
