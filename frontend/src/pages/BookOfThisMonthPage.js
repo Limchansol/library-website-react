@@ -18,15 +18,23 @@ function BookOfThisMonthPage() {
   const sentBook = useLocation().state?.book;
 
   useEffect(() => {
-    if (sentBook) {
+    if (sentBook?.bookImg?.data) {
       setBook(sentBook);
       return;
-    } //이달의 책 링크 타고 넘어왔을 경우
+    } // 제대로 랜더링 된 이달의 책 링크 타고 넘어왔을 경우
+    const source = axios.CancelToken.source();
     const fetchBook = async () => {
-      const bookRes = await axios.get(`/api/bookOfTheMonth/${thisMonth}`);
-      setBook(bookRes.data);
+      try {
+        const bookRes = await axios.get(`/api/bookOfTheMonth/${thisMonth}`, {
+          cancelToken: source.token,
+        });
+        setBook(bookRes.data);
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchBook();
+    return () => source.cancel("페이지 이동으로 api요청이 취소되었습니다.");
   }, []);
 
   return (

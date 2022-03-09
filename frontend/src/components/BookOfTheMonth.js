@@ -15,11 +15,19 @@ function BookOfTheMonth({ month }) {
   });
 
   useEffect(() => {
+    const source = axios.CancelToken.source();
     const fetchData = async () => {
-      const book = await axios.get(`/api/bookOfTheMonth/${nowMonth}`);
-      setTragetBook(book.data);
+      try {
+        const book = await axios.get(`/api/bookOfTheMonth/${nowMonth}`, {
+          cancelToken: source.token,
+        });
+        setTragetBook(book.data);
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchData();
+    return () => source.cancel("페이지 이동으로 api요청이 취소되었습니다.");
   }, [nowMonth]);
 
   return (

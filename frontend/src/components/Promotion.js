@@ -68,17 +68,25 @@ function Promotion() {
   };
 
   useEffect(() => {
+    const source = axios.CancelToken.source();
     const fetchData = async () => {
-      const promotionImg = await axios.get("/api/promotions/");
-      promotionImg.data.map((e) => {
-        setArrForImg((prev) => [
-          ...prev,
-          [e.ad.data, e.ad.link, e.ad.contentType],
-        ]);
-      });
-      imgCnt = promotionImg.data.length;
+      try {
+        const promotionImg = await axios.get("/api/promotions/", {
+          cancelToken: source.token,
+        });
+        promotionImg.data.map((e) => {
+          setArrForImg((prev) => [
+            ...prev,
+            [e.ad.data, e.ad.link, e.ad.contentType],
+          ]);
+        });
+        imgCnt = promotionImg.data.length;
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchData();
+    return () => source.cancel("페이지 이동으로 api요청이 취소되었습니다.");
   }, []);
 
   useEffect(() => {

@@ -5,11 +5,19 @@ import style from "./FAQPage.module.css";
 
 function FAQPage() {
   useEffect(() => {
+    const source = axios.CancelToken.source();
     const fetchFAQ = async () => {
-      const faqs = await axios.get("/api/FAQs");
-      setFilteredFAQList(faqs.data);
+      try {
+        const faqs = await axios.get("/api/FAQs", {
+          cancelToken: source.token,
+        });
+        setFilteredFAQList(faqs.data);
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchFAQ();
+    return () => source.cancel("페이지 이동으로 api요청이 취소되었습니다.");
   }, []);
 
   const [keyword, setKeyword] = useState("");

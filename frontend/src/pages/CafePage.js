@@ -5,11 +5,19 @@ import style from "./CafePage.module.css";
 function CafePage() {
   const [cafeMenu, setCafeMenu] = useState([]);
   useEffect(() => {
+    const source = axios.CancelToken.source();
     const fetchData = async () => {
-      const cafeMenuData = await axios.get("/api/cafeMenu");
-      setCafeMenu(cafeMenuData.data);
+      try {
+        const cafeMenuData = await axios.get("/api/cafeMenu", {
+          cancelToken: source.token,
+        });
+        setCafeMenu(cafeMenuData.data);
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchData();
+    return () => source.cancel("페이지 이동으로 api요청이 취소되었습니다.");
   }, []);
   return (
     <div id={style.cafePage}>

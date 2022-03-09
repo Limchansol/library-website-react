@@ -16,31 +16,42 @@ function Calender() {
   const [changedDayType, setChangedDayType] = useState("red");
 
   useEffect(() => {
+    const source = axios.CancelToken.source();
     const now = new Date();
     setToday([now.getFullYear(), now.getMonth(), now.getDate()]);
     const fetchData = async () => {
       try {
         let temp = await axios.get("/api/users/checkLogIn", {
           headers: { token: loginToken.token?.access },
+          cancelToken: source.token,
         });
         if (temp.data.message === "jwt expired") {
           const refreshData = await axios.get("/api/users/checkrefreshjwt", {
             headers: { token: loginToken.token?.refresh },
+            cancelToken: source.token,
           });
           setLoginToken(refreshData.data);
           temp = await axios.get("/api/users/checkLogIn", {
             headers: { token: refreshData.data.token?.access },
+            cancelToken: source.token,
           });
         }
         setIsAdmin(temp.data.isAdmin);
       } catch (err) {
         console.log(err);
       } finally {
-        const dayData = await axios.get("/api/calenders");
-        setSpecialDay(dayData.data[0].specialDay);
+        try {
+          const dayData = await axios.get("/api/calenders", {
+            cancelToken: source.token,
+          });
+          setSpecialDay(dayData.data[0].specialDay);
+        } catch (error) {
+          console.log(error);
+        }
       }
     };
     fetchData();
+    return () => source.cancel("페이지 이동으로 api요청이 취소되었습니다.");
   }, []);
 
   function changeSchedule(e) {

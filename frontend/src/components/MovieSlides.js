@@ -10,15 +10,24 @@ function MovieSlides({ movies, handleMovieArr, isAdmin, handleMoviePosters }) {
   const [moviePosters, setMoviePosters] = useState([]);
 
   useEffect(() => {
+    const source = axios.CancelToken.source();
     const fetchData = async () => {
-      const nowYear = new Date().getFullYear();
-      const season = await axios.get("/api/utils/movieSeason");
-      const posters = await axios.get(
-        `/api/moviePosters/${nowYear}/${season.data.movieSeason}`
-      );
-      setMoviePosters(posters.data);
+      try {
+        const nowYear = new Date().getFullYear();
+        const season = await axios.get("/api/utils/movieSeason", {
+          cancelToken: source.token,
+        });
+        const posters = await axios.get(
+          `/api/moviePosters/${nowYear}/${season.data.movieSeason}`,
+          { cancelToken: source.token }
+        );
+        setMoviePosters(posters.data);
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchData();
+    return () => source.cancel("페이지 이동으로 api요청이 취소되었습니다.");
   }, []);
 
   const handleSlideScroll = () => {

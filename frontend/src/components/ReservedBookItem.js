@@ -39,7 +39,6 @@ function ReservedBookItem({ loginInfo, book }) {
   return (
     <tr>
       <td>{book.title}</td>
-
       <td>{book.state === "reservation" ? "정상 예약중" : "대여 가능"}</td>
       <td>
         <button onClick={cancelReservation}>취소하기</button>

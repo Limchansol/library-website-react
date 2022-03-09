@@ -1,8 +1,8 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
-import style from "./BookChart.module.css";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+import axios from "axios";
+import style from "./BookChart.module.css";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -61,15 +61,23 @@ function BookChart() {
   };
 
   useEffect(() => {
+    const source = axios.CancelToken.source();
     const fetchBook = async () => {
-      const bookData = await axios.get("/api/books/forgraph");
-      setAllBookLen(bookData.data.len);
-      setData((prev) => ({
-        ...prev,
-        datasets: [{ ...data.datasets[0], data: bookData.data.kdcLenArr }],
-      }));
+      try {
+        const bookData = await axios.get("/api/books/forgraph", {
+          cancelToken: source.token,
+        });
+        setAllBookLen(bookData.data.len);
+        setData((prev) => ({
+          ...prev,
+          datasets: [{ ...data.datasets[0], data: bookData.data.kdcLenArr }],
+        }));
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchBook();
+    return () => source.cancel("페이지 이동으로 api요청이 취소되었습니다.");
   }, []);
 
   return (
