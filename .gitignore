@@ -1,3 +1,4 @@
 /node_modules
 /backend/rawBookData.js
+/backend/data.js
 /.env
