@@ -73,3 +73,10 @@ button:hover {
 button:active {
   background-color: #a98274;
 }
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+button:disabled:hover {
+  background-color: #a98274;
+}
