@@ -1,3 +1,28 @@
+#rental {
+  width: 900px;
+  margin: auto;
+}
+
+#rental h2 {
+  text-align: center;
+  margin-top: 50px;
+}
+
+#rental input {
+  display: block;
+  margin-bottom: 10px;
+  width: 300px;
+}
+
+#rental button {
+  margin-bottom: 30px;
+}
+
+#rental table {
+  width: 850px;
+  text-align: center;
+}
+
 #promotion {
   width: 900px;
   margin: auto;

@@ -24,7 +24,15 @@ function AdministratorPage() {
     paragraph: "",
     bookImg: null,
   });
-  const [rentalUserName, setRentalUserName] = useState("");
+  const [rentalInfo, setRentalInfo] = useState(() => {
+    const now = new Date();
+    return {
+      userName: "",
+      loanStartYYYY: now.getFullYear(),
+      loanStartMM: now.getMonth() + 1,
+      loanStartDD: now.getDate(),
+    };
+  });
   const [searchedRentalUser, setSearchedRentalUser] = useState([]);
   const bookFileRef = useRef();
   const navigate = useNavigate();
@@ -99,9 +107,12 @@ function AdministratorPage() {
     }));
   }
 
-  function handleRentalUser(e) {
-    const { value } = e.target;
-    setRentalUserName(value);
+  function handleRentalInfo(e) {
+    const { value, name } = e.target;
+    setRentalInfo((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   }
 
   function BOMImgClear(e) {
@@ -198,7 +209,7 @@ function AdministratorPage() {
     try {
       e.preventDefault();
       const searchedUser = await axios.get(
-        `/api/users/rentalusersearch/${rentalUserName}`
+        `/api/users/rentalusersearch/${rentalInfo.userName}`
       );
       setSearchedRentalUser(searchedUser.data);
     } catch (error) {
@@ -212,7 +223,6 @@ function AdministratorPage() {
 
   async function bookStateChange(e) {
     const { username, userphone } = e.target.dataset;
-    const now = new Date();
     const rentalFlag = ["none", "ready"].includes(
       location.state?.rentalBook?.state
     );
@@ -222,9 +232,9 @@ function AdministratorPage() {
         phone: userphone,
         borrowedBooks: {
           title: location.state?.rentalBook?.title,
-          loanStartYYYY: now.getFullYear(),
-          loanStartMM: now.getMonth() + 1,
-          loanStartDD: now.getDate(),
+          loanStartYYYY: Number(rentalInfo.loanStartYYYY),
+          loanStartMM: Number(rentalInfo.loanStartMM),
+          loanStartDD: Number(rentalInfo.loanStartDD),
         },
       });
       await axios.put("/api/books/bookstateUpdate", {
@@ -274,12 +284,45 @@ function AdministratorPage() {
             <label htmlFor="userSearch">이름:</label>
             <input
               type="text"
-              name="userSearch"
+              name="userName"
               id="userSearch"
-              value={rentalUserName}
+              value={rentalInfo.userName}
               placeholder="이름을 검색하세요"
-              onChange={handleRentalUser}
+              onChange={handleRentalInfo}
             />
+
+            {["none", "ready"].includes(location.state?.rentalBook?.state) && (
+              <>
+                <label htmlFor="loanYYYY">대출 연도:</label>
+                <input
+                  type="number"
+                  name="loanStartYYYY"
+                  id="loanYYYY"
+                  value={rentalInfo.loanStartYYYY}
+                  placeholder="연도를 입력하세요."
+                  onChange={handleRentalInfo}
+                />
+                <label htmlFor="loanMM">대출 달:</label>
+                <input
+                  type="number"
+                  name="loanStartMM"
+                  id="loanMM"
+                  value={rentalInfo.loanStartMM}
+                  placeholder="달을 입력하세요."
+                  onChange={handleRentalInfo}
+                />
+                <label htmlFor="loanDD">대출 일:</label>
+                <input
+                  type="number"
+                  name="loanStartDD"
+                  id="loanDD"
+                  value={rentalInfo.loanStartDD}
+                  placeholder="일을 입력하세요."
+                  onChange={handleRentalInfo}
+                />
+              </>
+            )}
+
             <button type="submit">유저 검색</button>
           </form>
           {searchedRentalUser.length !== 0 && (
