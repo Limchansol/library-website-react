@@ -1,4 +1,107 @@
-# 리액트로 도서관 웹사이트 만들기
+# 리액트로 도서관 웹사이트 만들기  
+
+**BuildTools:** ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white) 
+
+**Version Control:** ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)   
+
+**Language:** ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) 
+
+**Frontend:** ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)   
+
+**Web API:** ![KakaoTalk](https://img.shields.io/badge/kakaotalk-ffcd00.svg?style=for-the-badge&logo=kakaotalk&logoColor=000000)   
+
+**Backend:**  ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)   
+
+**Major-Package:** ![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white)  ![Chart.js](https://img.shields.io/badge/chart.js-F5788D.svg?style=for-the-badge&logo=chart.js&logoColor=white)    ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+
+**Database:** ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)	   
+
+## INDEX
+ + [NPM SCRPITS](#npm-scripts) 
+ + [웹사이트 기능](#웹사이트에-구현한-기능)
+ + [프로젝트 복기(서버)](#프로젝트-복기-with-server)
+
+## NPM SCRIPTS  
+````
+npm run seed //MONGODB에 seed를 넣는 명령어
+npm run dev  //서버와 클라이언트를 동시에 실행시키지만, 서버는 nodemon으로 실행시키는 명령어
+npm run server
+npm run client //각각 서버와 클라이언트를 실행시키는 명령어
+npm run start //배포용 서버와 클라이언트를 동시에 실행시키는 명령어
+````
+
+## 웹사이트에 구현한 기능   
+
+**네비게이션**   
+
+상단   
+
+- 로고, 검색바, 유틸메뉴로 구성.   
+- 검색바에서는 종류별(저자, 책 이름, 통합 검색 등) 검색이 가능하도록 search기능 구현.   
+
+하단   
+
+- 네비게이션 메뉴를 통해 다른 페이지로 이동 가능.   
+- 네비게이션 바에 hover하면, 세부 메뉴가 나타나도록 구현.   
+
+**홈 화면**   
+
+- 배너 광고가 일정 시간마다 내용이 바뀌도록 애니메이션 구현.   
+
+- 이달의 책 컴포넌트 구현. 클릭시 이달의 책 페이지로 이동.   
+
+- 도서관 일정 캘린더 컴포넌트 구현. 오늘 날짜 표시.   
+
+- 도서관 책 보유 현황 chart.js로 구현.   
+
+**소개 메뉴**   
+
+- 소개 문구가 들어가도록 구현.  
+
+- 카카오맵 api로 오는길 표시.   
+
+**도서관 이용 메뉴**   
+
+- 도서관 이용에 관한 내용 서술.   
+
+**도서관 자료 메뉴**   
+
+- 주제별, 상세 검색이 가능하도록 구현   
+
+**도서관 활동 메뉴**    
+
+- 도서관 활동에 대해 서술.    
+ 
+- 영화로 세상읽기 서브 메뉴에서 애니메이션을 이용해 상영 영화를 살펴볼 수 있도록 구현.     
+
+**알림 및 소통 메뉴**    
+
+- 문의, FAQ등을 구현.   
+
+**로그인/회원가입**    
+
+- 로그인과 회원가입을 jwt / access토큰과 refresh토큰 방식으로 구현.      
+
+- 새로고침을 해도 로그인 정보가 날아가지 않도록 세션 스토리지에 정보 일시적으로 저장.     
+
+- 받아온 토큰을 **RECOIL**을 이용하여 저장.   
+   
+   
+**마이페이지**   
+
+- 로그인시 활성화.   
+
+- 관심도서를 지정할 수 있고, 관심도서 책 모양을 클릭 시 저장한 관심도서의 상세 내용을 살펴볼 수 있도록 이미지 확대.    
+  
+- 대여/예약한 책을 살펴볼 수 있도록 구현.    
+
+
+**관리자 페이지**   
+
+- 관리자가 받아온 문의에 답할 수 있도록 구현.   
+
+- 프로모션이나 상영하는 영화 등, 바뀔 수 있는 정보에 대해 수정할 수 있도록 구현.   
+
 
 1. 기존에 만들었던 작은 도서관 사이트 리액트로 전환하기
 
@@ -70,7 +173,7 @@
    - 데이터 가공(저자 형식이나 분류 형식이 엉망)
    - 페이지네이션 추가 실패
 
-## 프로젝트 복기 with Server’s perspective
+## 프로젝트 복기 with Server
 
 [2022. 2. 11]
 
