@@ -42,15 +42,26 @@ function SearchKdcPage() {
   const [kdc, setKdc] = useState("");
   const [kdcBooks, setKdcBooks] = useState([]);
   const [cursor, setCursor] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const LIMIT = 7;
 
   const fetchBookForSubj = async (limit, cursor) => {
     const subNum = subject.findIndex((a) => a === kdc);
-    const subjBooksRes = await axios.get(
-      `/api/books/subject?subNum=${subNum}&limit=${limit}&cursor=${
-        cursor ? cursor : ""
-      }`
-    );
+    let result;
+    try {
+      setIsLoading(true);
+      result = await axios.get(
+        `/api/books/subject?subNum=${subNum}&limit=${limit}&cursor=${
+          cursor ? cursor : ""
+        }`
+      );
+    } catch (error) {
+      console.log("주제별 검색 오류", error);
+      return;
+    } finally {
+      setIsLoading(false);
+    }
+    const subjBooksRes = result;
     const {
       books,
       paging: { nextCursor },
@@ -105,7 +116,9 @@ function SearchKdcPage() {
               return <Book book={book} key={i} index={i + 1} />;
             })}
         </div>
-        {cursor && <LoadMoreBtn handleLoadMore={handleLoadMore} />}
+        {cursor && (
+          <LoadMoreBtn handleLoadMore={handleLoadMore} isLoading={isLoading} />
+        )}
       </div>
     </>
   );

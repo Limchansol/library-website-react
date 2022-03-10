@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { loginBool, loginUserInfo } from "../Atoms/LoginAtom.js";
 import axios from "axios";
@@ -10,12 +10,10 @@ function LogInPage() {
     id: "",
     password: "",
   });
-  const isLoggedIn = useRecoilValue(loginBool);
   const [loginInfo, setLoginInfo] = useRecoilState(loginUserInfo);
   const [logInFailed, setLogInFailed] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
-  const $password = useRef();
+  const passwordRef = useRef();
 
   const handleUserInfo = (e) => {
     const { name, value } = e.target;
@@ -43,7 +41,7 @@ function LogInPage() {
           ...prev,
           password: "",
         }));
-        $password.current.focus();
+        passwordRef.current.focus();
       }
     };
     fetchData();
@@ -67,7 +65,7 @@ function LogInPage() {
           name="password"
           value={userInfo.password}
           onChange={handleUserInfo}
-          ref={$password}
+          ref={passwordRef}
           className={style["user-pw"]}
           placeholder="비밀번호"
         />

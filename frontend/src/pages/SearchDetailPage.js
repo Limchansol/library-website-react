@@ -13,6 +13,7 @@ function SearchDetailPage() {
   });
   const [detailedBooks, setDetailedBooks] = useState([]);
   const [cursor, setCursor] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const LIMIT = 7;
 
   const handleDetailedSearchValue = (e) => {
@@ -36,13 +37,24 @@ function SearchDetailPage() {
       encodeURIComponent(isbn),
       encodeURIComponent(publisher),
     ];
-    const detailedRes = await axios.get(
-      `/api/books/detailed?title=${encodedQuery[0]}&writer=${
-        encodedQuery[1]
-      }&isbn=${encodedQuery[2]}&publisher=${
-        encodedQuery[3]
-      }&limit=${LIMIT}&cursor=${cursor ? cursor : ""}`
-    );
+    let result;
+    try {
+      setIsLoading(true);
+      result = await axios.get(
+        `/api/books/detailed?title=${encodedQuery[0]}&writer=${
+          encodedQuery[1]
+        }&isbn=${encodedQuery[2]}&publisher=${
+          encodedQuery[3]
+        }&limit=${LIMIT}&cursor=${cursor ? cursor : ""}`
+      );
+    } catch (error) {
+      console.log("상세 검색 오류", error);
+      alert("오류가 발생했습니다. 다시 시도해주세요.");
+      return;
+    } finally {
+      setIsLoading(false);
+    }
+    const detailedRes = result;
     const {
       books,
       paging: { nextCursor },
@@ -128,7 +140,9 @@ function SearchDetailPage() {
           detailedBooks.map((book, i) => {
             return <Book book={book} key={i} index={i + 1} />;
           })}
-        {cursor && <LoadMoreBtn handleLoadMore={handleLoadMore} />}
+        {cursor && (
+          <LoadMoreBtn handleLoadMore={handleLoadMore} isLoading={isLoading} />
+        )}
       </div>
     </>
   );

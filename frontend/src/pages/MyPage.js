@@ -149,6 +149,7 @@ function MyPage() {
       window.location.reload();
     } catch (error) {
       console.log("회원탈퇴 오류", error);
+      return;
     }
   };
 

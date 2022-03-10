@@ -366,6 +366,7 @@ function SignUpPage() {
         navigate("/", { replace: true });
       } catch (error) {
         alert("예기치 못한 오류가 발생했습니다. 회원가입을 다시 시도해주세요.");
+        return;
       }
     };
     fetchData();

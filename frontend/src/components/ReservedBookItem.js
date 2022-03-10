@@ -29,11 +29,11 @@ function ReservedBookItem({ loginInfo, book }) {
           changeTo: "none",
         });
       }
-
       alert(`『${book.title}』 도서 예약이 취소되었습니다.`);
       window.location.reload();
     } catch (error) {
       alert("오류가 발생했습니다. 다시 시도해주세요.");
+      return;
     }
   };
   return (

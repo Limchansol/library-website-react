@@ -8,19 +8,30 @@ function SearchedPage() {
   const { category, keyword } = useLocation().state;
   const [selectedBooks, setSelectedBooks] = useState([]);
   const [cursor, setCursor] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const LIMIT = 7;
 
   const fetchData = async (cursor) => {
-    const booksRes = await axios.get(
-      `api/books?${category}=${encodeURIComponent(
-        keyword
-      )}&limit=${LIMIT}&cursor=${cursor ? cursor : ""}`
-    ); //keyword에 인코딩 필요!
+    let result;
+    try {
+      setIsLoading(true);
+      result = await axios.get(
+        `api/books?${category}=${encodeURIComponent(
+          keyword
+        )}&limit=${LIMIT}&cursor=${cursor ? cursor : ""}`
+      ); //keyword에 인코딩 필요!
+    } catch (error) {
+      console.log(error);
+      alert("오류가 발생했습니다. 다시 시도해주세요.");
+      return;
+    } finally {
+      setIsLoading(false);
+    }
+    const booksRes = result;
     const {
       books,
       paging: { nextCursor },
     } = booksRes.data;
-    // const wantedBooks = filterByKeyword(category, keyword, books);
     if (!cursor) {
       setSelectedBooks(books);
     } else {
@@ -52,7 +63,9 @@ function SearchedPage() {
         selectedBooks.map((book, i) => {
           return <Book book={book} key={i} index={i + 1} />;
         })}
-      {cursor && <LoadMoreBtn handleLoadMore={handleLoadMore} />}
+      {cursor && (
+        <LoadMoreBtn handleLoadMore={handleLoadMore} isLoading={isLoading} />
+      )}
     </div>
   );
 }

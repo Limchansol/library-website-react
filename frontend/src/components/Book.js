@@ -89,6 +89,7 @@ function Book({ book, index }) {
       window.location.reload();
     } catch (error) {
       alert("오류가 발생했습니다. 다시 시도해주세요.");
+      return;
     }
   };
 
@@ -120,6 +121,7 @@ function Book({ book, index }) {
       moveToMyPage(`『${book.title}』을 관심 도서에 담았습니다.`, navigate);
     } catch (error) {
       alert("오류가 발생했습니다. 다시 시도해주세요.");
+      return;
     }
   };
 
