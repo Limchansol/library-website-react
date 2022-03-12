@@ -38,6 +38,8 @@ function SignUpPage() {
     email: [false, ""],
   });
 
+  const navigate = useNavigate();
+
   const checkId = (value) => {
     let validity;
     let message;
@@ -348,7 +350,6 @@ function SignUpPage() {
     }
   };
 
-  const navigate = useNavigate();
   // false인 애들만 골라서 메시지 띄워놓기
   const handleSubmit = (e) => {
     e.preventDefault();

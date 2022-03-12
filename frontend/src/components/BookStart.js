@@ -45,11 +45,13 @@ function BookStart() {
           <h2 className={style.subtitle}>북스타트 참여 방법</h2>
           <div className={style.content}>
             새로운 북스타트가 시작되기 전, 함께 참여할 아이들을 찾는 글이{" "}
-            <b>공지사항</b>에 올라갑니다.
+            <b>알림</b>에 올라갑니다.
             <br />
             북스타트에 참여하고 싶으시다면, 신청 기한에 맞추어 아래에 있는{" "}
             <b>신청하기</b> 버튼을 눌러주세요.
-            <button className={style.apply}>신청하기</button>
+            <button className={style.apply} disabled>
+              신청하기
+            </button>
           </div>
         </div>
       </div>

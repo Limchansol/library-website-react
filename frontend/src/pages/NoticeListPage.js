@@ -93,7 +93,7 @@ function NoticeListPage() {
 
   return (
     <div id="notice-list-page">
-      <h1 className={style["page-title"]}>공지사항</h1>
+      <h1 className={style["page-title"]}>알림</h1>
       <div className={style["list-title"]}>
         <span className={style["number"]}>번호</span>
         <span className={style["title"]}>제목</span>

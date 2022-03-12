@@ -15,11 +15,11 @@ const navItemsData = {
   ],
   "도서관 활동": [
     { title: "영화로 세상 읽기", address: "/movie-program" },
-    { title: "책으로 무언가 하기", address: "/book-program" },
+    { title: "책과 함께하기", address: "/book-program" },
     { title: "지역에서 무언가 하기", address: "/local-program" },
   ],
   "알림 및 소통": [
-    { title: "공지사항", address: "/notice" },
+    { title: "알림", address: "/notice" },
     { title: "FAQ", address: "/FAQ" },
     { title: "문의", address: "/inquiry" },
   ],
