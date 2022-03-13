@@ -82,6 +82,7 @@ function MovieSlides({ movies, handleMovieArr, isAdmin, handleMoviePosters }) {
   return (
     <>
       {isAdmin ? (
+        // 관리자 화면
         <div className={style.movieSlides} style={{ position: "relative" }}>
           <div
             className={style.slideScreen}
@@ -185,7 +186,7 @@ function MovieSlides({ movies, handleMovieArr, isAdmin, handleMoviePosters }) {
           )}
         </div>
       ) : (
-        // 여기 기준으로 위에서는 관리자 페이지에서 보이는 화면
+        // 일반 사용자 화면
         <div className={style.movieSlides} style={{ position: "relative" }}>
           <div
             className={style.slideScreen}
